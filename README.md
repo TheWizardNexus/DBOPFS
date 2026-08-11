@@ -17,9 +17,33 @@ This `1.0.0` package preserves the production ARCANE OS runtime byte-for-byte. I
 
 ## Install
 
+### npm
+
 ```sh
 npm install dbopfs@1.0.0
 ```
+
+Expose the complete `node_modules/dbopfs/` directory through your web server at `/vendor/dbopfs/`.
+
+### GitHub Release without npm
+
+Download the verified [`dbopfs-1.0.0.tgz` release asset](https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz), then extract its top-level `package/` directory as `vendor/dbopfs/` in your web project.
+
+```sh
+# macOS, Linux, Git Bash, or WSL
+curl -fL https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz -o dbopfs-1.0.0.tgz
+mkdir -p vendor/dbopfs
+tar -xzf dbopfs-1.0.0.tgz -C vendor/dbopfs --strip-components=1
+```
+
+```powershell
+# PowerShell
+Invoke-WebRequest 'https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz' -OutFile 'dbopfs-1.0.0.tgz'
+New-Item -ItemType Directory -Force 'vendor/dbopfs' | Out-Null
+tar -xzf 'dbopfs-1.0.0.tgz' -C 'vendor/dbopfs' --strip-components=1
+```
+
+The [v1.0.0 release page](https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0) includes release notes, checksums, and verification evidence. Both installation paths provide the same package layout.
 
 DBOPFS is a browser-only ESM module. Serve it over HTTPS or localhost; do not import it during Node.js server-side rendering.
 
@@ -28,7 +52,7 @@ Declare a stable application ID before loading the module:
 ```html
 <meta name="arcane-app-id" content="my-app">
 <script type="module">
-  import '/node_modules/dbopfs/arcane/modules/DBOPFS.js';
+  import '/vendor/dbopfs/arcane/modules/DBOPFS.js';
 
   await window.dbopfs.readyPromise;
 
@@ -110,10 +134,10 @@ Storage methods are asynchronous and return promises. The [async patterns guide]
 
 ## ARCANE OS migration
 
-The package intentionally keeps this layout:
+Both npm and the GitHub Release provide this layout. Expose the selected package root at a stable web path such as `/vendor/dbopfs/`:
 
 ```text
-node_modules/dbopfs/
+/vendor/dbopfs/
 ├── arcane/modules/
 │   ├── AppDataScope.js
 │   ├── DBOPFS.js
@@ -121,7 +145,7 @@ node_modules/dbopfs/
 └── node_modules/strong-type/
 ```
 
-An ARCANE installation can redirect its DBOPFS module mount or import pointer from the in-tree `arcane/modules` source to `node_modules/dbopfs/arcane/modules`. The worker and application-scope module remain adjacent, and the relative `strong-type` import remains valid because that dependency is bundled. Existing DBOPFS call sites do not need API changes.
+An ARCANE installation can redirect its DBOPFS module mount or import pointer from the in-tree `arcane/modules` source to the selected package root's `arcane/modules` directory. That package root can be an npm installation or the extracted GitHub Release. The worker and application-scope module remain adjacent, and the relative `strong-type` import remains valid because that dependency is bundled. Existing DBOPFS call sites do not need API changes.
 
 The release test installs the packed tarball into a clean consumer fixture and verifies this exact layout before publication.
 

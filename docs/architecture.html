@@ -19,7 +19,7 @@
     <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
     <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
     <title>Architecture — DBOPFS</title>
-    <link rel="stylesheet" href="assets/site.css?v=137c33c">
+    <link rel="stylesheet" href="assets/site.css?v=install-footer-1">
     <script type="module" src="assets/site.js?v=137c33c"></script>
 </head>
 <body data-page="architecture">
@@ -181,7 +181,7 @@
                 <section id="arcane">
                     <p class="eyebrow">Externalized runtime</p>
                     <h2>Arcane integration</h2>
-                    <p>The npm release is intended to preserve the existing <code>arcane/modules</code> layout. Arcane OS can replace its in-tree copy with an installed package by changing only the directory pointer that serves those modules.</p>
+                    <p>The packaged 1.0.0 artifact from npm or the GitHub Release preserves the existing <code>arcane/modules</code> layout. Arcane OS can replace its in-tree copy with either package source by changing only the directory pointer that serves those modules. See the <a href="getting-started.html#install">npm and GitHub Release installation paths</a>.</p>
                     <div class="diagram" role="img" aria-label="Arcane application imports the modules pointer, which resolves to the installed DBOPFS package and opens the application OPFS directory">
                         <div class="diagram__node"><strong>Arcane app</strong><span>Existing import statement.</span></div>
                         <div class="diagram__node"><strong>Modules pointer</strong><span>Configured package directory.</span></div>
@@ -196,7 +196,7 @@
 
     <footer class="site-footer">
         <div class="wrap">
-            <div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="api.html">API reference</a></li></ul></div><div><h2>Project</h2><ul><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div></div>
+            <div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Learn</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="async.html">Async patterns</a></li><li><a href="api.html">API reference</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="playground/index.html">Playground</a></li></ul></div><div><h2>Get DBOPFS</h2><ul><li><a href="getting-started.html#install">Installation instructions</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">GitHub Release</a></li><li><a href="https://www.npmjs.com/package/dbopfs/v/1.0.0">npm package</a></li><li><a href="status.html">Release status</a></li><li><a href="license.html">License &amp; commercial use</a></li></ul></div><div><h2>Ecosystem</h2><ul><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub repository</a></li><li><a href="https://thewizardnexus.github.io/ARCANE-OS/">Arcane OS</a></li><li><a href="https://thewizardnexus.github.io/TWiN-Compass/">TWiN Compass</a></li><li><a href="https://www.thewizardnexus.com/">The Wizard Nexus</a></li><li><a href="https://www.thewizardnexus.com/#block-a2f8cfd2fde8d5d75077">Contact TWiN</a></li></ul></div></div>
             <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Released 1.0.0</span></div>
         </div>
     </footer>

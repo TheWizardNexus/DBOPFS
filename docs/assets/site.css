@@ -1286,7 +1286,7 @@ td:first-child{
 .footer-grid{
     display:grid;
     gap:var(--space-6);
-    grid-template-columns:minmax(0,1.2fr) repeat(2,minmax(10rem,.4fr));
+    grid-template-columns:minmax(15rem,1.25fr) repeat(3,minmax(9rem,.55fr));
 }
 
 .footer-grid h2{
