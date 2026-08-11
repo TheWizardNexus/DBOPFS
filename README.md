@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/og.png" alt="DBOPFS — a browser-native database written in files, by The Wizard Nexus" width="100%">
+</p>
+
 # DBOPFS
 
 [![release tests](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FTheWizardNexus%2FDBOPFS%2Fmain%2Frelease%2Fbadges%2Ftests.json)](https://thewizardnexus.github.io/DBOPFS/status.html)

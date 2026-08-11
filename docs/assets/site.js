@@ -1,4 +1,4 @@
-const NPM_PACKAGE_NAME='dbopfs'; // Temporary placeholder. Change once the final npm name or scope is confirmed.
+const NPM_PACKAGE_NAME='dbopfs';
 
 function setPackageName(){
     for(const element of document.querySelectorAll('[data-package-name]')){

@@ -1,4 +1,9 @@
 node_modules/
+!docs/node_modules/
+docs/node_modules/*
+!docs/node_modules/strong-type/
+!docs/node_modules/strong-type/index.js
+!docs/node_modules/strong-type/LICENSE
 .coverage-tmp/
 .release-tmp/
 *.log
