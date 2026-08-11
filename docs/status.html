@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="DBOPFS 1.0.0 release status, test evidence, coverage, package verification, and publication links.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/status.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/status.html">
@@ -26,8 +27,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -49,6 +51,7 @@
                 <ul>
                     <li><a href="#snapshot">Current snapshot</a></li>
                     <li><a href="#evidence">Evidence badges</a></li>
+                    <li><a href="#screenshots">Test screenshots</a></li>
                     <li><a href="#gates">Release gates</a></li>
                     <li><a href="#compatibility">Compatibility claim</a></li>
                     <li><a href="#publication">Release links</a></li>
@@ -82,6 +85,22 @@
                     </div>
                     <div class="callout warning">
                         <p><strong>No workflow implication.</strong> These are release-artifact badges. They do not claim that GitHub Actions runs on every commit.</p>
+                    </div>
+                </section>
+
+                <section id="screenshots">
+                    <p class="eyebrow">What the run looked like</p>
+                    <h2>Test and coverage examples</h2>
+                    <p>These images are documentation views rendered from the committed 1.0.0 machine-readable evidence. They show the actual recorded names, durations, byte counts, and percentages; they are not live CI widgets and do not invent a pass threshold.</p>
+                    <div class="evidence-gallery">
+                        <figure class="evidence-figure">
+                            <a href="assets/vanilla-test-results.png"><img src="assets/vanilla-test-results.png" alt="Vanilla-test 1.4.9 browser results showing all nine DBOPFS OPFS tests passed in Chrome"></a>
+                            <figcaption><strong>vanilla-test browser run.</strong> Nine real-OPFS cases passed in Chrome 151. <a href="https://github.com/TheWizardNexus/DBOPFS/blob/main/release/files/test-results.json">Open test-results.json</a>.</figcaption>
+                        </figure>
+                        <figure class="evidence-figure">
+                            <a href="assets/chrome-coverage-results.png"><img src="assets/chrome-coverage-results.png" alt="Chrome precise V8 coverage report showing 81.50 percent total coverage across the three DBOPFS runtime modules"></a>
+                            <figcaption><strong>Chrome precise coverage.</strong> Page and worker targets executed 33,775 of 41,441 runtime source bytes. <a href="https://github.com/TheWizardNexus/DBOPFS/blob/main/release/files/coverage-summary.json">Open coverage-summary.json</a>.</figcaption>
+                        </figure>
                     </div>
                 </section>
 

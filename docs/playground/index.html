@@ -6,6 +6,7 @@
     <meta name="arcane-app-id" content="dbopfs-playground">
     <meta name="description" content="A structured browser playground for testing DBOPFS records, tables, metadata, backup, and restore without evaluating visitor-authored code.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/playground/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/playground/">
@@ -28,8 +29,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="../index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="../index.html" data-nav="home">Home</a><a href="../getting-started.html" data-nav="start">Get started</a><a href="../guides.html" data-nav="guides">Guides</a><a href="../api.html" data-nav="api">API</a><a href="index.html" data-nav="playground">Playground</a><a href="../status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="../index.html" data-nav="home">Home</a><a href="../getting-started.html" data-nav="start">Get started</a><a href="../guides.html" data-nav="guides">Guides</a><a href="../async.html" data-nav="async">Async</a><a href="../api.html" data-nav="api">API</a><a href="../architecture.html" data-nav="architecture">Architecture</a><a href="index.html" data-nav="playground">Playground</a><a href="../status.html" data-nav="status">Status</a><a href="../license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -48,7 +50,7 @@
         <section class="section compact">
             <div class="wrap">
                 <div class="callout warning">
-                    <p><strong>Use disposable data only.</strong> Records remain on this device until cleared, evicted, or deleted through browser controls. GitHub project sites under <code>thewizardnexus.github.io</code> share one origin; the application folder is organizational isolation, not protection from hostile same-origin code.</p>
+                    <p><strong>Use disposable data only.</strong> Records remain on this device until cleared, evicted, or deleted through browser controls. GitHub project sites under <code>thewizardnexus.github.io</code> share one origin. This playground uses its own application-ID folder to avoid accidental data mixing, but another same-origin script could still access the origin's browser storage. See <a href="../architecture.html#security">Application folders and same-origin apps</a>.</p>
                 </div>
 
                 <div class="card" aria-labelledby="capability-heading">

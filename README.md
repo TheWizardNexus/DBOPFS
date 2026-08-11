@@ -65,7 +65,15 @@ OPFS root/
         └── memory/
 ```
 
-The application-ID folder prevents accidental cross-application access. It is not a security boundary against hostile code on the same origin. Use separate origins or browser profiles for mutually untrusted applications.
+### Application folders and same-origin apps
+
+An application ID stores records under `apps/<application-id>`. This helps prevent accidental reads, restores, or clears between trusted apps that share one browser origin (the same protocol, host, and port). Common examples are test apps at `example.com/app-a` and `example.com/app-b`, or several apps served from one intranet or extranet host without subdomains.
+
+The folder is an organizational boundary, not a security boundary. A hostile or compromised script running on the same origin can bypass DBOPFS and request the browser's raw storage APIs. If applications do not trust one another or require isolated databases, host them on separate origins—normally separate domains or subdomains—or run them in separate browser profiles.
+
+Trusted apps can deliberately share a browser-local database by using the same application ID and agreeing on the same tables and data formats. An app can also download validated seed data from a server and write it locally, or implement authenticated synchronization across browsers, devices, and machines. DBOPFS 1.0.0 does not provide the server, authentication, authorization, encryption, conflict handling, or sync protocol; those parts must be built for the application's security needs. Built-in preload or synchronization support may be considered in a future release if there is enough interest.
+
+[Arcane OS](https://thewizardnexus.github.io/ARCANE-OS/) already supports DBOPFS database export/import and packaged database prepopulation. See the [application-scoping architecture guide](https://thewizardnexus.github.io/DBOPFS/architecture.html#security) for diagrams and deployment guidance.
 
 ## Readiness
 
@@ -96,6 +104,10 @@ window.addEventListener('dbopfs-ready', ({detail}) => {
 
 The [API reference](https://thewizardnexus.github.io/DBOPFS/api.html) documents signatures, return values, cache behavior, and existing error semantics.
 
+The `tables` property is a page-local in-memory cache: it belongs only to the current loaded page, is not durable storage, and is not automatically refreshed when another tab or script changes OPFS. Read the [cache guide](https://thewizardnexus.github.io/DBOPFS/guides.html#cache) before relying on cached reads.
+
+Storage methods are asynchronous and return promises. The [async patterns guide](https://thewizardnexus.github.io/DBOPFS/async.html) explains when to await immediately, when to start independent work and await it later, and why `await` gives sequencing rather than a multi-record transaction.
+
 ## ARCANE OS migration
 
 The package intentionally keeps this layout:
@@ -115,7 +127,12 @@ The release test installs the packed tarball into a clean consumer fixture and v
 
 ## Tests and coverage
 
-Release tests use [`vanilla-test@1.4.9`](https://github.com/RIAEvangelist/vanilla-test) in Google Chrome against real OPFS on localhost. Chrome precise coverage is captured for the three runtime modules. There is intentionally no GitHub workflow; badges are generated from the final release evidence committed under `release/`.
+Release tests use [`vanilla-test@1.4.9`](https://github.com/RIAEvangelist/vanilla-test) in Google Chrome against real OPFS on localhost. Chrome precise coverage is captured for the three runtime modules. Release tests do not run in GitHub Actions; the repository's Pages-only workflow deploys the documentation. Badges are generated from the final release evidence committed under `release/`.
+
+<p>
+  <a href="https://thewizardnexus.github.io/DBOPFS/status.html#screenshots"><img src="docs/assets/vanilla-test-results.png" alt="Vanilla-test browser results: 9 passed, 0 failed, 0 skipped" width="49%"></a>
+  <a href="https://thewizardnexus.github.io/DBOPFS/status.html#screenshots"><img src="docs/assets/chrome-coverage-results.png" alt="Chrome precise runtime coverage: 81.50 percent" width="49%"></a>
+</p>
 
 ```sh
 npm ci
@@ -136,5 +153,7 @@ npm run release:test
 Noncommercial use is licensed under [PolyForm Noncommercial 1.0.0](LICENSE). This is source-available software, not OSI open source.
 
 A separate paid commercial license is available for a nominal fee; see [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md). Downloading the package does not grant commercial rights.
+
+Redistributors must preserve the license terms or official license URL and every exact `Required Notice:` line in [NOTICE](NOTICE), as required by PolyForm's Notices clause.
 
 Source identity and hashes are recorded in [SOURCE_PROVENANCE.md](SOURCE_PROVENANCE.md). Third-party terms are listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

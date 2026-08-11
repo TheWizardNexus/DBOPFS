@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="DBOPFS is a browser-native database abstraction over the Origin Private File System, created by The Wizard Nexus.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/">
@@ -32,13 +33,17 @@
                     <small>The Wizard Nexus</small>
                 </span>
             </a>
-            <nav class="site-nav" aria-label="Primary navigation">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
                 <a href="index.html" data-nav="home">Home</a>
                 <a href="getting-started.html" data-nav="start">Get started</a>
                 <a href="guides.html" data-nav="guides">Guides</a>
+                <a href="async.html" data-nav="async">Async</a>
                 <a href="api.html" data-nav="api">API</a>
+                <a href="architecture.html" data-nav="architecture">Architecture</a>
                 <a href="playground/index.html" data-nav="playground">Playground</a>
                 <a href="status.html" data-nav="status">Status</a>
+                <a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -105,7 +110,8 @@
                     <article class="card">
                         <span class="card-number">03 / SCOPE</span>
                         <h3>Apps own a namespace.</h3>
-                        <p>A validated application ID places data below <code>apps/&lt;application-id&gt;</code>, reducing accidental cross-app reads and clears.</p>
+                        <p>A validated application ID places data below <code>apps/&lt;application-id&gt;</code>, reducing accidental cross-app reads and clears. It organizes trusted same-origin apps; it is not a hostile-code security boundary.</p>
+                        <p><a href="architecture.html#security">Understand application isolation and sharing</a></p>
                     </article>
                 </div>
             </div>
@@ -116,7 +122,8 @@
                 <div class="section-heading">
                     <p class="eyebrow">Install and initialize</p>
                     <h2>Your first durable record.</h2>
-                    <p>The public 1.0.0 package is available from npm as <code>dbopfs</code>.</p>
+                    <p>Install 1.0.0 from npm, or download the same verified tarball from the GitHub release for plain self-hosted browser JavaScript.</p>
+                    <p><a class="button" href="https://www.npmjs.com/package/dbopfs/v/1.0.0">Open npm package</a> <a class="button secondary" href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">Download GitHub release</a></p>
                 </div>
                 <div class="card-grid two">
                     <div class="code-card">
@@ -124,7 +131,7 @@
                             <span>Terminal</span>
                             <button class="copy-button" type="button" data-copy-target="home-install">Copy</button>
                         </div>
-                        <pre><code id="home-install" data-package-name>npm install dbopfs</code></pre>
+                        <pre><code id="home-install" data-package-name>npm install dbopfs@1.0.0</code></pre>
                     </div>
                     <div class="code-card">
                         <div class="code-card__header">
@@ -134,7 +141,7 @@
                         <pre><code id="home-quickstart">&lt;meta name="arcane-app-id" content="my-app"&gt;
 
 &lt;script type="module"&gt;
-    import '/modules/DBOPFS.js';
+    import '/vendor/dbopfs/arcane/modules/DBOPFS.js';
 
     await window.dbopfs.readyPromise;
 
@@ -184,6 +191,11 @@
                         <p>In Arcane, the native application binding is authoritative. In an ordinary browser, a stable metadata declaration supplies the application ID.</p>
                         <p><a href="architecture.html#identity">Understand identity</a></p>
                     </article>
+                    <article class="card">
+                        <h3>Async without guesswork</h3>
+                        <p>Learn when to await immediately, when independent operations can overlap, and why sequencing is not the same as a transaction.</p>
+                        <p><a href="async.html">Use promises safely</a></p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -193,7 +205,7 @@
                 <div>
                     <p class="eyebrow">Know the boundary</p>
                     <h2>Local by design.</h2>
-                    <p class="page-lede">DBOPFS does not create a server, account, synchronization layer, encryption boundary, or cross-origin database. Browser site-data controls, quota, and eviction policy still apply.</p>
+                    <p class="page-lede">DBOPFS does not create a server, account, synchronization layer, encryption boundary, or cross-origin database. Applications may build secure preload and synchronization services around it; browser site-data controls, quota, and eviction policy still apply.</p>
                 </div>
                 <div class="card">
                     <h3>Ready to inspect it?</h3>

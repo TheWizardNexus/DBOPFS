@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Practical DBOPFS guides for record formats, batch work, raw files, table discovery, backup, restore, and Arcane integration.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/guides.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/guides.html">
@@ -26,8 +27,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -46,6 +48,7 @@
             <nav class="toc" aria-label="On this page">
                 <h2>On this page</h2>
                 <ul>
+                    <li><a href="#setup">Choose a setup</a></li>
                     <li><a href="#formats">Record formats</a></li>
                     <li><a href="#batch">Batch operations</a></li>
                     <li><a href="#cache">Cache and fresh reads</a></li>
@@ -59,6 +62,81 @@
             </nav>
 
             <article class="docs-content">
+                <section id="setup">
+                    <p class="eyebrow">Three supported paths</p>
+                    <h2>Choose your setup.</h2>
+                    <p>DBOPFS is always a browser ES module. The difference is how the same runtime files reach your web server.</p>
+
+                    <h3>1. Arcane OS</h3>
+                    <p>Point Arcane's modules mount at the installed package's <code>arcane/modules</code> directory. Existing Arcane imports remain unchanged, and the native application identity is authoritative.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Arcane application</span><button class="copy-button" type="button" data-copy-target="guide-setup-arcane">Copy</button></div>
+                        <pre><code id="guide-setup-arcane">import '/arcane/modules/DBOPFS.js';
+
+const db=window.dbopfs;
+await db.readyPromise;
+await db.set('examples','hello.json',{message:'Hello from Arcane'});</code></pre>
+                    </div>
+
+                    <h3>2. npm application</h3>
+                    <p>Install the package, then configure your web server to expose the complete <code>node_modules/dbopfs</code> package root at <code>/vendor/dbopfs/</code>. A browser cannot resolve the bare name <code>dbopfs</code> unless a bundler or import map provides that mapping.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="guide-setup-npm">Copy</button></div>
+                        <pre><code id="guide-setup-npm">npm install dbopfs@1.0.0</code></pre>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>index.html</span><button class="copy-button" type="button" data-copy-target="guide-setup-npm-html">Copy</button></div>
+                        <pre><code id="guide-setup-npm-html">&lt;meta name="arcane-app-id" content="npm-example"&gt;
+&lt;script type="module"&gt;
+    import '/vendor/dbopfs/arcane/modules/DBOPFS.js';
+
+    const db=window.dbopfs;
+    await db.readyPromise;
+    await db.set('examples','hello.txt','Hello from npm');
+    console.log(await db.get('examples','hello.txt'));
+&lt;/script&gt;</code></pre>
+                    </div>
+
+                    <h3>3. Plain browser JavaScript without npm</h3>
+                    <p>Download the <a href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">verified GitHub release tarball</a>, extract its <code>package/</code> directory, and publish that directory as <code>/vendor/dbopfs/</code>. Keep the layout intact:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Self-hosted release layout</span></div>
+                        <pre><code>/vendor/dbopfs/
+├── arcane/modules/
+│   ├── AppDataScope.js
+│   ├── DBOPFS.js
+│   └── DBOPFSWorker.js
+└── node_modules/strong-type/
+    └── index.js</code></pre>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Complete raw-JavaScript page</span><button class="copy-button" type="button" data-copy-target="guide-setup-raw">Copy</button></div>
+                        <pre><code id="guide-setup-raw">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="arcane-app-id" content="raw-js-example"&gt;
+    &lt;title&gt;DBOPFS raw JavaScript example&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;output id="result"&gt;Loading…&lt;/output&gt;
+    &lt;script type="module"&gt;
+        import '/vendor/dbopfs/arcane/modules/DBOPFS.js';
+
+        const db=window.dbopfs;
+        await db.readyPromise;
+        await db.set('examples','hello.txt','Hello from raw JavaScript');
+        document.querySelector('#result').textContent=
+            await db.get('examples','hello.txt');
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Serve the page over HTTPS or localhost.</strong> Opening it directly as a <code>file:</code> URL does not provide the secure origin that OPFS requires.</p>
+                    </div>
+                </section>
+
                 <section id="formats">
                     <p class="eyebrow">Choose by filename</p>
                     <h2>Record formats</h2>
@@ -113,13 +191,29 @@ for(const result of results){
                 <section id="cache">
                     <p class="eyebrow">Page-local speed</p>
                     <h2>Cache and fresh reads</h2>
-                    <p>DBOPFS keeps values it has read or written in an in-memory table cache. Ordinary <code>get()</code> calls return the cached value when one exists.</p>
+                    <p><strong>Page-local</strong> means the cache lives in JavaScript memory for this loaded page only. It is not a second database and it disappears when the page closes or reloads. Other tabs, windows, workers, and same-origin scripts have separate memory, so their writes do not refresh this page's cached values.</p>
+                    <p>DBOPFS caches parsed values after this page reads or writes them. An ordinary <code>get()</code> can return a cached <em>truthy</em> value without reopening the OPFS file, which avoids repeated filesystem work. Cached <code>false</code>, <code>0</code>, <code>''</code>, and <code>null</code> are read from OPFS again because the preserved runtime checks cache truthiness.</p>
                     <div class="code-card">
                         <div class="code-card__header"><span>Force a filesystem read</span><button class="copy-button" type="button" data-copy-target="guide-force">Copy</button></div>
-                        <pre><code id="guide-force">const cached=await dbopfs.get('users','alex.json');
-const fresh=await dbopfs.get('users','alex.json',true);</code></pre>
+                        <pre><code id="guide-force">const db=window.dbopfs;
+await db.readyPromise;
+
+const cached=await db.get('users','alex.json');
+const fresh=await db.get('users','alex.json',true);</code></pre>
                     </div>
-                    <p>Use <code>force=true</code> when another tab, worker, or same-origin script may have changed the file. DBOPFS does not provide cross-tab subscriptions or conflict resolution.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Situation</th><th>Recommended read</th><th>Why</th></tr></thead>
+                            <tbody>
+                                <tr><td>This page just wrote or read the record.</td><td><code>get(table,key)</code></td><td>The page-local value is normally current and avoids extra I/O.</td></tr>
+                                <tr><td>Another tab, worker, or same-origin script may have changed the file.</td><td><code>get(table,key,true)</code></td><td><code>force=true</code> bypasses this page's cached value and reads OPFS again.</td></tr>
+                                <tr><td>The page reloaded.</td><td>Either form</td><td>The old in-memory cache is gone; the first read must open the file.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>The public <code>tables</code> property exposes the actual current in-memory value map, not a copy and not a list of every persistent record. Mutating that object—or an object returned by <code>get()</code>—changes memory only and does not write OPFS. The special <code>tables</code> setter starts a write but exposes no promise; prefer <code>await db.set()</code>.</p>
+                    <p><code>writeFile()</code> writes raw bytes but does not refresh or invalidate parsed cache entries. Follow a raw write with <code>get(table,key,true)</code> when parsed freshness matters, or use <code>readFile()</code> for raw-file access. DBOPFS does not provide cross-tab subscriptions, automatic cache invalidation, or conflict resolution.</p>
+                    <p>For promise ordering and safe concurrency, continue to <a href="async.html">Async patterns</a>.</p>
                 </section>
 
                 <section id="raw-files">
@@ -182,19 +276,56 @@ const total=await dbopfs.count('notes');</code></pre>
                     <h2>Backup and restore</h2>
                     <p><code>downloadCompressedPNG()</code> serializes the current app's discovered tables, compresses the JSON with the browser's <code>deflate</code> stream, and encodes the bytes in RGB pixel channels.</p>
                     <div class="code-card">
-                        <div class="code-card__header"><span>Download backup</span><button class="copy-button" type="button" data-copy-target="guide-backup">Copy</button></div>
-                        <pre><code id="guide-backup">await dbopfs.downloadCompressedPNG('my-app-backup');</code></pre>
+                        <div class="code-card__header"><span>Create a hello-world file and download it</span><button class="copy-button" type="button" data-copy-target="guide-backup">Copy</button></div>
+                        <pre><code id="guide-backup">var db=window.dbopfs;
+await db.readyPromise;
+
+await db.set(
+    'examples',
+    'hello-world.txt',
+    'Hello, world from DBOPFS!'
+);
+
+await db.downloadCompressedPNG('hello-world-backup');</code></pre>
+                    </div>
+                    <div class="card backup-example">
+                        <div>
+                            <p class="eyebrow">Working artifact</p>
+                            <h3>Hello-world backup PNG</h3>
+                            <p>This 342-byte image was generated by the production 1.0.0 <code>downloadCompressedPNG()</code> method and restore-verified in Chrome. It contains one record: <code>examples/hello-world.txt</code> with the value <code>Hello, world from DBOPFS!</code>.</p>
+                            <p><a class="button" href="assets/dbopfs-hello-world-backup.png" download="dbopfs-hello-world-backup.png">Download example backup PNG</a></p>
+                        </div>
+                        <a class="backup-example__preview" href="assets/dbopfs-hello-world-backup.png" aria-label="Open the hello-world backup PNG at its natural size"><img src="assets/dbopfs-hello-world-backup.png" alt="Small pixel-data PNG containing the compressed DBOPFS hello-world backup"></a>
                     </div>
                     <div class="code-card">
-                        <div class="code-card__header"><span>Restore selected file</span><button class="copy-button" type="button" data-copy-target="guide-restore">Copy</button></div>
-                        <pre><code id="guide-restore">const backupFile=fileInput.files[0];
+                        <div class="code-card__header"><span>Pick, restore, and verify a backup</span><button class="copy-button" type="button" data-copy-target="guide-restore">Copy</button></div>
+                        <pre><code id="guide-restore">var db=window.dbopfs;
+await db.readyPromise;
 
-await dbopfs.restoreFromPNG(backupFile);</code></pre>
+var picker=document.createElement('input');
+picker.type='file';
+picker.accept='image/png';
+picker.onchange=async()=>{
+    var file=picker.files[0];
+
+    if(!file){
+        return;
+    }
+
+    await db.restoreFromPNG(file);
+    console.log(await db.get(
+        'examples',
+        'hello-world.txt',
+        true
+    ));
+};
+picker.click();</code></pre>
                     </div>
                     <div class="callout warning">
                         <p><strong>Restore merges and overwrites matching keys.</strong> It does not clear the destination first and does not treat the backup as authority to select another application ID.</p>
                     </div>
                     <p>Backup requires <code>CompressionStream</code>, canvas, and download APIs. Restore requires <code>createImageBitmap</code>, canvas pixel access, and <code>DecompressionStream</code>.</p>
+                    <p>The PNG is a data container, so a small backup may look like a tiny field of colored pixels rather than a conventional illustration. <a href="https://thewizardnexus.github.io/ARCANE-OS/">Arcane OS</a> uses these DBOPFS import/export capabilities and can also ship prepopulated databases.</p>
                 </section>
 
                 <section id="clearing">

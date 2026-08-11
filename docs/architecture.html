@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="DBOPFS architecture: application identity, OPFS storage layout, singleton lifecycle, worker fallback, caching, and browser security boundaries.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/architecture.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/architecture.html">
@@ -26,8 +27,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -130,26 +132,35 @@
 
                 <section id="cache">
                     <p class="eyebrow">Within one page</p>
-                    <h2>Cache and concurrency</h2>
+                    <h2>Page-local cache and concurrency</h2>
+                    <p><strong>Page-local</strong> means the cache exists only in JavaScript memory for the current loaded page. It is not another database, it is not saved when the page closes, and a different tab, worker, window, or same-origin script has its own memory and cannot update this cache automatically.</p>
                     <p>The singleton maintains three private maps:</p>
                     <ul>
                         <li>table handles, keyed by alias or discovered physical name;</li>
                         <li>parsed record values, keyed by table and filename;</li>
                         <li>write-lock promises, keyed by <code>tableName:fileName</code>.</li>
                     </ul>
-                    <p>Writes to the same table/key are chained in call order. Writes to different keys may proceed concurrently. This is not a transaction system: a batch can partially succeed, and another tab or same-origin script does not share the in-memory locks.</p>
-                    <p><code>get(table,key,true)</code> forces a filesystem read when cross-context changes are possible.</p>
+                    <p>An ordinary <code>get()</code> can return a cached truthy parsed value without reopening the file. Falsey values are read again. Use <code>get(table,key,true)</code> to force a fresh filesystem read when another context—or <code>writeFile()</code>—may have changed that file. See the <a href="guides.html#cache">cache guide</a> for copyable examples and edge cases.</p>
+                    <p>Writes to the same table/key are chained in call order within this page. Writes to different keys may proceed concurrently. Another tab or same-origin script does not share these in-memory locks.</p>
+                    <div class="callout warning">
+                        <p><strong>Cache and locks are not transactions.</strong> A batch can partially succeed, and <code>await</code> only waits for and sequences promises. It does not make several files one atomic operation. See <a href="async.html">Async patterns</a>.</p>
+                    </div>
                 </section>
 
                 <section id="security">
                     <p class="eyebrow">What scoping does—and does not—mean</p>
-                    <h2>Security boundary</h2>
+                    <h2>Application folders and same-origin apps</h2>
+                    <p>An application ID stores records under <code>apps/&lt;application-id&gt;</code>. This helps prevent accidental reads, restores, or clears between trusted apps that share one browser origin—the same protocol, host, and port. Examples include test apps at <code>example.com/app-a</code> and <code>example.com/app-b</code>, or several apps served from one intranet or extranet host without subdomains.</p>
                     <div class="callout success">
                         <p><strong>Protected against accidental helper misuse:</strong> backup, restore, enumeration, and clear-all begin at the current <code>apps/&lt;id&gt;</code> directory rather than the origin root.</p>
                     </div>
                     <div class="callout warning">
-                        <p><strong>Not a hostile-code boundary:</strong> every script already running on the same origin can request the raw browser storage APIs. Separate origins or native per-app browser profiles provide the stronger isolation boundary.</p>
+                        <p><strong>Organization is not security isolation.</strong> A hostile or compromised script already running on the same origin can bypass DBOPFS and request the browser's raw storage APIs. If applications do not trust one another or require isolated databases, place them on separate origins—normally separate domains or subdomains—or use separate browser profiles.</p>
                     </div>
+                    <h3>Trusted sharing, preloading, and synchronization</h3>
+                    <p>Trusted apps on the same origin can deliberately share a browser-local database by using the same application ID and agreeing on the same tables and data formats. Sharing an ID means sharing access; it should be an explicit design choice.</p>
+                    <p>A browser app can download validated seed files from a server and write them into DBOPFS on first run. It can synchronize files across browsers, devices, or machines through a service you build. DBOPFS 1.0.0 does not provide the server, authentication, authorization, encryption, transport, conflict handling, or synchronization protocol, so those parts must follow the application's own security model.</p>
+                    <p>Built-in preload or synchronization support may be considered in a future release if there is enough interest. <a href="https://thewizardnexus.github.io/ARCANE-OS/">Arcane OS</a> already supports DBOPFS database export/import and packaged database prepopulation.</p>
                     <ul>
                         <li>DBOPFS does not encrypt record contents.</li>
                         <li>It does not validate application schemas or sanitize record values.</li>

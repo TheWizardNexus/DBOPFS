@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Practical DBOPFS async patterns: await, controlled concurrency, Promise.all, allSettled, caching, ordering, and transaction limits.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/async.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/async.html">
+    <meta property="og:title" content="Async Patterns — DBOPFS">
+    <meta property="og:description" content="When to await DBOPFS operations, when to overlap independent work, and why sequencing is not a transaction.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Async patterns — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="async">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Async patterns</span></nav>
+                <p class="eyebrow">Promises without guesswork</p>
+                <h1>Async patterns.</h1>
+                <p class="page-lede">DBOPFS storage methods return promises. Learn when to await immediately, when independent operations can overlap, and where reliability matters more than shaving a little waiting time.</p>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#promise-basics">Promise basics</a></li>
+                    <li><a href="#await-now">Await immediately</a></li>
+                    <li><a href="#await-later">Start now, await later</a></li>
+                    <li><a href="#parallel">Parallel work</a></li>
+                    <li><a href="#settled">Partial outcomes</a></li>
+                    <li><a href="#background">Background work</a></li>
+                    <li><a href="#atomicity">Ordering and atomicity</a></li>
+                    <li><a href="#freshness">Cache freshness</a></li>
+                    <li><a href="#performance">Performance guide</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="promise-basics">
+                    <p class="eyebrow">The contract</p>
+                    <h2>All storage methods are asynchronous.</h2>
+                    <p><code>readyPromise</code> is a promise-valued property. Every public storage method is declared <code>async</code> and returns a promise. A promise represents work that has started or will start; <code>await</code> pauses only the surrounding async function until that promise settles. It does not freeze the browser.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Setup and read-back value</span><button class="copy-button" type="button" data-copy-target="async-basics">Copy</button></div>
+                        <pre><code id="async-basics">var db=window.dbopfs;
+await db.readyPromise;
+
+var saved=await db.set(
+    'users',
+    'alex.json',
+    {name:'Alex',active:true}
+);
+
+console.log(saved);</code></pre>
+                    </div>
+                    <p><code>set()</code> resolves to the complete value read back from the file after writing. With append, that is the complete resulting file value—not just the appended fragment.</p>
+                </section>
+
+                <section id="await-now">
+                    <p class="eyebrow">Dependencies and reliability</p>
+                    <h2>Await immediately when the next step depends on success.</h2>
+                    <p>Await before showing “Saved,” reading the value back, navigating away, starting a backup, or performing a dependent operation. A <code>try</code>/<code>catch</code> makes failure visible to the user.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Save before continuing</span><button class="copy-button" type="button" data-copy-target="async-await-now">Copy</button></div>
+                        <pre><code id="async-await-now">try{
+    var saved=await db.set(
+        'drafts',
+        'current.json',
+        {body:'Hello'}
+    );
+
+    console.log('Saved',saved);
+    // Navigate only after the save succeeds.
+}catch(error){
+    console.error('Save failed',error);
+}</code></pre>
+                    </div>
+                </section>
+
+                <section id="await-later">
+                    <p class="eyebrow">Overlap independent work</p>
+                    <h2>Start now, await later.</h2>
+                    <p>You do not have to place <code>await</code> on the same line that creates a promise. Keep the promise, do independent synchronous work, then await it before anything depends on the result.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Controlled overlap</span><button class="copy-button" type="button" data-copy-target="async-await-later">Copy</button></div>
+                        <pre><code id="async-await-later">var pendingSave=db.set(
+    'drafts',
+    'current.json',
+    {body:'Hello'}
+);
+
+console.log('Rendering preview while storage works');
+
+var saved=await pendingSave;
+console.log('Durable value',saved);</code></pre>
+                    </div>
+                    <p>This can reduce total wall-clock waiting when the work is independent. It does not make the storage operation itself faster.</p>
+                </section>
+
+                <section id="parallel">
+                    <p class="eyebrow">Independent required results</p>
+                    <h2>Use Promise.all() for independent work that must all succeed.</h2>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Read two independent records</span><button class="copy-button" type="button" data-copy-target="async-all">Copy</button></div>
+                        <pre><code id="async-all">var [profile,preferences]=await Promise.all([
+    db.get('users','alex.json'),
+    db.get('settings','alex.json')
+]);
+
+console.log({profile,preferences});</code></pre>
+                    </div>
+                    <p><code>Promise.all()</code> reports the first rejection, but it does not cancel operations that already started and it provides no rollback. Use it only when the operations are independent.</p>
+                </section>
+
+                <section id="settled">
+                    <p class="eyebrow">Keep every outcome</p>
+                    <h2>Use settled results when partial success matters.</h2>
+                    <p><code>setMany()</code>, <code>getMany()</code>, and <code>deleteMany()</code> return results shaped like <code>Promise.allSettled()</code>. Inspect every status; the batch is not atomic.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Match each result to its file</span><button class="copy-button" type="button" data-copy-target="async-settled">Copy</button></div>
+                        <pre><code id="async-settled">var items={
+    'appearance.json':{mode:'dark'},
+    'locale.json':{language:'en-US'}
+};
+var entries=Object.entries(items);
+var results=await db.setMany('settings',items);
+
+results.forEach((result,index)=>{
+    var [fileName]=entries[index];
+    console.log(fileName,result);
+});</code></pre>
+                    </div>
+                    <p>If partial success is unacceptable, implement application-specific validation and compensation. Inspecting results detects partial success; it does not undo it.</p>
+                </section>
+
+                <section id="background">
+                    <p class="eyebrow">Exceptional pattern</p>
+                    <h2>Fire-and-forget is for noncritical work only.</h2>
+                    <p>If nothing later depends on completion, you may intentionally continue without retaining the result—but you must handle rejection. Navigation, reload, tab closure, and browser shutdown can interrupt unfinished work.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Noncritical background write</span><button class="copy-button" type="button" data-copy-target="async-background">Copy</button></div>
+                        <pre><code id="async-background">void db.set(
+    'telemetry',
+    'last-view.json',
+    {at:Date.now()}
+).catch(error=>{
+    console.error('Background save failed',error);
+});</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Do not use this for important data.</strong> Save drafts while the page is active and await critical saves before navigation. Browsers do not promise to finish OPFS work started during <code>unload</code>, <code>beforeunload</code>, or <code>pagehide</code>.</p>
+                    </div>
+                </section>
+
+                <section id="atomicity">
+                    <p class="eyebrow">A precise boundary</p>
+                    <h2>Ordering is not transaction atomicity.</h2>
+                    <div class="callout warning">
+                        <p><strong><code>await</code> sequences the surrounding async function; it does not lock the database or create a transaction.</strong> DBOPFS serializes individual same-key <code>set()</code> calls only within one page-local instance.</p>
+                    </div>
+                    <ul>
+                        <li>Same-instance <code>set()</code> calls to one table/key run in invocation order.</li>
+                        <li>Different keys can overlap.</li>
+                        <li>Other tabs, workers, instances, and raw OPFS users do not share the queue.</li>
+                        <li><code>writeFile()</code>, destructive methods, and multi-key batches are not part of a multi-record transaction.</li>
+                        <li>A read followed by a write is not an atomic read-modify-write operation.</li>
+                    </ul>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Lost-update example</span><button class="copy-button" type="button" data-copy-target="async-counter">Copy</button></div>
+                        <pre><code id="async-counter">async function increment(){
+    var value=await db.get(
+        'counters',
+        'visits.json',
+        true
+    ) ?? 0;
+
+    await db.set('counters','visits.json',value+1);
+}
+
+await Promise.all([increment(),increment()]);
+// Both calls can read 0, leaving a final value of 1.</code></pre>
+                    </div>
+                </section>
+
+                <section id="freshness">
+                    <p class="eyebrow">Other contexts</p>
+                    <h2>Force fresh reads when another context may write.</h2>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Cached and fresh reads</span><button class="copy-button" type="button" data-copy-target="async-fresh">Copy</button></div>
+                        <pre><code id="async-fresh">var cached=await db.get('users','alex.json');
+var fresh=await db.get('users','alex.json',true);
+
+var keys=['alex.json','sam.json'];
+var freshBatch=await Promise.allSettled(
+    keys.map(key=>db.get('users',key,true))
+);</code></pre>
+                    </div>
+                    <p><code>getMany()</code> has no <code>force</code> option. Use the explicit <code>Promise.allSettled()</code> pattern above for fresh batch reads. Read the full <a href="guides.html#cache">page-local cache guide</a>.</p>
+                </section>
+
+                <section id="performance">
+                    <p class="eyebrow">Choose deliberately</p>
+                    <h2>Performance and reliability guide</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Pattern</th><th>Best use</th><th>Tradeoff</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sequential <code>await</code></td><td>Dependent steps, user-visible save state, destructive work.</td><td>Wait times accumulate, but order and errors are clear.</td></tr>
+                                <tr><td>Start now, await later</td><td>Overlap storage with independent rendering or computation.</td><td>You must retain and eventually observe the promise.</td></tr>
+                                <tr><td><code>Promise.all()</code></td><td>Independent operations where every result is required.</td><td>First rejection is reported; no cancellation or rollback.</td></tr>
+                                <tr><td>Batch methods / <code>allSettled()</code></td><td>Independent operations where every outcome matters.</td><td>Can partially succeed; inspect every result.</td></tr>
+                                <tr><td>Fire-and-forget</td><td>Noncritical, best-effort telemetry with handled errors.</td><td>Caller proceeds sooner, but I/O is not faster and reliability is lower.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Parallel syntax adds no throughput to same-key <code>set()</code> calls because DBOPFS queues them. Excessive parallel file operations can also add contention and memory pressure; prefer intentional batches over unbounded loops.</p>
+                    <p><a class="button" href="api.html">See exact API return types</a> <a class="button secondary" href="guides.html#cache">Understand the cache</a></p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap"><div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="api.html">API reference</a></li></ul></div><div><h2>Project</h2><ul><li><a href="architecture.html">Architecture</a></li><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li></ul></div></div><div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Released 1.0.0</span></div></div>
+    </footer>
+</body>
+</html>

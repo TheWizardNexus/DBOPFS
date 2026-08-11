@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Install DBOPFS, declare an application identity, and write your first browser-local OPFS record.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/getting-started.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/getting-started.html">
@@ -29,13 +30,17 @@
                 <span class="brand-mark" aria-hidden="true"></span>
                 <span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span>
             </a>
-            <nav class="site-nav" aria-label="Primary navigation">
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
                 <a href="index.html" data-nav="home">Home</a>
                 <a href="getting-started.html" data-nav="start">Get started</a>
                 <a href="guides.html" data-nav="guides">Guides</a>
+                <a href="async.html" data-nav="async">Async</a>
                 <a href="api.html" data-nav="api">API</a>
+                <a href="architecture.html" data-nav="architecture">Architecture</a>
                 <a href="playground/index.html" data-nav="playground">Playground</a>
                 <a href="status.html" data-nav="status">Status</a>
+                <a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -55,7 +60,7 @@
                 <h2>On this page</h2>
                 <ul>
                     <li><a href="#requirements">Requirements</a></li>
-                    <li><a href="#install">Install</a></li>
+                    <li><a href="#install">Choose a source</a></li>
                     <li><a href="#identity">Declare identity</a></li>
                     <li><a href="#import">Expose and import</a></li>
                     <li><a href="#ready">Wait for readiness</a></li>
@@ -88,14 +93,27 @@
 
                 <section id="install">
                     <p class="eyebrow">Step one</p>
-                    <h2>Install DBOPFS 1.0.0.</h2>
-                    <p>The public npm package name is <code>dbopfs</code>.</p>
-                    <div class="code-card">
-                        <div class="code-card__header"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="start-install">Copy</button></div>
-                        <pre><code id="start-install" data-package-name>npm install dbopfs</code></pre>
+                    <h2>Choose npm or the GitHub release.</h2>
+                    <p>Both sources contain the same verified <code>dbopfs@1.0.0</code> package layout.</p>
+                    <div class="card-grid two">
+                        <article class="card">
+                            <h3>Install from npm</h3>
+                            <p>Use the registry when npm already manages your application's dependencies.</p>
+                            <div class="code-card">
+                                <div class="code-card__header"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="start-install">Copy</button></div>
+                                <pre><code id="start-install" data-package-name>npm install dbopfs@1.0.0</code></pre>
+                            </div>
+                            <p><a href="https://www.npmjs.com/package/dbopfs/v/1.0.0">Open dbopfs@1.0.0 on npm</a></p>
+                        </article>
+                        <article class="card">
+                            <h3>Download from GitHub</h3>
+                            <p>Use the release tarball when you want plain self-hosted browser files without adding npm to the application.</p>
+                            <p><a class="button secondary" href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">Download dbopfs-1.0.0.tgz</a></p>
+                            <p><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">Release notes, checksums, and evidence</a></p>
+                        </article>
                     </div>
                     <div class="callout">
-                        <p><strong>Verified release.</strong> Test, coverage, tarball, and clean-install evidence are linked from the <a href="status.html">status page</a>.</p>
+                        <p><strong>Verified release.</strong> The npm package and GitHub asset are the same tarball. Test, coverage, checksum, and clean-install evidence are linked from the <a href="status.html">status page</a>.</p>
                     </div>
                 </section>
 
@@ -119,19 +137,25 @@
 
                 <section id="import">
                     <p class="eyebrow">Step three</p>
-                    <h2>Expose the browser module directory.</h2>
-                    <p>The package contains browser files, but your web server or bundler still decides their public URL. Preserve the package's <code>arcane/modules</code> layout and its bundled runtime dependency, then map that directory to a stable URL such as <code>/modules/</code>.</p>
+                    <h2>Expose the package root to the browser.</h2>
+                    <p>The package contains browser files, but your web server still decides their public URL. Expose the complete package root at a stable URL such as <code>/vendor/dbopfs/</code>. This preserves the adjacent worker and the package's bundled runtime dependency.</p>
                     <div class="code-card">
                         <div class="code-card__header"><span>Browser module</span><button class="copy-button" type="button" data-copy-target="start-import">Copy</button></div>
-                        <pre><code id="start-import">import '/modules/DBOPFS.js';</code></pre>
+                        <pre><code id="start-import">import '/vendor/dbopfs/arcane/modules/DBOPFS.js';</code></pre>
                     </div>
-                    <p>For a deliberately simple server that exposes installed packages, the equivalent installed path may look like this:</p>
+                    <p>Whether the files came from npm or the GitHub release, the public directory must keep this shape:</p>
                     <div class="code-card">
-                        <div class="code-card__header"><span>Direct installed-package URL</span><button class="copy-button" type="button" data-copy-target="start-direct-import">Copy</button></div>
-                        <pre><code id="start-direct-import" data-package-name>import './node_modules/dbopfs/arcane/modules/DBOPFS.js';</code></pre>
+                        <div class="code-card__header"><span>Public files</span></div>
+                        <pre><code>/vendor/dbopfs/
+├── arcane/modules/
+│   ├── AppDataScope.js
+│   ├── DBOPFS.js
+│   └── DBOPFSWorker.js
+└── node_modules/strong-type/
+    └── index.js</code></pre>
                     </div>
                     <div class="callout warning">
-                        <p><strong>Do not separate the worker.</strong> <code>DBOPFSWorker.js</code> must remain beside <code>DBOPFS.js</code>. The module resolves it with <code>import.meta.url</code>.</p>
+                        <p><strong>Do not flatten the package.</strong> <code>DBOPFSWorker.js</code> must remain beside <code>DBOPFS.js</code>, and the bundled <code>node_modules/strong-type</code> path must remain below the same package root.</p>
                     </div>
                 </section>
 
@@ -141,7 +165,7 @@
                     <p>Importing the module creates <code>window.dbopfs</code> and starts initialization. Awaiting its persistent readiness promise avoids an event-listener race.</p>
                     <div class="code-card">
                         <div class="code-card__header"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="start-ready">Copy</button></div>
-                        <pre><code id="start-ready">import '/modules/DBOPFS.js';
+                        <pre><code id="start-ready">import '/vendor/dbopfs/arcane/modules/DBOPFS.js';
 
 await window.dbopfs.readyPromise;
 

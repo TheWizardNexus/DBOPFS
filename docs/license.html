@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="DBOPFS licensing notice for noncommercial and separately licensed commercial use.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/license.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/license.html">
@@ -26,8 +27,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -45,7 +47,7 @@
         <div class="wrap docs-layout">
             <nav class="toc" aria-label="On this page">
                 <h2>On this page</h2>
-                <ul><li><a href="#authority">Governing text</a></li><li><a href="#noncommercial">Noncommercial use</a></li><li><a href="#commercial">Commercial use</a></li><li><a href="#third-party">Third-party notices</a></li></ul>
+                <ul><li><a href="#authority">Governing text</a></li><li><a href="#noncommercial">Noncommercial use</a></li><li><a href="#notices">Required notices</a></li><li><a href="#commercial">Commercial use</a></li><li><a href="#third-party">Third-party notices</a></li></ul>
             </nav>
 
             <article class="docs-content">
@@ -55,14 +57,29 @@
                     <div class="callout warning">
                         <p><strong>This page is an overview, not a license grant.</strong> The <a href="https://github.com/TheWizardNexus/DBOPFS/blob/v1.0.0/LICENSE">LICENSE file in the 1.0.0 tag</a> is the governing text.</p>
                     </div>
-                    <p>Where this summary and the governing text differ, the governing text controls.</p>
+                    <p>Read the deployed <a href="LICENSE.txt">plain-text license copy</a> or the <a href="https://polyformproject.org/licenses/noncommercial/1.0.0">official PolyForm Noncommercial 1.0.0 terms</a>. Where this summary and the governing text differ, the governing text controls.</p>
                 </section>
 
                 <section id="noncommercial">
                     <p class="eyebrow">Intended release model</p>
                     <h2>Noncommercial use</h2>
-                    <p>The intended license permits qualifying noncommercial use subject to its definitions, conditions, attribution requirements, restrictions, and termination terms.</p>
+                    <p>The intended license permits qualifying noncommercial use subject to its definitions, conditions, notice requirements, restrictions, and termination terms.</p>
                     <p>“Noncommercial” is determined by the actual governing license—not by an informal assumption that a project is small, free to download, educational, charitable, internal, or not yet profitable.</p>
+                </section>
+
+                <section id="notices">
+                    <p class="eyebrow">Redistribution requirement</p>
+                    <h2>Preserve the required notices.</h2>
+                    <p>PolyForm's Notices clause requires anyone distributing any part of DBOPFS to provide the license terms or official URL and every plain-text line supplied by the licensor that begins with <code>Required Notice:</code>.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Required Notice lines—copy exactly</span><button class="copy-button" type="button" data-copy-target="license-required-notices">Copy</button></div>
+                        <pre><code id="license-required-notices">Required Notice: Copyright 2026 The Wizard Nexus.
+Required Notice: Commercial use is not granted by the public license. See COMMERCIAL-LICENSE.md.</code></pre>
+                    </div>
+                    <p>Download the deployed <a href="NOTICE.txt">NOTICE.txt</a>, <a href="LICENSE.txt">LICENSE.txt</a>, and <a href="COMMERCIAL-LICENSE.md">COMMERCIAL-LICENSE.md</a>. The npm tarball already includes the governing license and these required notice lines.</p>
+                    <div class="callout">
+                        <p><strong>No source header is missing.</strong> PolyForm Noncommercial 1.0.0 has no standard source-file license header. The preserved runtime files do not need implementation edits to satisfy that requirement.</p>
+                    </div>
                 </section>
 
                 <section id="commercial">
@@ -73,6 +90,7 @@
                         <h3>Request a commercial license</h3>
                         <p>Describe the product, organization, distribution model, expected users, and how DBOPFS will be used. The Wizard Nexus can then confirm whether a commercial license is required and provide the applicable nominal fee and terms.</p>
                         <p><a class="button" href="https://www.thewizardnexus.com/#block-a2f8cfd2fde8d5d75077">Contact The Wizard Nexus</a></p>
+                        <p><a href="COMMERCIAL-LICENSE.md">Read the commercial-licensing request terms</a></p>
                     </div>
                 </section>
 
@@ -80,7 +98,7 @@
                     <p class="eyebrow">Dependency boundary</p>
                     <h2>Third-party notices</h2>
                     <p>The release may include or bundle third-party software with its own license. Those terms remain applicable to that third-party material and do not expand the DBOPFS license.</p>
-                    <p>Review the package contents, dependency notices, and the final 1.0.0 release evidence before redistribution.</p>
+                    <p>Review the deployed <a href="THIRD_PARTY_NOTICES.md">third-party notices</a>, package contents, dependency licenses, and final 1.0.0 release evidence before redistribution.</p>
                 </section>
             </article>
         </div>

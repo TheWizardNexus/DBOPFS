@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="Complete DBOPFS API reference for properties, readiness, records, files, tables, backup, restore, and application scoping.">
     <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/api.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/api.html">
@@ -26,8 +27,9 @@
     <header class="site-header">
         <div class="header-inner">
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -61,9 +63,10 @@
                 <section id="singleton">
                     <p class="eyebrow">Default export</p>
                     <h2>Singleton and constructor</h2>
+                    <p>Every example on this page is browser-console ready after completing <a href="getting-started.html">Get started</a>. Each method example obtains <code>window.dbopfs</code> and waits for <code>readyPromise</code>, so its prerequisites are visible in the copied code.</p>
                     <div class="api-entry">
                         <h3>new DBOPFS(options={})</h3>
-                        <p>Creates the database when no compatible <code>window.dbopfs</code> exists. Otherwise, the constructor returns the existing singleton.</p>
+                        <p>Creates the database when <code>window.dbopfs</code> is not already truthy. Otherwise, the constructor returns that existing value. A standard module import creates the singleton before caller code resumes, so browser applications normally use <code>window.dbopfs</code> rather than constructing another instance.</p>
                         <dl>
                             <dt>options.storage</dt><dd>Storage-manager adapter; defaults to <code>navigator.storage</code>.</dd>
                             <dt>options.applicationId</dt><dd>Explicit ID for adapters and tests. Browser pages should normally declare metadata instead.</dd>
@@ -74,11 +77,14 @@
                     </div>
                     <div class="code-card">
                         <div class="code-card__header"><span>Automatic singleton</span><button class="copy-button" type="button" data-copy-target="api-singleton">Copy</button></div>
-                        <pre><code id="api-singleton">import DBOPFS from '/modules/DBOPFS.js';
+                        <pre><code id="api-singleton">var module=await import(
+    '/vendor/dbopfs/arcane/modules/DBOPFS.js'
+);
+var DBOPFS=module.default;
 
 await window.dbopfs.readyPromise;
-
-console.log(window.dbopfs instanceof DBOPFS);</code></pre>
+console.log(window.dbopfs instanceof DBOPFS);
+console.log(new DBOPFS()===window.dbopfs);</code></pre>
                     </div>
                     <div class="callout warning">
                         <p><strong>Browser module only.</strong> The module reads <code>navigator</code> at top level and relies on <code>window</code>, <code>document</code>, Worker APIs, and OPFS. It is not a Node.js database.</p>
@@ -96,11 +102,39 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                                 <tr><td><code>readyPromise</code></td><td><code>Promise&lt;void&gt;</code></td><td>Persistent initialization promise; recommended for race-safe startup.</td></tr>
                                 <tr><td><code>applicationId</code></td><td>string</td><td>Resolved canonical application owner.</td></tr>
                                 <tr><td><code>storagePath</code></td><td>string</td><td>App-relative path such as <code>apps/my-app</code>.</td></tr>
-                                <tr><td><code>tables</code></td><td>object</td><td>In-memory cache of values read or written during this page lifetime.</td></tr>
+                                <tr><td><code>tables</code></td><td>object</td><td>Values cached in JavaScript memory for this loaded page only. Other tabs do not refresh it. See <a href="guides.html#cache">Cache and fresh reads</a>.</td></tr>
                                 <tr><td><code>tables = update</code></td><td>setter</td><td>Calls <code>set(update.tableName,update.fileName,update.value)</code> without exposing the promise. Prefer <code>await set()</code> when failures matter.</td></tr>
                             </tbody>
                         </table>
                     </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Read every property</span><button class="copy-button" type="button" data-copy-target="api-properties">Copy</button></div>
+                        <pre><code id="api-properties">var db=window.dbopfs;
+await db.readyPromise;
+
+console.log({
+    ready:db.ready,
+    applicationId:db.applicationId,
+    storagePath:db.storagePath,
+    touchedValues:db.tables
+});</code></pre>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Prefer set() over the tables setter</span><button class="copy-button" type="button" data-copy-target="api-tables-setter">Copy</button></div>
+                        <pre><code id="api-tables-setter">var db=window.dbopfs;
+await db.readyPromise;
+
+// Awaitable and recommended:
+await db.set('notes','draft.txt','Hello');
+
+// Starts a write but exposes no Promise:
+db.tables={
+    tableName:'notes',
+    fileName:'background-draft.txt',
+    value:'Best-effort write'
+};</code></pre>
+                    </div>
+                    <div class="callout warning"><p><strong>The <code>tables</code> setter is fire-and-forget.</strong> Even <code>await (db.tables=update)</code> does not wait for its internal write. Use <code>await db.set()</code> when completion or failure matters.</p></div>
                 </section>
 
                 <section id="readiness">
@@ -117,14 +151,19 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                     </div>
                     <div class="code-card">
                         <div class="code-card__header"><span>Event detail</span><button class="copy-button" type="button" data-copy-target="api-event">Copy</button></div>
-                        <pre><code id="api-event">window.addEventListener(
-    'dbopfs-ready',
-    event=>{
-        console.log(event.detail.applicationId);
-        console.log(event.detail.storagePath);
-    },
-    {once:true}
-);</code></pre>
+                        <pre><code id="api-event">function reportScope(source){
+    console.log(source.applicationId,source.storagePath);
+}
+
+if(window.dbopfs?.ready){
+    reportScope(window.dbopfs);
+}else{
+    window.addEventListener(
+        'dbopfs-ready',
+        ({detail})=>reportScope(detail),
+        {once:true}
+    );
+}</code></pre>
                     </div>
                 </section>
 
@@ -133,63 +172,145 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                     <h2>Record methods</h2>
 
                     <div class="api-entry" id="set">
-                        <h3>set(tableName='', fileName='', value={}, append=false)</h3>
-                        <p>Serializes non-string values, writes one file, refreshes its cached value, and serializes concurrent writes to the same table/key.</p>
+                        <h3>set(tableName, fileName, value={}, append=false)</h3>
+                        <p>Asynchronously serializes non-string values, writes one file, refreshes its cached value, and serializes concurrent writes to the same table/key. See <a href="async.html">Async patterns</a> for safe sequencing and parallel work.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;any&gt;</code> with the value as read back by <code>get()</code>.</dd><dt>Parsing</dt><dd><code>.json</code> is parsed; <code>.jsonl</code>/<code>.ndjson</code> becomes an array; other names return text.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Write JSON and use the read-back value</span><button class="copy-button" type="button" data-copy-target="api-example-set">Copy</button></div><pre><code id="api-example-set">var db=window.dbopfs;
+await db.readyPromise;
+
+var saved=await db.set(
+    'users',
+    'alex.json',
+    {name:'Alex',active:true}
+);
+console.log(saved);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="set-many">
                         <h3>setMany(tableName, items)</h3>
                         <p>Writes every own enumerable entry in <code>items</code>, using each property name as a filename.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code> in object-entry order.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Write a batch and inspect every result</span><button class="copy-button" type="button" data-copy-target="api-example-set-many">Copy</button></div><pre><code id="api-example-set-many">var db=window.dbopfs;
+await db.readyPromise;
+
+var items={
+    'appearance.json':{mode:'dark'},
+    'locale.json':{language:'en-US'}
+};
+var results=await db.setMany('settings',items);
+
+Object.keys(items).forEach((name,index)=>{
+    console.log(name,results[index]);
+});</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="get">
-                        <h3>get(tableName='', fileName='', force=false)</h3>
-                        <p>Returns a cached value unless <code>force</code> is true or the key has no cached truthy value. Reads and parses the file when required.</p>
-                        <dl><dt>Returns</dt><dd><code>Promise&lt;any|null&gt;</code>. Missing files return <code>null</code>.</dd><dt>force</dt><dd>When true, bypasses the page-local cache.</dd></dl>
+                        <h3>get(tableName, fileName, force=false)</h3>
+                        <p>Asynchronously returns a cached value unless <code>force</code> is true or the key has no cached truthy value. Reads and parses the file when required.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;any|null&gt;</code>. Missing files return <code>null</code>.</dd><dt>force</dt><dd>When true, bypasses the <a href="guides.html#cache">page-local cache</a> and reads OPFS again.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Compare cached and fresh reads</span><button class="copy-button" type="button" data-copy-target="api-example-get">Copy</button></div><pre><code id="api-example-get">var db=window.dbopfs;
+await db.readyPromise;
+
+var cached=await db.get('users','alex.json');
+var fresh=await db.get('users','alex.json',true);
+console.log({cached,fresh});</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="get-many">
                         <h3>getMany(tableName, fileNames)</h3>
                         <p>Reads each requested filename with <code>get()</code>.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code> in filename order.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Read several keys</span><button class="copy-button" type="button" data-copy-target="api-example-get-many">Copy</button></div><pre><code id="api-example-get-many">var db=window.dbopfs;
+await db.readyPromise;
+
+var names=['appearance.json','locale.json'];
+var results=await db.getMany('settings',names);
+
+names.forEach((name,index)=>{
+    console.log(name,results[index]);
+});</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="get-all">
                         <h3>getAll(tableName='')</h3>
                         <p>With a table name, returns every record in that directory. Without one, discovers physical tables and returns a nested object.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;Object&gt;</code>.</dd><dt>All tables</dt><dd>Shape: <code>{tableName:{fileName:value}}</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Read one table or the app database</span><button class="copy-button" type="button" data-copy-target="api-example-get-all">Copy</button></div><pre><code id="api-example-get-all">var db=window.dbopfs;
+await db.readyPromise;
+
+console.log(await db.getAll('notes'));
+console.log(await db.getAll());</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="delete">
-                        <h3>delete(tableName='', fileName='')</h3>
-                        <p>Removes one cache entry and attempts to remove the matching file. A missing file is treated as success.</p>
-                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd></dl>
+                        <h3>delete(tableName, fileName)</h3>
+                        <p>Removes one cache entry and attempts to remove the matching file. A missing file is treated as success. Other removal errors are logged and suppressed by the preserved runtime.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>. The value means the method completed; it is not independent proof that removal succeeded.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Create and safely delete an example</span><button class="copy-button" type="button" data-copy-target="api-example-delete">Copy</button></div><pre><code id="api-example-delete">var db=window.dbopfs;
+await db.readyPromise;
+
+var name=`delete-${crypto.randomUUID()}.txt`;
+await db.set('api-examples',name,'temporary');
+console.log(await db.delete('api-examples',name));</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="delete-many">
                         <h3>deleteMany(tableName, fileNames)</h3>
                         <p>Deletes the requested keys independently.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Create and delete an isolated batch</span><button class="copy-button" type="button" data-copy-target="api-example-delete-many">Copy</button></div><pre><code id="api-example-delete-many">var db=window.dbopfs;
+await db.readyPromise;
+
+var prefix=crypto.randomUUID();
+var items={
+    [`${prefix}-one.txt`]:'one',
+    [`${prefix}-two.txt`]:'two'
+};
+await db.setMany('api-examples',items);
+
+var results=await db.deleteMany(
+    'api-examples',
+    Object.keys(items)
+);
+console.log(results);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="filter-key-includes">
                         <h3>filterKeyIncludes(tableName, substring='')</h3>
                         <p>Reads records whose filenames contain the exact case-sensitive substring.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;Object&gt;</code> keyed by filename.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Find matching keys</span><button class="copy-button" type="button" data-copy-target="api-example-filter">Copy</button></div><pre><code id="api-example-filter">var db=window.dbopfs;
+await db.readyPromise;
+
+var matches=await db.filterKeyIncludes(
+    'notes',
+    'meeting'
+);
+console.log(matches);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="has-key">
                         <h3>hasKey(tableName, key)</h3>
-                        <p>Checks whether the named file handle exists.</p>
+                        <p>Checks whether the named file handle exists. The preserved runtime returns <code>false</code> for any caught error, not only a missing key.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;boolean&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Check one key</span><button class="copy-button" type="button" data-copy-target="api-example-has-key">Copy</button></div><pre><code id="api-example-has-key">var db=window.dbopfs;
+await db.readyPromise;
+
+var exists=await db.hasKey(
+    'notes',
+    'meeting.json'
+);
+console.log(exists);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="count">
                         <h3>count(tableName)</h3>
                         <p>Counts entries yielded by the table directory.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;number&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Count records</span><button class="copy-button" type="button" data-copy-target="api-example-count">Copy</button></div><pre><code id="api-example-count">var db=window.dbopfs;
+await db.readyPromise;
+
+console.log(await db.count('notes'));</code></pre></div>
                     </div>
                 </section>
 
@@ -198,21 +319,50 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                     <h2>File methods</h2>
 
                     <div class="api-entry" id="write-file">
-                        <h3>writeFile(tableName='', fileName='', fileData='', append=false)</h3>
-                        <p>Writes raw data through <code>createWritable()</code>, or through the co-located worker when the asynchronous writable surface is unavailable.</p>
+                        <h3>writeFile(tableName, fileName, fileData='', append=false)</h3>
+                        <p>Writes raw data through <code>createWritable()</code>, or through the co-located worker when the asynchronous writable surface is unavailable. It does not refresh or invalidate parsed entries in the <a href="guides.html#cache">page-local cache</a>.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd><dt>append</dt><dd>Preserves existing bytes and writes at the current file size.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Write and append raw content</span><button class="copy-button" type="button" data-copy-target="api-example-write-file">Copy</button></div><pre><code id="api-example-write-file">var db=window.dbopfs;
+await db.readyPromise;
+
+var name=`raw-${crypto.randomUUID()}.txt`;
+var first=new Blob(['first line\n'],{type:'text/plain'});
+
+await db.writeFile('documents',name,first);
+await db.writeFile('documents',name,'second line\n',true);
+console.log(await db.readFile('documents',name));</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="read-file">
-                        <h3>readFile(tableName='', fileName='')</h3>
+                        <h3>readFile(tableName, fileName)</h3>
                         <p>Returns the underlying browser file. The worker fallback reconstructs a <code>File</code> from transferred bytes.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;File&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Read a browser File</span><button class="copy-button" type="button" data-copy-target="api-example-read-file">Copy</button></div><pre><code id="api-example-read-file">var db=window.dbopfs;
+await db.readyPromise;
+
+var name=`read-${crypto.randomUUID()}.txt`;
+await db.writeFile('documents',name,'Hello from OPFS');
+
+var file=await db.readFile('documents',name);
+console.log({
+    name:file.name,
+    size:file.size,
+    text:await file.text()
+});</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="file-metadata">
-                        <h3>getFileMetadata(tableName='', fileName='')</h3>
+                        <h3>getFileMetadata(tableName, fileName)</h3>
                         <p>Reads metadata available through the browser File API. Creation time is not exposed.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;{lastModified:number|null,size:number|null,type:string}&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Inspect file metadata</span><button class="copy-button" type="button" data-copy-target="api-example-metadata">Copy</button></div><pre><code id="api-example-metadata">var db=window.dbopfs;
+await db.readyPromise;
+
+var name=`metadata-${crypto.randomUUID()}.txt`;
+await db.writeFile('documents',name,'metadata example');
+
+var metadata=await db.getFileMetadata('documents',name);
+console.log(metadata);</code></pre></div>
                     </div>
                 </section>
 
@@ -221,39 +371,74 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                     <h2>Table methods</h2>
 
                     <div class="api-entry" id="table-handle">
-                        <h3>getTableHandle(tableName='')</h3>
+                        <h3>getTableHandle(tableName)</h3>
                         <p>Waits for readiness, returns a registered handle, matches a default alias to its physical handle, or creates the named directory.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;FileSystemDirectoryHandle&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Open or create a table directory</span><button class="copy-button" type="button" data-copy-target="api-example-table-handle">Copy</button></div><pre><code id="api-example-table-handle">var db=window.dbopfs;
+await db.readyPromise;
+
+var handle=await db.getTableHandle('projects');
+console.log(handle.kind,handle.name);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="table-names">
                         <h3>getTableNames(discover=false)</h3>
                         <p>Returns registered aliases by default. With <code>discover=true</code>, enumerates physical directories and registers newly discovered handles.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;string[]&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Compare aliases with physical directories</span><button class="copy-button" type="button" data-copy-target="api-example-table-names">Copy</button></div><pre><code id="api-example-table-names">var db=window.dbopfs;
+await db.readyPromise;
+
+console.log(await db.getTableNames());
+console.log(await db.getTableNames(true));</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="all-keys">
                         <h3>getAllKeys(tableName)</h3>
                         <p>Enumerates names in one table.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;string[]&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>List every key in a table</span><button class="copy-button" type="button" data-copy-target="api-example-all-keys">Copy</button></div><pre><code id="api-example-all-keys">var db=window.dbopfs;
+await db.readyPromise;
+
+console.log(await db.getAllKeys('notes'));</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="clear-table">
                         <h3>clear(tableName)</h3>
-                        <p>Deletes every entry in one table while retaining the directory.</p>
+                        <p>Deletes every entry in one table while retaining the directory. Individual deletion failures may be logged and suppressed by the preserved runtime.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Clear only a throwaway example table</span><button class="copy-button" type="button" data-copy-target="api-example-clear">Copy</button></div><pre><code id="api-example-clear">var db=window.dbopfs;
+await db.readyPromise;
+
+var table=`api-clear-${crypto.randomUUID()}`;
+await db.set(table,'temporary.txt','temporary');
+await db.clear(table);
+console.log(await db.count(table)); // 0</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="delete-table">
                         <h3>deleteTable(tableName)</h3>
-                        <p>Recursively removes a table and clears its registered cache/handle. Operational errors are logged by the implementation.</p>
-                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd><dt>Literal name</dt><dd>The removal call uses the supplied directory name. The default <code>memories</code> alias points to physical <code>memory</code>; prefer <code>clear('memories')</code> for that default table.</dd></dl>
+                        <p>Recursively attempts to remove a table and clears its registered cache/handle. Operational errors are logged and suppressed by the preserved runtime.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>. The value means the method completed; it does not independently verify removal.</dd><dt>Literal name</dt><dd>The removal call uses the supplied directory name. The default <code>memories</code> alias points to physical <code>memory</code>; prefer <code>clear('memories')</code> for that default table.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Create and delete an isolated table</span><button class="copy-button" type="button" data-copy-target="api-example-delete-table">Copy</button></div><pre><code id="api-example-delete-table">var db=window.dbopfs;
+await db.readyPromise;
+
+var table=`api-delete-${crypto.randomUUID()}`;
+await db.set(table,'temporary.txt','temporary');
+console.log(await db.deleteTable(table));</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="clear-all">
                         <h3>clearAllStorage()</h3>
                         <p>Deletes all entries below the current application directory, resets caches and locks, then recreates the default tables.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;DBOPFS&gt;</code>.</dd><dt>Scope</dt><dd>Current <code>apps/&lt;application-id&gt;</code> directory only.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Confirm before clearing the whole app database</span><button class="copy-button" type="button" data-copy-target="api-example-clear-all">Copy</button></div><pre><code id="api-example-clear-all">var db=window.dbopfs;
+await db.readyPromise;
+
+if(confirm(`Delete every record in ${db.storagePath}?`)){
+    var sameDatabase=await db.clearAllStorage();
+    console.log(sameDatabase===db);
+}</code></pre></div>
+                        <div class="callout warning"><p><strong>Destructive:</strong> create a backup first. This clears every table in the current application-ID folder.</p></div>
                     </div>
                 </section>
 
@@ -265,13 +450,35 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                         <h3>downloadCompressedPNG(name='DBOPFS-backup')</h3>
                         <p>Discovers current app tables, streams their JSON through <code>CompressionStream('deflate')</code>, stores the byte length and payload in PNG pixel channels, and starts a browser download.</p>
                         <dl><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd><dt>Filename</dt><dd><code>&lt;name&gt;-YYYY-MM-DD-hh-mm-ss.png</code>.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Start a browser backup download</span><button class="copy-button" type="button" data-copy-target="api-example-download">Copy</button></div><pre><code id="api-example-download">var db=window.dbopfs;
+await db.readyPromise;
+
+await db.downloadCompressedPNG(
+    `${db.applicationId}-backup`
+);</code></pre></div>
                     </div>
 
                     <div class="api-entry" id="restore-backup">
                         <h3>restoreFromPNG(file)</h3>
-                        <p>Decodes a DBOPFS backup, inflates its JSON, and calls <code>setMany()</code> for each table.</p>
-                        <dl><dt>file</dt><dd>A <code>File</code> or <code>Blob</code> created by DBOPFS backup.</dd><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd><dt>Merge</dt><dd>Existing matching keys are overwritten; unrelated records remain.</dd></dl>
+                        <p>Decodes a DBOPFS backup, inflates its JSON, and calls <code>setMany()</code> for each table. Individual item failures may be logged while the outer restore still resolves.</p>
+                        <dl><dt>file</dt><dd>A <code>File</code> or <code>Blob</code> created by DBOPFS backup.</dd><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd><dt>Merge</dt><dd>Existing matching keys are overwritten; unrelated records remain. Restore is not atomic.</dd></dl>
+                        <div class="code-card"><div class="code-card__header"><span>Pick and restore a PNG backup</span><button class="copy-button" type="button" data-copy-target="api-example-restore">Copy</button></div><pre><code id="api-example-restore">var db=window.dbopfs;
+await db.readyPromise;
+
+var picker=document.createElement('input');
+picker.type='file';
+picker.accept='image/png';
+picker.onchange=async()=>{
+    var file=picker.files[0];
+
+    if(file&&confirm(`Merge into ${db.storagePath}?`)){
+        await db.restoreFromPNG(file);
+        console.log('Restore finished');
+    }
+};
+picker.click();</code></pre></div>
                     </div>
+                    <div class="callout warning"><p><strong>Value-level backup:</strong> the PNG stores JSON values discovered through DBOPFS. It is not a byte-for-byte filesystem image and does not preserve raw binary bytes, MIME metadata, or timestamps.</p></div>
                 </section>
 
                 <section id="errors">
@@ -294,7 +501,7 @@ console.log(window.dbopfs instanceof DBOPFS);</code></pre>
                         <li>Quota, eviction, retention, and persistence grants belong to the browser.</li>
                         <li>App folders do not isolate hostile scripts that already share an origin.</li>
                         <li>There is no schema validation, query language, transaction spanning multiple keys, encryption, replication, or synchronization.</li>
-                        <li>Batch methods may partially succeed and must be inspected when atomicity is required.</li>
+                        <li>Batch methods are not atomic. Inspect every result and implement application-specific compensation if partial success is unacceptable.</li>
                     </ul>
                 </section>
             </article>

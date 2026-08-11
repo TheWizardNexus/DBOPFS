@@ -18,6 +18,45 @@ function setCurrentNavigation(){
     }
 }
 
+function installNavigation(){
+    const toggle=document.querySelector('.nav-toggle');
+    const navigation=document.querySelector('.site-nav');
+
+    if(!toggle||!navigation){
+        return;
+    }
+
+    const close=()=>{
+        toggle.setAttribute('aria-expanded','false');
+        navigation.removeAttribute('data-open');
+    };
+    const open=()=>{
+        toggle.setAttribute('aria-expanded','true');
+        navigation.dataset.open='true';
+    };
+
+    document.documentElement.dataset.navReady='true';
+    toggle.addEventListener('click',()=>{
+        if(toggle.getAttribute('aria-expanded')==='true'){
+            close();
+        }else{
+            open();
+        }
+    });
+    navigation.addEventListener('click',event=>{
+        if(event.target.closest('a')){
+            close();
+        }
+    });
+
+    const desktop=window.matchMedia('(min-width:52.01rem)');
+    desktop.addEventListener?.('change',event=>{
+        if(event.matches){
+            close();
+        }
+    });
+}
+
 async function copyText(text){
     if(navigator.clipboard?.writeText){
         await navigator.clipboard.writeText(text);
@@ -92,6 +131,7 @@ function setCurrentYear(){
 
 setPackageName();
 setCurrentNavigation();
+installNavigation();
 installCopyButtons();
 installBadgeFallbacks();
 setCurrentYear();
