@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Install DBOPFS, declare an application identity, and write your first browser-local OPFS record.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/getting-started.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/getting-started.html">
+    <meta property="og:title" content="Get started with DBOPFS">
+    <meta property="og:description" content="Install DBOPFS, declare an application identity, and write your first browser-local OPFS record.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Get started with DBOPFS">
+    <meta name="twitter:description" content="Install DBOPFS, declare an application identity, and write your first browser-local OPFS record.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Get started — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="start">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span>
+            </a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a>
+                <a href="getting-started.html" data-nav="start">Get started</a>
+                <a href="guides.html" data-nav="guides">Guides</a>
+                <a href="api.html" data-nav="api">API</a>
+                <a href="playground/index.html" data-nav="playground">Playground</a>
+                <a href="status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Get started</span></nav>
+                <p class="eyebrow">First record</p>
+                <h1>Get started.</h1>
+                <p class="page-lede">Install the package, expose its browser modules, declare a stable application identity, then wait for the singleton before reading or writing.</p>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#requirements">Requirements</a></li>
+                    <li><a href="#install">Install</a></li>
+                    <li><a href="#identity">Declare identity</a></li>
+                    <li><a href="#import">Expose and import</a></li>
+                    <li><a href="#ready">Wait for readiness</a></li>
+                    <li><a href="#first-record">First record</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="requirements">
+                    <p class="eyebrow">Before installation</p>
+                    <h2>Requirements</h2>
+                    <p>DBOPFS is a browser-only ES module. It expects the web platform, not Node.js, a server runtime, or server-side rendering.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Requirement</th><th>Why it matters</th></tr></thead>
+                            <tbody>
+                                <tr><td>HTTPS or localhost</td><td>OPFS is exposed only in a secure browser context.</td></tr>
+                                <tr><td><code>navigator.storage.getDirectory</code></td><td>Opens the origin-private filesystem root.</td></tr>
+                                <tr><td>ES modules</td><td>The runtime uses imports, top-level await, private fields, and <code>import.meta.url</code>.</td></tr>
+                                <tr><td>Window and Worker APIs</td><td>The singleton lives on <code>window</code>; a co-located worker supplies the synchronous-access fallback.</td></tr>
+                                <tr><td>Compression and image APIs</td><td>Required only for PNG backup and restore, not ordinary CRUD.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="callout">
+                        <p><strong>Browser support is capability-based.</strong> Test the actual browsers you support. The <a href="playground/index.html">playground</a> reports each required feature independently.</p>
+                    </div>
+                </section>
+
+                <section id="install">
+                    <p class="eyebrow">Step one</p>
+                    <h2>Install the release candidate.</h2>
+                    <p><code>dbopfs</code> is the temporary npm package-name placeholder. It is centralized in <code>assets/site.js</code> so the published documentation can be updated quickly when the final name or scope is confirmed.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Terminal</span><button class="copy-button" type="button" data-copy-target="start-install">Copy</button></div>
+                        <pre><code id="start-install" data-package-name>npm install dbopfs</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Release-candidate notice.</strong> Do not treat the placeholder command as proof that the package is published. Confirm the package link and integrity evidence on the <a href="status.html">status page</a> first.</p>
+                    </div>
+                </section>
+
+                <section id="identity">
+                    <p class="eyebrow">Step two</p>
+                    <h2>Declare one stable application ID.</h2>
+                    <p>Add the declaration before importing DBOPFS. IDs must begin with a lowercase letter, contain only lowercase letters, digits, and single hyphen-separated segments, and be no longer than 64 characters.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>HTML</span><button class="copy-button" type="button" data-copy-target="start-meta">Copy</button></div>
+                        <pre><code id="start-meta">&lt;meta name="arcane-app-id" content="my-app"&gt;</code></pre>
+                    </div>
+                    <p>That declaration maps browser data to:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>OPFS path</span></div>
+                        <pre><code>apps/my-app/</code></pre>
+                    </div>
+                    <div class="callout">
+                        <p><strong>Arcane host behavior:</strong> when the native <code>Arcane.app.current()</code> binding exists, its application ID is authoritative. A mismatch with the document declaration fails before storage opens.</p>
+                    </div>
+                </section>
+
+                <section id="import">
+                    <p class="eyebrow">Step three</p>
+                    <h2>Expose the browser module directory.</h2>
+                    <p>The package contains browser files, but your web server or bundler still decides their public URL. Preserve the package's <code>arcane/modules</code> layout and its bundled runtime dependency, then map that directory to a stable URL such as <code>/modules/</code>.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Browser module</span><button class="copy-button" type="button" data-copy-target="start-import">Copy</button></div>
+                        <pre><code id="start-import">import '/modules/DBOPFS.js';</code></pre>
+                    </div>
+                    <p>For a deliberately simple server that exposes installed packages, the equivalent release-candidate path may look like this:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Direct installed-package URL</span><button class="copy-button" type="button" data-copy-target="start-direct-import">Copy</button></div>
+                        <pre><code id="start-direct-import" data-package-name>import './node_modules/dbopfs/arcane/modules/DBOPFS.js';</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Do not separate the worker.</strong> <code>DBOPFSWorker.js</code> must remain beside <code>DBOPFS.js</code>. The module resolves it with <code>import.meta.url</code>.</p>
+                    </div>
+                </section>
+
+                <section id="ready">
+                    <p class="eyebrow">Step four</p>
+                    <h2>Wait for the singleton.</h2>
+                    <p>Importing the module creates <code>window.dbopfs</code> and starts initialization. Awaiting its persistent readiness promise avoids an event-listener race.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="start-ready">Copy</button></div>
+                        <pre><code id="start-ready">import '/modules/DBOPFS.js';
+
+await window.dbopfs.readyPromise;
+
+console.log(window.dbopfs.applicationId);
+console.log(window.dbopfs.storagePath);</code></pre>
+                    </div>
+                    <p>If event-based orchestration fits your application better, guard the event with the persistent <code>ready</code> flag:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Race-safe event pattern</span><button class="copy-button" type="button" data-copy-target="start-event">Copy</button></div>
+                        <pre><code id="start-event">function begin(){
+    if(!window.dbopfs?.ready){
+        return;
+    }
+
+    // Initialize the application once.
+}
+
+window.addEventListener('dbopfs-ready',begin,{once:true});
+begin();</code></pre>
+                    </div>
+                </section>
+
+                <section id="first-record">
+                    <p class="eyebrow">Step five</p>
+                    <h2>Write and read JSON.</h2>
+                    <p>Use a <code>.json</code> filename when you want <code>get()</code> to parse stored JSON back into an object.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="start-record">Copy</button></div>
+                        <pre><code id="start-record">const db=window.dbopfs;
+
+await db.set(
+    'users',
+    'alex.json',
+    {
+        name:'Alex',
+        role:'admin'
+    }
+);
+
+const user=await db.get('users','alex.json');
+console.log(user.role); // "admin"</code></pre>
+                    </div>
+                    <div class="callout success">
+                        <p><strong>Record created:</strong> the value now lives at <code>apps/my-app/users/alex.json</code> inside this origin's private filesystem.</p>
+                    </div>
+                    <p>Next, learn the data formats and batch operations in <a href="guides.html">Guides</a>, or inspect every signature in the <a href="api.html">API reference</a>.</p>
+                </section>
+
+                <section id="troubleshooting">
+                    <p class="eyebrow">Common first-run failures</p>
+                    <h2>Troubleshooting</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>APP_DATA_SCOPE_REQUIRED</code></td><td>Add the application-ID metadata before the module import.</td></tr>
+                                <tr><td><code>APP_DATA_SCOPE_INVALID</code></td><td>Use the canonical lowercase, hyphen-separated ID format.</td></tr>
+                                <tr><td><code>APP_DATA_SCOPE_MISMATCH</code></td><td>Make the document declaration match the native or explicit application identity.</td></tr>
+                                <tr><td><code>APP_DATA_STORAGE_UNAVAILABLE</code></td><td>Use HTTPS or localhost and a browser exposing <code>navigator.storage.getDirectory</code>.</td></tr>
+                                <tr><td>Worker request is 404</td><td>Keep <code>DBOPFSWorker.js</code> beside the imported <code>DBOPFS.js</code> file.</td></tr>
+                                <tr><td>Object comes back as text</td><td>Use a filename ending in <code>.json</code>; parsing is extension-driven.</td></tr>
+                                <tr><td>Module dependency is 404</td><td>Verify the installed package includes its bundled <code>strong-type</code> path and that the server exposes it.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div>
+                <div><h2>Develop</h2><ul><li><a href="guides.html">Guides</a></li><li><a href="api.html">API reference</a></li><li><a href="playground/index.html">Playground</a></li></ul></div>
+                <div><h2>Project</h2><ul><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div>
+            </div>
+            <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Target release 1.0.0 · Release candidate</span></div>
+        </div>
+    </footer>
+</body>
+</html>

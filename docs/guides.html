@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Practical DBOPFS guides for record formats, batch work, raw files, table discovery, backup, restore, and Arcane integration.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/guides.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/guides.html">
+    <meta property="og:title" content="DBOPFS developer guides">
+    <meta property="og:description" content="Practical DBOPFS guides for formats, batch work, files, tables, backup, restore, and Arcane integration.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS developer guides">
+    <meta name="twitter:description" content="Practical DBOPFS guides for formats, batch work, files, tables, backup, restore, and Arcane integration.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Guides — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="guides">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Guides</span></nav>
+                <p class="eyebrow">Working patterns</p>
+                <h1>Guides.</h1>
+                <p class="page-lede">Choose record formats deliberately, keep batch outcomes visible, understand cached reads, and treat backup, clearing, and app identity as scoped operations.</p>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#formats">Record formats</a></li>
+                    <li><a href="#batch">Batch operations</a></li>
+                    <li><a href="#cache">Cache and fresh reads</a></li>
+                    <li><a href="#raw-files">Raw files</a></li>
+                    <li><a href="#tables">Tables and discovery</a></li>
+                    <li><a href="#backup">Backup and restore</a></li>
+                    <li><a href="#clearing">Clear safely</a></li>
+                    <li><a href="#arcane">Arcane integration</a></li>
+                    <li><a href="#devtools">Chrome DevTools</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="formats">
+                    <p class="eyebrow">Choose by filename</p>
+                    <h2>Record formats</h2>
+                    <p><code>set()</code> serializes non-string values with <code>JSON.stringify()</code>. <code>get()</code> then decides how to read text by looking at the filename extension.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Filename</th><th>Write behavior</th><th>Read behavior</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>profile.json</code></td><td>Objects, arrays, numbers, and booleans are JSON-serialized.</td><td>Valid JSON is parsed. Invalid JSON remains text.</td></tr>
+                                <tr><td><code>events.ndjson</code> or <code>.jsonl</code></td><td>Write a newline-delimited string, or use append for complete JSON rows.</td><td>Each valid nonempty JSON row is parsed into an array; invalid rows are skipped.</td></tr>
+                                <tr><td><code>note.txt</code></td><td>Strings are written as-is.</td><td>Returns text.</td></tr>
+                                <tr><td><code>profile</code></td><td>An object is still JSON-serialized.</td><td>Returns the serialized text because there is no <code>.json</code> extension.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Formats</span><button class="copy-button" type="button" data-copy-target="guide-formats">Copy</button></div>
+                        <pre><code id="guide-formats">await dbopfs.set('profiles','alex.json',{active:true});
+await dbopfs.set('notes','welcome.txt','Hello OPFS');
+
+const profile=await dbopfs.get('profiles','alex.json');
+const note=await dbopfs.get('notes','welcome.txt');</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Do not append to a JSON document.</strong> Appending a second serialized value creates invalid JSON. Reserve append for raw text or complete newline-delimited rows.</p>
+                    </div>
+                </section>
+
+                <section id="batch">
+                    <p class="eyebrow">Keep every outcome</p>
+                    <h2>Batch operations</h2>
+                    <p><code>setMany()</code>, <code>getMany()</code>, and <code>deleteMany()</code> return <code>Promise.allSettled()</code> results. Inspect each status when partial success matters.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Batch write</span><button class="copy-button" type="button" data-copy-target="guide-batch">Copy</button></div>
+                        <pre><code id="guide-batch">const results=await dbopfs.setMany(
+    'settings',
+    {
+        'appearance.json':{mode:'dark'},
+        'locale.json':{language:'en-US'}
+    }
+);
+
+for(const result of results){
+    if(result.status==='rejected'){
+        console.error(result.reason);
+    }
+}</code></pre>
+                    </div>
+                    <p>The object entry order determines the returned result order. The result objects do not add filenames, so keep the original entry list if you need to associate a rejection with its key.</p>
+                </section>
+
+                <section id="cache">
+                    <p class="eyebrow">Page-local speed</p>
+                    <h2>Cache and fresh reads</h2>
+                    <p>DBOPFS keeps values it has read or written in an in-memory table cache. Ordinary <code>get()</code> calls return the cached value when one exists.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Force a filesystem read</span><button class="copy-button" type="button" data-copy-target="guide-force">Copy</button></div>
+                        <pre><code id="guide-force">const cached=await dbopfs.get('users','alex.json');
+const fresh=await dbopfs.get('users','alex.json',true);</code></pre>
+                    </div>
+                    <p>Use <code>force=true</code> when another tab, worker, or same-origin script may have changed the file. DBOPFS does not provide cross-tab subscriptions or conflict resolution.</p>
+                </section>
+
+                <section id="raw-files">
+                    <p class="eyebrow">Below parsed values</p>
+                    <h2>Raw files and metadata</h2>
+                    <p>Use <code>readFile()</code> when you need the browser <code>File</code>, and <code>writeFile()</code> when you want to control the exact bytes or string content.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Raw file</span><button class="copy-button" type="button" data-copy-target="guide-raw">Copy</button></div>
+                        <pre><code id="guide-raw">await dbopfs.writeFile(
+    'logs',
+    'session.log',
+    'started\n'
+);
+
+const file=await dbopfs.readFile('logs','session.log');
+const text=await file.text();
+const metadata=await dbopfs.getFileMetadata(
+    'logs',
+    'session.log'
+);</code></pre>
+                    </div>
+                    <p>Metadata contains <code>lastModified</code>, <code>size</code>, and <code>type</code>. On a worker-only fallback that cannot expose <code>getFile()</code>, modification time and size are returned as <code>null</code>.</p>
+                </section>
+
+                <section id="tables">
+                    <p class="eyebrow">Logical and physical names</p>
+                    <h2>Tables, keys, and discovery</h2>
+                    <p>DBOPFS creates default directories during initialization. It can also create any named table when first requested.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Default alias</th><th>Physical directory</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>users</code>, <code>scores</code>, <code>chats</code>, <code>notes</code></td><td>Same as alias</td></tr>
+                                <tr><td><code>documents</code>, <code>songs</code>, <code>images</code>, <code>reports</code>, <code>errors</code></td><td>Same as alias</td></tr>
+                                <tr><td><code>journal_entries</code>, <code>streams_of_consciousness</code></td><td>Same as alias</td></tr>
+                                <tr><td><code>memories</code></td><td><code>memory</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Discover and query</span><button class="copy-button" type="button" data-copy-target="guide-tables">Copy</button></div>
+                        <pre><code id="guide-tables">const registered=await dbopfs.getTableNames();
+const physical=await dbopfs.getTableNames(true);
+const keys=await dbopfs.getAllKeys('notes');
+const matches=await dbopfs.filterKeyIncludes(
+    'notes',
+    'meeting'
+);
+const exists=await dbopfs.hasKey('notes','meeting.json');
+const total=await dbopfs.count('notes');</code></pre>
+                    </div>
+                    <p>Use simple single-entry table and file names. They are OPFS directory/file names, not path expressions.</p>
+                    <div class="callout warning">
+                        <p><strong>Default alias edge case:</strong> <code>memories</code> points to the physical <code>memory</code> directory. Prefer <code>clear('memories')</code> when emptying that default table; direct table deletion uses the literal name passed to <code>deleteTable()</code>.</p>
+                    </div>
+                </section>
+
+                <section id="backup">
+                    <p class="eyebrow">Current app only</p>
+                    <h2>Backup and restore</h2>
+                    <p><code>downloadCompressedPNG()</code> serializes the current app's discovered tables, compresses the JSON with the browser's <code>deflate</code> stream, and encodes the bytes in RGB pixel channels.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Download backup</span><button class="copy-button" type="button" data-copy-target="guide-backup">Copy</button></div>
+                        <pre><code id="guide-backup">await dbopfs.downloadCompressedPNG('my-app-backup');</code></pre>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Restore selected file</span><button class="copy-button" type="button" data-copy-target="guide-restore">Copy</button></div>
+                        <pre><code id="guide-restore">const backupFile=fileInput.files[0];
+
+await dbopfs.restoreFromPNG(backupFile);</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Restore merges and overwrites matching keys.</strong> It does not clear the destination first and does not treat the backup as authority to select another application ID.</p>
+                    </div>
+                    <p>Backup requires <code>CompressionStream</code>, canvas, and download APIs. Restore requires <code>createImageBitmap</code>, canvas pixel access, and <code>DecompressionStream</code>.</p>
+                </section>
+
+                <section id="clearing">
+                    <p class="eyebrow">Destructive operations</p>
+                    <h2>Clear safely</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Operation</th><th>Scope</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>delete(table,key)</code></td><td>One file in one table.</td></tr>
+                                <tr><td><code>clear(table)</code></td><td>All files in one table; the table remains.</td></tr>
+                                <tr><td><code>deleteTable(table)</code></td><td>The named directory and its records.</td></tr>
+                                <tr><td><code>clearAllStorage()</code></td><td>Everything below the current <code>apps/&lt;id&gt;</code> directory, then recreates default tables.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Ask the user for confirmation before destructive UI actions. Never present DBOPFS clearing as deletion of server copies, synced copies, another origin, or browser backups.</p>
+                </section>
+
+                <section id="arcane">
+                    <p class="eyebrow">Pointer-only integration</p>
+                    <h2>Use the package from Arcane.</h2>
+                    <p>Keep the existing module filenames and co-location intact. Configure Arcane's public modules pointer to the installed package's <code>arcane/modules</code> directory, then retain the existing import:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Arcane application</span><button class="copy-button" type="button" data-copy-target="guide-arcane">Copy</button></div>
+                        <pre><code id="guide-arcane">import '/arcane/modules/DBOPFS.js';
+
+await window.dbopfs.readyPromise;</code></pre>
+                    </div>
+                    <p>Application pages still declare their canonical IDs. In a native Arcane host, the bound package identity remains authoritative and mismatches fail closed.</p>
+                </section>
+
+                <section id="devtools">
+                    <p class="eyebrow">Inspect the filesystem</p>
+                    <h2>Chrome DevTools</h2>
+                    <p>Run this read-only helper in the Console on the same page as your application. It lists OPFS entries without installing an extension.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>DevTools Console</span><button class="copy-button" type="button" data-copy-target="guide-devtools">Copy</button></div>
+                        <pre><code id="guide-devtools">async function opfsTree(directory,prefix=''){
+    const rows=[];
+
+    for await(const [name,handle] of directory.entries()){
+        const path=`${prefix}${name}`;
+        rows.push(`${handle.kind}: ${path}`);
+
+        if(handle.kind==='directory'){
+            rows.push(...await opfsTree(handle,`${path}/`));
+        }
+    }
+
+    return rows;
+}
+
+const root=await navigator.storage.getDirectory();
+console.log((await opfsTree(root)).join('\n'));</code></pre>
+                    </div>
+                    <p>Use the Network panel to confirm <code>DBOPFS.js</code>, <code>AppDataScope.js</code>, the bundled runtime dependency, and <code>DBOPFSWorker.js</code> all load successfully. Browser site-data controls operate at origin scope, which may include multiple GitHub Pages projects.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div>
+                <div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="api.html">API reference</a></li><li><a href="playground/index.html">Playground</a></li></ul></div>
+                <div><h2>Project</h2><ul><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div>
+            </div>
+            <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Target release 1.0.0 · Release candidate</span></div>
+        </div>
+    </footer>
+</body>
+</html>

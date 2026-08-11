@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Truthful release-candidate status, test evidence, coverage evidence, and publication gates for DBOPFS 1.0.0.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/status.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/status.html">
+    <meta property="og:title" content="DBOPFS 1.0.0 Release Status">
+    <meta property="og:description" content="Release-candidate gates, tests, coverage, package verification, and publication evidence for DBOPFS.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS 1.0.0 Release Status">
+    <meta name="twitter:description" content="Release-candidate gates, tests, coverage, package verification, and publication evidence for DBOPFS.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Release status — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="status">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Release status</span></nav>
+                <p class="eyebrow">Target 1.0.0</p>
+                <h1>Release candidate.</h1>
+                <p class="page-lede">The runtime and documentation are being prepared for one 1.0.0 publication. This page stays conservative until tests, coverage, packaging, npm, GitHub release, Arcane consumption, and live Pages evidence are complete.</p>
+                <div class="version-line"><span class="status-chip warning">Not a final release</span><span>Target: 1.0.0</span></div>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#snapshot">Current snapshot</a></li>
+                    <li><a href="#evidence">Evidence badges</a></li>
+                    <li><a href="#gates">Release gates</a></li>
+                    <li><a href="#compatibility">Compatibility claim</a></li>
+                    <li><a href="#publication">Final publication</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="snapshot">
+                    <p class="eyebrow">Truthful state</p>
+                    <h2>Current snapshot</h2>
+                    <ul class="status-list">
+                        <li><span class="status-dot success" aria-hidden="true"></span><div><strong>Runtime source identified</strong><span><code>DBOPFS.js</code>, <code>AppDataScope.js</code>, and <code>DBOPFSWorker.js</code> retain their existing implementation.</span></div></li>
+                        <li><span class="status-dot success" aria-hidden="true"></span><div><strong>Static documentation prepared</strong><span>Dependency-free HTML, CSS, JavaScript, accurate API reference, and a structured browser playground are present.</span></div></li>
+                        <li><span class="status-dot warning" aria-hidden="true"></span><div><strong>Npm identity provisional</strong><span><code>dbopfs</code> is a documentation placeholder until the final name or scope and registry ownership are confirmed.</span></div></li>
+                        <li><span class="status-dot warning" aria-hidden="true"></span><div><strong>Test and coverage evidence pending</strong><span>Badges remain evidence links, not claims, until release reports are generated and reviewed.</span></div></li>
+                        <li><span class="status-dot warning" aria-hidden="true"></span><div><strong>Publication pending</strong><span>No final 1.0.0 npm publication, Git tag, GitHub release, or release-status declaration is asserted here.</span></div></li>
+                    </ul>
+                </section>
+
+                <section id="evidence">
+                    <p class="eyebrow">Release-bound reports</p>
+                    <h2>Evidence badges</h2>
+                    <p>The badge images are read from the repository's release evidence. If the files do not exist yet, the site shows an evidence-pending fallback.</p>
+                    <div class="badges" aria-label="Release evidence badges">
+                        <a href="https://github.com/TheWizardNexus/DBOPFS/tree/main/release" aria-label="Open test evidence">
+                            <img data-evidence-badge src="https://raw.githubusercontent.com/TheWizardNexus/DBOPFS/main/release/badges/tests.svg" alt="DBOPFS test status badge"><span class="badge-fallback" hidden>tests · evidence pending</span>
+                        </a>
+                        <a href="https://github.com/TheWizardNexus/DBOPFS/tree/main/release" aria-label="Open coverage evidence">
+                            <img data-evidence-badge src="https://raw.githubusercontent.com/TheWizardNexus/DBOPFS/main/release/badges/coverage.svg" alt="DBOPFS code coverage badge"><span class="badge-fallback" hidden>coverage · evidence pending</span>
+                        </a>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>No workflow implication.</strong> These are release-artifact badges. They do not claim that GitHub Actions runs on every commit.</p>
+                    </div>
+                </section>
+
+                <section id="gates">
+                    <p class="eyebrow">Before 1.0.0</p>
+                    <h2>Release gates</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Gate</th><th>Required evidence</th><th>Current site claim</th></tr></thead>
+                            <tbody>
+                                <tr><td>Tests</td><td>Vanilla-test suite passes from a clean install, with results saved under <code>release/</code>.</td><td>Pending evidence</td></tr>
+                                <tr><td>Coverage</td><td>Coverage report covers the released runtime, with a reviewed summary and badge.</td><td>Pending evidence</td></tr>
+                                <tr><td>Package contents</td><td><code>npm pack --dry-run</code> and tarball inspection prove all three modules and the bundled relative dependency are present.</td><td>Pending evidence</td></tr>
+                                <tr><td>Clean consumer</td><td>A fresh project installs the tarball and loads the browser singleton and worker.</td><td>Pending evidence</td></tr>
+                                <tr><td>Arcane pointer</td><td>Arcane OS replaces its in-tree DBOPFS path with the installed modules directory and needs no code changes.</td><td>Pending evidence</td></tr>
+                                <tr><td>License</td><td>The governing root license is reviewed, committed, and matches the commercial-use notice.</td><td>Pending final text</td></tr>
+                                <tr><td>Registry</td><td>The confirmed package name is available, owned, and the 1.0.0 metadata resolves correctly.</td><td>Placeholder only</td></tr>
+                                <tr><td>GitHub release</td><td>Tag and release point to the verified commit and package evidence.</td><td>Not published</td></tr>
+                                <tr><td>Pages</td><td>Live project URL loads every route and the structured playground from the release commit.</td><td>Candidate source only</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="compatibility">
+                    <p class="eyebrow">What 1.0.0 must prove</p>
+                    <h2>Compatibility claim</h2>
+                    <p>The intended release contract is narrow and testable:</p>
+                    <div class="callout">
+                        <p><strong>Arcane OS can remove its in-tree DBOPFS copy, point its modules directory at the installed package, and continue using the existing application code without changes.</strong></p>
+                    </div>
+                    <p>This site does not mark that claim complete until the actual clean Arcane smoke evidence is linked from the release directory.</p>
+                </section>
+
+                <section id="publication">
+                    <p class="eyebrow">One coordinated release</p>
+                    <h2>Final publication</h2>
+                    <p>When every gate is complete, the maintainer will update this page in the same release commit to:</p>
+                    <ul>
+                        <li>replace “release candidate” with the final 1.0.0 status;</li>
+                        <li>replace the temporary npm name everywhere;</li>
+                        <li>link the immutable test and coverage evidence;</li>
+                        <li>link the npm package, Git tag, and GitHub release;</li>
+                        <li>state the browsers actually exercised, without extrapolating beyond the evidence;</li>
+                        <li>confirm the live GitHub Pages playground and Arcane pointer-only integration.</li>
+                    </ul>
+                    <p><a class="button ghost" href="https://github.com/TheWizardNexus/DBOPFS/releases">View GitHub releases</a></p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap"><div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="api.html">API reference</a></li><li><a href="playground/index.html">Playground</a></li></ul></div><div><h2>Project</h2><ul><li><a href="architecture.html">Architecture</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div></div><div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Target release 1.0.0 · Release candidate</span></div></div>
+    </footer>
+</body>
+</html>

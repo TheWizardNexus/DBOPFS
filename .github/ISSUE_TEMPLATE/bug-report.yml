@@ -1,0 +1,32 @@
+name: Bug report
+description: Report reproducible DBOPFS behavior.
+title: "Bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Do not include private database contents or credentials.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: DBOPFS version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+    validations:
+      required: true

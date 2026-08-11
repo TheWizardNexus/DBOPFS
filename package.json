@@ -1,0 +1,63 @@
+{
+  "name": "dbopfs",
+  "version": "1.0.0",
+  "description": "A browser-native database that maps tables and records to the Origin Private File System.",
+  "type": "module",
+  "main": "./arcane/modules/DBOPFS.js",
+  "module": "./arcane/modules/DBOPFS.js",
+  "browser": "./arcane/modules/DBOPFS.js",
+  "exports": {
+    ".": "./arcane/modules/DBOPFS.js",
+    "./arcane/modules/DBOPFS.js": "./arcane/modules/DBOPFS.js",
+    "./arcane/modules/DBOPFSWorker.js": "./arcane/modules/DBOPFSWorker.js",
+    "./arcane/modules/AppDataScope.js": "./arcane/modules/AppDataScope.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "arcane/modules/DBOPFS.js",
+    "arcane/modules/DBOPFSWorker.js",
+    "arcane/modules/AppDataScope.js",
+    "COMMERCIAL-LICENSE.md",
+    "NOTICE",
+    "SOURCE_PROVENANCE.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "sideEffects": true,
+  "scripts": {
+    "test": "node release/scripts/run-browser-release-tests.mjs",
+    "coverage": "node release/scripts/run-browser-release-tests.mjs",
+    "release:test": "node release/scripts/release-test.mjs",
+    "prepublishOnly": "npm run release:test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheWizardNexus/DBOPFS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheWizardNexus/DBOPFS/issues"
+  },
+  "homepage": "https://thewizardnexus.github.io/DBOPFS/",
+  "keywords": [
+    "opfs",
+    "database",
+    "browser",
+    "filesystem",
+    "storage",
+    "arcane"
+  ],
+  "author": "The Wizard Nexus",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "strong-type": "1.1.0"
+  },
+  "bundleDependencies": [
+    "strong-type"
+  ],
+  "devDependencies": {
+    "puppeteer-core": "25.6.0",
+    "vanilla-test": "1.4.9"
+  }
+}

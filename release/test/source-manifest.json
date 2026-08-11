@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "sha256",
+  "files": [
+    {
+      "path": "arcane/modules/AppDataScope.js",
+      "bytes": 7642,
+      "sha256": "4ac7be2fc8c7e0e3dfae4d748ed6dfd7a9169464b3ffb91e12c65d6d69574a06"
+    },
+    {
+      "path": "arcane/modules/DBOPFS.js",
+      "bytes": 29879,
+      "sha256": "133ea76ae80210b6f2e873d4240caca62e1f8d43558f77fc0e471e60355ee5e8"
+    },
+    {
+      "path": "arcane/modules/DBOPFSWorker.js",
+      "bytes": 3928,
+      "sha256": "7b3f1b5176431a104a0faa80063577362cc57eef0800212abafc209f7912d14e"
+    }
+  ]
+}

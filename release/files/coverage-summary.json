@@ -1,0 +1,28 @@
+{
+  "files": [
+    {
+      "byteCoveragePercent": 71.34,
+      "coveredBytes": 5452,
+      "modulePath": "arcane/modules/AppDataScope.js",
+      "totalBytes": 7642
+    },
+    {
+      "byteCoveragePercent": 83.45,
+      "coveredBytes": 24927,
+      "modulePath": "arcane/modules/DBOPFS.js",
+      "totalBytes": 29871
+    },
+    {
+      "byteCoveragePercent": 86.46,
+      "coveredBytes": 3396,
+      "modulePath": "arcane/modules/DBOPFSWorker.js",
+      "totalBytes": 3928
+    }
+  ],
+  "metric": "executed source bytes from precise V8 block coverage",
+  "total": {
+    "byteCoveragePercent": 81.5,
+    "coveredBytes": 33775,
+    "totalBytes": 41441
+  }
+}

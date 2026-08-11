@@ -1,0 +1,8 @@
+node_modules/
+.coverage-tmp/
+.release-tmp/
+*.log
+*.tgz
+!release/files/*.tgz
+Thumbs.db
+.DS_Store

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="DBOPFS architecture: application identity, OPFS storage layout, singleton lifecycle, worker fallback, caching, and browser security boundaries.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/architecture.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/architecture.html">
+    <meta property="og:title" content="DBOPFS Architecture">
+    <meta property="og:description" content="How DBOPFS maps application-scoped browser records to OPFS directories and files.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS Architecture">
+    <meta name="twitter:description" content="How DBOPFS maps application-scoped browser records to OPFS directories and files.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Architecture — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="architecture">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Architecture</span></nav>
+                <p class="eyebrow">Under the abstraction</p>
+                <h1>Architecture.</h1>
+                <p class="page-lede">DBOPFS wraps the browser's Origin Private File System with app identity, table handles, parsed record values, serialized per-key writes, and a worker fallback.</p>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#mapping">Storage mapping</a></li>
+                    <li><a href="#lifecycle">Initialization lifecycle</a></li>
+                    <li><a href="#identity">Application identity</a></li>
+                    <li><a href="#worker">Worker fallback</a></li>
+                    <li><a href="#cache">Cache and concurrency</a></li>
+                    <li><a href="#security">Security boundary</a></li>
+                    <li><a href="#pages">GitHub Pages</a></li>
+                    <li><a href="#arcane">Arcane integration</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="mapping">
+                    <p class="eyebrow">One concept per filesystem level</p>
+                    <h2>Storage mapping</h2>
+                    <div class="diagram" role="img" aria-label="Origin maps to apps directory, then application ID, then table directory, then record file">
+                        <div class="diagram__node"><strong>Origin</strong><span>One private filesystem per browser origin.</span></div>
+                        <div class="diagram__node"><strong>Application</strong><span><code>apps/&lt;application-id&gt;</code></span></div>
+                        <div class="diagram__node"><strong>Table</strong><span>One OPFS directory.</span></div>
+                        <div class="diagram__node"><strong>Record</strong><span>One OPFS file.</span></div>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Example physical layout</span></div>
+                        <pre><code>OPFS root/
+└── apps/
+    └── my-app/
+        ├── users/
+        │   └── alex.json
+        ├── notes/
+        │   └── welcome.txt
+        └── settings/
+            └── appearance.json</code></pre>
+                    </div>
+                    <p>The tree is private to the origin and normally invisible to the user's ordinary filesystem. DBOPFS backup is an explicit way to create a downloadable representation.</p>
+                </section>
+
+                <section id="lifecycle">
+                    <p class="eyebrow">Import to ready</p>
+                    <h2>Initialization lifecycle</h2>
+                    <ol class="flow">
+                        <li><div><strong>Request persistence.</strong>The module asks <code>navigator.storage.persist()</code> when available. The browser decides whether to grant it.</div></li>
+                        <li><div><strong>Create the singleton.</strong>If <code>window.dbopfs</code> does not already expose <code>get()</code>, the module constructs one instance.</div></li>
+                        <li><div><strong>Resolve identity.</strong><code>AppDataScope</code> reconciles explicit, document-declared, and native-bound identities.</div></li>
+                        <li><div><strong>Open the app directory.</strong>The module opens <code>apps/&lt;id&gt;</code> beneath the OPFS root.</div></li>
+                        <li><div><strong>Create default tables.</strong>Known table directories are opened with <code>{create:true}</code>.</div></li>
+                        <li><div><strong>Publish readiness.</strong><code>ready</code> becomes true and <code>dbopfs-ready</code> is dispatched with the resolved scope.</div></li>
+                    </ol>
+                    <p><code>readyPromise</code> represents that same lifecycle and remains available after the event has already fired.</p>
+                </section>
+
+                <section id="identity">
+                    <p class="eyebrow">Fail-closed ownership</p>
+                    <h2>Application identity</h2>
+                    <p>Canonical IDs match <code>^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$</code> and are limited to 64 characters.</p>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Identity source</th><th>Role</th></tr></thead>
+                            <tbody>
+                                <tr><td>Native <code>Arcane.app.current().id</code></td><td>Authoritative when the bridge exists.</td></tr>
+                                <tr><td>Explicit constructor option</td><td>Useful for controlled adapters and synthetic tests.</td></tr>
+                                <tr><td><code>meta[name="arcane-app-id"]</code></td><td>Normal browser-page declaration.</td></tr>
+                                <tr><td><code>documentElement.dataset.arcaneAppId</code></td><td>Equivalent document-level declaration.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Conflicting declarations fail before the OPFS directory is opened. Imported module paths and page URLs are never guessed as ownership.</p>
+                </section>
+
+                <section id="worker">
+                    <p class="eyebrow">Browser fallback</p>
+                    <h2>Worker fallback</h2>
+                    <p>Ordinary main-thread operations use asynchronous <code>FileSystemFileHandle.createWritable()</code> and <code>getFile()</code>. If one is unavailable, DBOPFS creates a dedicated worker from:</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Resolved beside the module</span></div>
+                        <pre><code>new URL('./DBOPFSWorker.js',import.meta.url)</code></pre>
+                    </div>
+                    <p>The worker revalidates the application ID, opens the same <code>apps/&lt;id&gt;</code> subtree, and uses a synchronous OPFS access handle. Each request travels through its own <code>MessageChannel</code>; transferable buffers avoid cloning file bytes.</p>
+                    <div class="callout warning">
+                        <p><strong>Deployment invariant:</strong> renaming or separating the worker breaks fallback loading. Preserve the runtime module directory exactly.</p>
+                    </div>
+                </section>
+
+                <section id="cache">
+                    <p class="eyebrow">Within one page</p>
+                    <h2>Cache and concurrency</h2>
+                    <p>The singleton maintains three private maps:</p>
+                    <ul>
+                        <li>table handles, keyed by alias or discovered physical name;</li>
+                        <li>parsed record values, keyed by table and filename;</li>
+                        <li>write-lock promises, keyed by <code>tableName:fileName</code>.</li>
+                    </ul>
+                    <p>Writes to the same table/key are chained in call order. Writes to different keys may proceed concurrently. This is not a transaction system: a batch can partially succeed, and another tab or same-origin script does not share the in-memory locks.</p>
+                    <p><code>get(table,key,true)</code> forces a filesystem read when cross-context changes are possible.</p>
+                </section>
+
+                <section id="security">
+                    <p class="eyebrow">What scoping does—and does not—mean</p>
+                    <h2>Security boundary</h2>
+                    <div class="callout success">
+                        <p><strong>Protected against accidental helper misuse:</strong> backup, restore, enumeration, and clear-all begin at the current <code>apps/&lt;id&gt;</code> directory rather than the origin root.</p>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Not a hostile-code boundary:</strong> every script already running on the same origin can request the raw browser storage APIs. Separate origins or native per-app browser profiles provide the stronger isolation boundary.</p>
+                    </div>
+                    <ul>
+                        <li>DBOPFS does not encrypt record contents.</li>
+                        <li>It does not validate application schemas or sanitize record values.</li>
+                        <li>It does not prevent browser eviction or user-driven site-data deletion.</li>
+                        <li>It does not authenticate users or authorize business operations.</li>
+                        <li>Backup files may contain every record in the current application scope and should be handled accordingly.</li>
+                    </ul>
+                </section>
+
+                <section id="pages">
+                    <p class="eyebrow">Project-site behavior</p>
+                    <h2>GitHub Pages</h2>
+                    <p>The documentation uses relative links and no root <code>&lt;base&gt;</code>, so it remains valid beneath the project path <code>/DBOPFS/</code>. GitHub Pages supplies HTTPS, which satisfies the secure-context requirement.</p>
+                    <p>All project sites under <code>thewizardnexus.github.io</code> share an origin. The playground therefore uses a distinct <code>dbopfs-playground</code> application directory and warns visitors to store only disposable example data.</p>
+                    <p>The playground imports <code>../arcane/modules/DBOPFS.js</code> from its page. The release publication step must mirror the installed runtime into the corresponding static site path without modifying its source.</p>
+                </section>
+
+                <section id="arcane">
+                    <p class="eyebrow">Externalized runtime</p>
+                    <h2>Arcane integration</h2>
+                    <p>The npm release is intended to preserve the existing <code>arcane/modules</code> layout. Arcane OS can replace its in-tree copy with an installed package by changing only the directory pointer that serves those modules.</p>
+                    <div class="diagram" role="img" aria-label="Arcane application imports the modules pointer, which resolves to the installed DBOPFS package and opens the application OPFS directory">
+                        <div class="diagram__node"><strong>Arcane app</strong><span>Existing import statement.</span></div>
+                        <div class="diagram__node"><strong>Modules pointer</strong><span>Configured package directory.</span></div>
+                        <div class="diagram__node"><strong>DBOPFS package</strong><span>Module, scope helper, worker.</span></div>
+                        <div class="diagram__node"><strong>App OPFS</strong><span>Host-bound application ID.</span></div>
+                    </div>
+                    <p>That compatibility claim remains a release gate until a clean consumer install and Arcane pointer-only smoke test have passed. See <a href="status.html">Release status</a>.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="api.html">API reference</a></li></ul></div><div><h2>Project</h2><ul><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div></div>
+            <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Target release 1.0.0 · Release candidate</span></div>
+        </div>
+    </footer>
+</body>
+</html>

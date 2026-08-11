@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Complete DBOPFS API reference for properties, readiness, records, files, tables, backup, restore, and application scoping.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/api.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/api.html">
+    <meta property="og:title" content="DBOPFS API Reference">
+    <meta property="og:description" content="Complete browser-native DBOPFS properties, methods, events, and behavior.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS API Reference">
+    <meta name="twitter:description" content="Complete browser-native DBOPFS properties, methods, events, and behavior.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>API reference — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="module" src="assets/site.js"></script>
+</head>
+<body data-page="api">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="api.html" data-nav="api">API</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>API reference</span></nav>
+                <p class="eyebrow">Runtime contract</p>
+                <h1>API reference.</h1>
+                <p class="page-lede">The default export is a browser class whose first instance becomes <code>window.dbopfs</code>. Importing the module creates that singleton automatically.</p>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#singleton">Singleton and constructor</a></li>
+                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#readiness">Readiness event</a></li>
+                    <li><a href="#records">Record methods</a></li>
+                    <li><a href="#files">File methods</a></li>
+                    <li><a href="#tables">Table methods</a></li>
+                    <li><a href="#backup">Backup methods</a></li>
+                    <li><a href="#errors">Errors and limits</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="singleton">
+                    <p class="eyebrow">Default export</p>
+                    <h2>Singleton and constructor</h2>
+                    <div class="api-entry">
+                        <h3>new DBOPFS(options={})</h3>
+                        <p>Creates the database when no compatible <code>window.dbopfs</code> exists. Otherwise, the constructor returns the existing singleton.</p>
+                        <dl>
+                            <dt>options.storage</dt><dd>Storage-manager adapter; defaults to <code>navigator.storage</code>.</dd>
+                            <dt>options.applicationId</dt><dd>Explicit ID for adapters and tests. Browser pages should normally declare metadata instead.</dd>
+                            <dt>options.documentObject</dt><dd>Document-like identity source; defaults to <code>document</code>.</dd>
+                            <dt>options.arcane</dt><dd>Optional native Arcane bridge; defaults to <code>globalThis.Arcane</code>.</dd>
+                            <dt>Returns</dt><dd>The new or existing <code>DBOPFS</code> instance.</dd>
+                        </dl>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Automatic singleton</span><button class="copy-button" type="button" data-copy-target="api-singleton">Copy</button></div>
+                        <pre><code id="api-singleton">import DBOPFS from '/modules/DBOPFS.js';
+
+await window.dbopfs.readyPromise;
+
+console.log(window.dbopfs instanceof DBOPFS);</code></pre>
+                    </div>
+                    <div class="callout warning">
+                        <p><strong>Browser module only.</strong> The module reads <code>navigator</code> at top level and relies on <code>window</code>, <code>document</code>, Worker APIs, and OPFS. It is not a Node.js database.</p>
+                    </div>
+                </section>
+
+                <section id="properties">
+                    <p class="eyebrow">Instance state</p>
+                    <h2>Properties</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Property</th><th>Type</th><th>Behavior</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>ready</code></td><td>boolean</td><td>Becomes <code>true</code> after the app directory and default tables open.</td></tr>
+                                <tr><td><code>readyPromise</code></td><td><code>Promise&lt;void&gt;</code></td><td>Persistent initialization promise; recommended for race-safe startup.</td></tr>
+                                <tr><td><code>applicationId</code></td><td>string</td><td>Resolved canonical application owner.</td></tr>
+                                <tr><td><code>storagePath</code></td><td>string</td><td>App-relative path such as <code>apps/my-app</code>.</td></tr>
+                                <tr><td><code>tables</code></td><td>object</td><td>In-memory cache of values read or written during this page lifetime.</td></tr>
+                                <tr><td><code>tables = update</code></td><td>setter</td><td>Calls <code>set(update.tableName,update.fileName,update.value)</code> without exposing the promise. Prefer <code>await set()</code> when failures matter.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="readiness">
+                    <p class="eyebrow">Lifecycle</p>
+                    <h2>Readiness event</h2>
+                    <div class="api-entry">
+                        <h3>dbopfs-ready</h3>
+                        <p>Dispatched on <code>window</code> after the database has opened and default directories exist.</p>
+                        <dl>
+                            <dt>detail.dbopfs</dt><dd>The singleton instance.</dd>
+                            <dt>detail.applicationId</dt><dd>The resolved canonical app ID.</dd>
+                            <dt>detail.storagePath</dt><dd>The app-relative OPFS directory.</dd>
+                        </dl>
+                    </div>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Event detail</span><button class="copy-button" type="button" data-copy-target="api-event">Copy</button></div>
+                        <pre><code id="api-event">window.addEventListener(
+    'dbopfs-ready',
+    event=>{
+        console.log(event.detail.applicationId);
+        console.log(event.detail.storagePath);
+    },
+    {once:true}
+);</code></pre>
+                    </div>
+                </section>
+
+                <section id="records">
+                    <p class="eyebrow">Parsed values</p>
+                    <h2>Record methods</h2>
+
+                    <div class="api-entry" id="set">
+                        <h3>set(tableName='', fileName='', value={}, append=false)</h3>
+                        <p>Serializes non-string values, writes one file, refreshes its cached value, and serializes concurrent writes to the same table/key.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;any&gt;</code> with the value as read back by <code>get()</code>.</dd><dt>Parsing</dt><dd><code>.json</code> is parsed; <code>.jsonl</code>/<code>.ndjson</code> becomes an array; other names return text.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="set-many">
+                        <h3>setMany(tableName, items)</h3>
+                        <p>Writes every own enumerable entry in <code>items</code>, using each property name as a filename.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code> in object-entry order.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="get">
+                        <h3>get(tableName='', fileName='', force=false)</h3>
+                        <p>Returns a cached value unless <code>force</code> is true or the key has no cached truthy value. Reads and parses the file when required.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;any|null&gt;</code>. Missing files return <code>null</code>.</dd><dt>force</dt><dd>When true, bypasses the page-local cache.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="get-many">
+                        <h3>getMany(tableName, fileNames)</h3>
+                        <p>Reads each requested filename with <code>get()</code>.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code> in filename order.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="get-all">
+                        <h3>getAll(tableName='')</h3>
+                        <p>With a table name, returns every record in that directory. Without one, discovers physical tables and returns a nested object.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;Object&gt;</code>.</dd><dt>All tables</dt><dd>Shape: <code>{tableName:{fileName:value}}</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="delete">
+                        <h3>delete(tableName='', fileName='')</h3>
+                        <p>Removes one cache entry and attempts to remove the matching file. A missing file is treated as success.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="delete-many">
+                        <h3>deleteMany(tableName, fileNames)</h3>
+                        <p>Deletes the requested keys independently.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;PromiseSettledResult[]&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="filter-key-includes">
+                        <h3>filterKeyIncludes(tableName, substring='')</h3>
+                        <p>Reads records whose filenames contain the exact case-sensitive substring.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;Object&gt;</code> keyed by filename.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="has-key">
+                        <h3>hasKey(tableName, key)</h3>
+                        <p>Checks whether the named file handle exists.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;boolean&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="count">
+                        <h3>count(tableName)</h3>
+                        <p>Counts entries yielded by the table directory.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;number&gt;</code>.</dd></dl>
+                    </div>
+                </section>
+
+                <section id="files">
+                    <p class="eyebrow">Raw bytes and metadata</p>
+                    <h2>File methods</h2>
+
+                    <div class="api-entry" id="write-file">
+                        <h3>writeFile(tableName='', fileName='', fileData='', append=false)</h3>
+                        <p>Writes raw data through <code>createWritable()</code>, or through the co-located worker when the asynchronous writable surface is unavailable.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd><dt>append</dt><dd>Preserves existing bytes and writes at the current file size.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="read-file">
+                        <h3>readFile(tableName='', fileName='')</h3>
+                        <p>Returns the underlying browser file. The worker fallback reconstructs a <code>File</code> from transferred bytes.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;File&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="file-metadata">
+                        <h3>getFileMetadata(tableName='', fileName='')</h3>
+                        <p>Reads metadata available through the browser File API. Creation time is not exposed.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;{lastModified:number|null,size:number|null,type:string}&gt;</code>.</dd></dl>
+                    </div>
+                </section>
+
+                <section id="tables">
+                    <p class="eyebrow">Directories</p>
+                    <h2>Table methods</h2>
+
+                    <div class="api-entry" id="table-handle">
+                        <h3>getTableHandle(tableName='')</h3>
+                        <p>Waits for readiness, returns a registered handle, matches a default alias to its physical handle, or creates the named directory.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;FileSystemDirectoryHandle&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="table-names">
+                        <h3>getTableNames(discover=false)</h3>
+                        <p>Returns registered aliases by default. With <code>discover=true</code>, enumerates physical directories and registers newly discovered handles.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;string[]&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="all-keys">
+                        <h3>getAllKeys(tableName)</h3>
+                        <p>Enumerates names in one table.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;string[]&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="clear-table">
+                        <h3>clear(tableName)</h3>
+                        <p>Deletes every entry in one table while retaining the directory.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="delete-table">
+                        <h3>deleteTable(tableName)</h3>
+                        <p>Recursively removes a table and clears its registered cache/handle. Operational errors are logged by the implementation.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;true&gt;</code>.</dd><dt>Literal name</dt><dd>The removal call uses the supplied directory name. The default <code>memories</code> alias points to physical <code>memory</code>; prefer <code>clear('memories')</code> for that default table.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="clear-all">
+                        <h3>clearAllStorage()</h3>
+                        <p>Deletes all entries below the current application directory, resets caches and locks, then recreates the default tables.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;DBOPFS&gt;</code>.</dd><dt>Scope</dt><dd>Current <code>apps/&lt;application-id&gt;</code> directory only.</dd></dl>
+                    </div>
+                </section>
+
+                <section id="backup">
+                    <p class="eyebrow">Portable payload</p>
+                    <h2>Backup methods</h2>
+
+                    <div class="api-entry" id="download-backup">
+                        <h3>downloadCompressedPNG(name='DBOPFS-backup')</h3>
+                        <p>Discovers current app tables, streams their JSON through <code>CompressionStream('deflate')</code>, stores the byte length and payload in PNG pixel channels, and starts a browser download.</p>
+                        <dl><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd><dt>Filename</dt><dd><code>&lt;name&gt;-YYYY-MM-DD-hh-mm-ss.png</code>.</dd></dl>
+                    </div>
+
+                    <div class="api-entry" id="restore-backup">
+                        <h3>restoreFromPNG(file)</h3>
+                        <p>Decodes a DBOPFS backup, inflates its JSON, and calls <code>setMany()</code> for each table.</p>
+                        <dl><dt>file</dt><dd>A <code>File</code> or <code>Blob</code> created by DBOPFS backup.</dd><dt>Returns</dt><dd><code>Promise&lt;void&gt;</code>.</dd><dt>Merge</dt><dd>Existing matching keys are overwritten; unrelated records remain.</dd></dl>
+                    </div>
+                </section>
+
+                <section id="errors">
+                    <p class="eyebrow">Failure contract</p>
+                    <h2>Errors and limits</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Code or name</th><th>Meaning</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>APP_DATA_SCOPE_REQUIRED</code></td><td>No explicit, declared, or native-bound application ID exists.</td></tr>
+                                <tr><td><code>APP_DATA_SCOPE_INVALID</code></td><td>An application ID violates the canonical pattern or 64-character limit.</td></tr>
+                                <tr><td><code>APP_DATA_SCOPE_MISMATCH</code></td><td>Two identity sources disagree.</td></tr>
+                                <tr><td><code>APP_DATA_STORAGE_UNAVAILABLE</code></td><td>The browser cannot expose an OPFS root/directory handle.</td></tr>
+                                <tr><td><code>NotFoundError</code></td><td>A raw file/table operation requested an entry that does not exist. <code>get()</code converts missing files to <code>null</code>.</td></tr>
+                                <tr><td><code>NotSupportedError</code></td><td>The worker fallback cannot obtain a synchronous OPFS access handle.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ul>
+                        <li>Quota, eviction, retention, and persistence grants belong to the browser.</li>
+                        <li>App folders do not isolate hostile scripts that already share an origin.</li>
+                        <li>There is no schema validation, query language, transaction spanning multiple keys, encryption, replication, or synchronization.</li>
+                        <li>Batch methods may partially succeed and must be inspected when atomicity is required.</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div>
+                <div><h2>Develop</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="playground/index.html">Playground</a></li></ul></div>
+                <div><h2>Project</h2><ul><li><a href="status.html">Release status</a></li><li><a href="license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div>
+            </div>
+            <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Target release 1.0.0 · Release candidate</span></div>
+        </div>
+    </footer>
+</body>
+</html>

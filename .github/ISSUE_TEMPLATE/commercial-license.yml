@@ -1,0 +1,36 @@
+name: Commercial license request
+description: Start a non-confidential request for paid commercial DBOPFS terms.
+title: "Commercial license request: "
+labels:
+  - commercial-license
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, payment details, personal data, or confidential project information. A maintainer will provide a private contact path.
+  - type: input
+    id: organization
+    attributes:
+      label: Organization or project
+      description: A public name or short non-confidential description is enough.
+    validations:
+      required: true
+  - type: dropdown
+    id: use
+    attributes:
+      label: Intended commercial use
+      options:
+        - Internal application
+        - Distributed application
+        - Hosted service
+        - Evaluation before commercial use
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I understand that this request does not grant commercial rights and that a separate written agreement and payment are required.
+          required: true

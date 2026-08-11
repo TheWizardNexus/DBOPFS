@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="arcane-app-id" content="dbopfs-playground">
+    <meta name="description" content="A structured browser playground for testing DBOPFS records, tables, metadata, backup, and restore without evaluating visitor-authored code.">
+    <meta name="theme-color" content="#050c17">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/playground/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/playground/">
+    <meta property="og:title" content="DBOPFS Structured Playground">
+    <meta property="og:description" content="Write, read, list, inspect, back up, and restore disposable browser-local DBOPFS records.">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS Structured Playground">
+    <meta name="twitter:description" content="Write, read, list, inspect, back up, and restore disposable browser-local DBOPFS records.">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Playground — DBOPFS</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <script type="module" src="../assets/site.js"></script>
+    <script type="module" src="playground.js"></script>
+</head>
+<body data-page="playground">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="../index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <nav class="site-nav" aria-label="Primary navigation">
+                <a href="../index.html" data-nav="home">Home</a><a href="../getting-started.html" data-nav="start">Get started</a><a href="../guides.html" data-nav="guides">Guides</a><a href="../api.html" data-nav="api">API</a><a href="index.html" data-nav="playground">Playground</a><a href="../status.html" data-nav="status">Status</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Playground</span></nav>
+                <p class="eyebrow">Structured browser lab</p>
+                <h1>Practice with real OPFS.</h1>
+                <p class="page-lede">Use named controls to write, read, inspect, and remove disposable records in the <code>dbopfs-playground</code> namespace. The page shows the equivalent JavaScript but never evaluates text as code.</p>
+                <div class="version-line"><span id="runtime-state" class="status-chip warning" role="status" aria-live="polite">Loading runtime</span><span id="runtime-detail">Checking browser capabilities…</span></div>
+            </div>
+        </header>
+
+        <section class="section compact">
+            <div class="wrap">
+                <div class="callout warning">
+                    <p><strong>Use disposable data only.</strong> Records remain on this device until cleared, evicted, or deleted through browser controls. GitHub project sites under <code>thewizardnexus.github.io</code> share one origin; the application folder is organizational isolation, not protection from hostile same-origin code.</p>
+                </div>
+
+                <div class="card" aria-labelledby="capability-heading">
+                    <p class="eyebrow">Environment check</p>
+                    <h2 id="capability-heading">Browser capabilities</h2>
+                    <ul class="capability-grid" id="capability-list">
+                        <li><span>Secure context</span><strong data-capability="secure" data-state="unknown">Checking</strong></li>
+                        <li><span>OPFS root</span><strong data-capability="opfs" data-state="unknown">Checking</strong></li>
+                        <li><span>Persistence request</span><strong data-capability="persist" data-state="unknown">Checking</strong></li>
+                        <li><span>CompressionStream</span><strong data-capability="compress" data-state="unknown">Checking</strong></li>
+                        <li><span>DecompressionStream</span><strong data-capability="decompress" data-state="unknown">Checking</strong></li>
+                        <li><span>ImageBitmap</span><strong data-capability="image" data-state="unknown">Checking</strong></li>
+                        <li><span>Web Worker</span><strong data-capability="worker" data-state="unknown">Checking</strong></li>
+                        <li><span>Database singleton</span><strong data-capability="runtime" data-state="unknown">Checking</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-rule">
+            <div class="wrap playground-grid">
+                <form class="card form-grid" id="record-form" novalidate>
+                    <div>
+                        <p class="eyebrow">Record controls</p>
+                        <h2>Choose an operation.</h2>
+                    </div>
+                    <div class="field">
+                        <label for="table-name">Table</label>
+                        <input id="table-name" name="tableName" value="notes" autocomplete="off" required>
+                        <p class="field-help">One OPFS directory name, not a path.</p>
+                    </div>
+                    <div class="field">
+                        <label for="file-name">Record key</label>
+                        <input id="file-name" name="fileName" value="welcome.json" autocomplete="off" required>
+                        <p class="field-help">Use <code>.json</code> for parsed values.</p>
+                    </div>
+                    <div class="field">
+                        <label for="record-value">Value</label>
+                        <textarea id="record-value" name="recordValue" spellcheck="false">{
+    "message":"Hello from DBOPFS",
+    "source":"structured playground"
+}</textarea>
+                    </div>
+                    <label class="checkbox" for="append-value">
+                        <input id="append-value" name="append" type="checkbox">
+                        <span><strong>Append raw text</strong><br><span class="field-help">Unavailable for <code>.json</code> because concatenated JSON would be invalid.</span></span>
+                    </label>
+
+                    <div class="button-row" aria-label="Record operations">
+                        <button class="button" type="button" data-action="set" data-requires-db>Set record</button>
+                        <button class="button ghost" type="button" data-action="get" data-requires-db>Get record</button>
+                        <button class="button ghost" type="button" data-action="list" data-requires-db>List table</button>
+                        <button class="button ghost" type="button" data-action="count" data-requires-db>Count</button>
+                        <button class="button ghost" type="button" data-action="metadata" data-requires-db>Metadata</button>
+                        <button class="button danger" type="button" data-action="delete" data-requires-db>Delete record</button>
+                        <button class="button danger" type="button" data-action="clear-table" data-requires-db>Clear table</button>
+                    </div>
+
+                    <div class="field">
+                        <label for="restore-file">DBOPFS PNG backup</label>
+                        <input class="file-input" id="restore-file" type="file" accept="image/png">
+                    </div>
+                    <div class="button-row" aria-label="Backup operations">
+                        <button class="button secondary" type="button" data-action="backup" data-requires-db data-requires-backup>Download backup</button>
+                        <button class="button secondary" type="button" data-action="restore" data-requires-db data-requires-restore>Restore selected PNG</button>
+                        <button class="button danger" type="button" data-action="reset" data-requires-db>Reset playground</button>
+                    </div>
+                </form>
+
+                <div class="output-panel">
+                    <section class="card" aria-labelledby="result-heading">
+                        <p class="eyebrow">Operation result</p>
+                        <h2 id="result-heading">Output</h2>
+                        <pre class="output-box" tabindex="0" aria-live="polite"><code id="operation-output">Waiting for the DBOPFS runtime.</code></pre>
+                    </section>
+
+                    <section class="card" aria-labelledby="tree-heading">
+                        <p class="eyebrow">Current app scope</p>
+                        <h2 id="tree-heading">Storage tree</h2>
+                        <p class="field-help"><span id="scope-path">apps/dbopfs-playground</span></p>
+                        <pre class="output-box" tabindex="0"><code id="storage-tree">The tree will appear when the runtime is ready.</code></pre>
+                    </section>
+
+                    <section class="code-card" aria-labelledby="generated-code-heading">
+                        <div class="code-card__header">
+                            <span id="generated-code-heading">Equivalent JavaScript</span>
+                            <button class="copy-button" type="button" data-copy-target="generated-code">Copy</button>
+                        </div>
+                        <pre><code id="generated-code">await dbopfs.set(
+    'notes',
+    'welcome.json',
+    {
+        message:'Hello from DBOPFS',
+        source:'structured playground'
+    }
+);</code></pre>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-rule compact">
+            <div class="wrap card-grid two">
+                <article class="card">
+                    <h2>What this page can do</h2>
+                    <p>Call fixed DBOPFS methods using validated table/key fields, parse JSON values, report results, inspect filenames, and confirm scoped destructive actions.</p>
+                </article>
+                <article class="card">
+                    <h2>What it cannot do</h2>
+                    <p>Run arbitrary JavaScript, access another origin, inspect server data, guarantee persistence, provide hostile-code isolation, or prove final 1.0.0 release readiness.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap"><div class="footer-grid"><div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div><div><h2>Develop</h2><ul><li><a href="../getting-started.html">Get started</a></li><li><a href="../guides.html">Guides</a></li><li><a href="../api.html">API reference</a></li></ul></div><div><h2>Project</h2><ul><li><a href="../status.html">Release status</a></li><li><a href="../license.html">License</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub</a></li></ul></div></div><div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>Playground app ID: dbopfs-playground</span></div></div>
+    </footer>
+</body>
+</html>

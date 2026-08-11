@@ -1,0 +1,118 @@
+[
+  {
+    "id": "dbopfs@1.0.0",
+    "name": "dbopfs",
+    "version": "1.0.0",
+    "size": 23216,
+    "unpackedSize": 84812,
+    "shasum": "1d2232b8a93e640c0803a71003698c7bc77ff395",
+    "integrity": "sha512-Ep8h9XUH+rGNKCwHjHWNgAhEGgIrBODBsX+JldhsgrnC2RlKKjKTr5VDfHYklD1YTEo82dUavCE2+rrd5xhO0w==",
+    "filename": "dbopfs-1.0.0.tgz",
+    "files": [
+      {
+        "path": "COMMERCIAL-LICENSE.md",
+        "size": 847,
+        "mode": 420
+      },
+      {
+        "path": "LICENSE",
+        "size": 4563,
+        "mode": 420
+      },
+      {
+        "path": "NOTICE",
+        "size": 147,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 5938,
+        "mode": 420
+      },
+      {
+        "path": "SOURCE_PROVENANCE.md",
+        "size": 1007,
+        "mode": 420
+      },
+      {
+        "path": "THIRD_PARTY_NOTICES.md",
+        "size": 588,
+        "mode": 420
+      },
+      {
+        "path": "arcane/modules/AppDataScope.js",
+        "size": 7642,
+        "mode": 420
+      },
+      {
+        "path": "arcane/modules/DBOPFS.js",
+        "size": 29879,
+        "mode": 420
+      },
+      {
+        "path": "arcane/modules/DBOPFSWorker.js",
+        "size": 3928,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/_config.yml",
+        "size": 25,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/.gitattributes",
+        "size": 39,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/.github/FUNDING.yml",
+        "size": 74,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/.github/workflows/node.js.yml",
+        "size": 885,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/.github/workflows/npm-publish.yml",
+        "size": 1460,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/index.js",
+        "size": 7966,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/lcov.js",
+        "size": 250,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/licence",
+        "size": 1097,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/package.json",
+        "size": 1607,
+        "mode": 420
+      },
+      {
+        "path": "node_modules/strong-type/README.md",
+        "size": 15080,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 1790,
+        "mode": 420
+      }
+    ],
+    "entryCount": 20,
+    "bundled": [
+      "strong-type"
+    ]
+  }
+]
