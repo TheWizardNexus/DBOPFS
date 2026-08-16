@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Install the DBOPFS Studio Extension and connect it to the current site from the browser toolbar or DevTools (the Console).">
+    <meta name="theme-color" content="#050c17">
+    <link rel="icon" href="data:,">
+    <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/studio.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/studio.html">
+    <meta property="og:title" content="DBOPFS Studio Extension">
+    <meta property="og:description" content="Connect DBOPFS Studio to the current or inspected site from the browser toolbar or DevTools (the Console).">
+    <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DBOPFS Studio Extension">
+    <meta name="twitter:description" content="Connect DBOPFS Studio to the current or inspected site from the browser toolbar or DevTools (the Console).">
+    <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
+    <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
+    <title>Studio Extension — DBOPFS</title>
+    <link rel="stylesheet" href="assets/site.css?v=install-footer-1">
+    <script type="module" src="assets/site.js?v=137c33c"></script>
+</head>
+<body data-page="studio">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
+            <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="studio.html" data-nav="studio">Studio</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <header class="page-hero">
+            <div class="wrap">
+                <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">DBOPFS</a><span aria-hidden="true">/</span><span>Studio Extension</span></nav>
+                <p class="eyebrow">Browser extension</p>
+                <h1>Inspect the current site with DBOPFS Studio.</h1>
+                <p class="page-lede">DBOPFS Studio is a Chromium extension for exploring and managing DBOPFS application data. Open it from the browser toolbar for the current site or from DevTools (the Console) for the page you are inspecting.</p>
+                <div class="hero-actions">
+                    <a class="button" href="https://thewizardnexus.github.io/DBOPFS-Studio/install.html">Open the installation guide</a>
+                    <a class="button secondary" href="https://thewizardnexus.github.io/DBOPFS-Studio/">Visit DBOPFS Studio</a>
+                    <a class="button ghost" href="https://github.com/TheWizardNexus/DBOPFS-Studio">View source</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="wrap docs-layout">
+            <nav class="toc" aria-label="On this page">
+                <h2>On this page</h2>
+                <ul>
+                    <li><a href="#workspace">What Studio provides</a></li>
+                    <li><a href="#screenshots">Studio screenshots</a></li>
+                    <li><a href="#install">Install the extension</a></li>
+                    <li><a href="#toolbar">Connect from the toolbar</a></li>
+                    <li><a href="#console">Connect from DevTools</a></li>
+                    <li><a href="#origin">Connection boundary</a></li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                </ul>
+            </nav>
+
+            <article class="docs-content">
+                <section id="workspace">
+                    <p class="eyebrow">DBOPFS-aware workspace</p>
+                    <h2>Inspect data as applications, tables, and records.</h2>
+                    <p>DBOPFS Studio presents the connected origin's DBOPFS application folders as database concepts instead of an unexplained raw file tree. The current Studio can inspect storage use, browse and filter records, edit supported text formats, preview browser-supported media, import files, export an application, print supported records, and guard destructive record deletion with exact-name confirmation.</p>
+                    <p>The current 0.1 interface is limited to discovered DBOPFS application namespaces. Raw OPFS browsing, rename, move, copy, table deletion, restore, and origin-wide clear are not exposed in the current Studio UI.</p>
+                    <div class="card-grid two">
+                        <article class="card">
+                            <span class="card-number">CURRENT SITE / TOOLBAR</span>
+                            <h3>Open from the extension.</h3>
+                            <p>Use the pinned toolbar icon while your site is active. Studio opens in a browser tab connected to that current site's origin.</p>
+                        </article>
+                        <article class="card">
+                            <span class="card-number">INSPECTED SITE / DEVTOOLS</span>
+                            <h3>Open from DevTools.</h3>
+                            <p>Open DevTools (the Console), select the dedicated <strong>DBOPFS Studio</strong> panel, and launch a Studio window connected to the inspected page.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="screenshots">
+                    <p class="eyebrow">The connected workspace</p>
+                    <h2>See DBOPFS Studio in use.</h2>
+                    <p>These screenshots come from the shipped Studio interface in its local demonstration mode. The sample origin and records are fictional; the dashboard, navigator, explorer, record inspector, and connection indicators are the real product UI.</p>
+                    <div class="evidence-gallery">
+                        <figure class="evidence-figure">
+                            <a href="assets/dbopfs-studio-dashboard.png"><img src="assets/dbopfs-studio-dashboard.png" alt="DBOPFS Studio connected dashboard showing the studio.demo.local origin, application namespaces, table and record counts, storage usage, and storage health" width="1280" height="720" loading="lazy" decoding="async"></a>
+                            <figcaption><strong>Connected dashboard.</strong> The selected origin stays visible while Studio reports DBOPFS application, table, record, quota, and persistence information.</figcaption>
+                        </figure>
+                        <figure class="evidence-figure">
+                            <a href="assets/dbopfs-studio-explorer.png"><img src="assets/dbopfs-studio-explorer.png" alt="DBOPFS Studio explorer showing application tables, document records, and a rendered Markdown record in the inspector" width="1280" height="720" loading="lazy" decoding="async"></a>
+                            <figcaption><strong>Explorer and record inspector.</strong> Browse a DBOPFS table, select a record, and switch between supported source and rendered views without leaving Studio.</figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section id="install">
+                    <p class="eyebrow">Install from source</p>
+                    <h2>Load the extension in Chromium.</h2>
+                    <p>DBOPFS Studio is currently distributed from its source repository as an unpacked Manifest V3 extension. Clone it in a Terminal (Command Prompt or PowerShell), or download and extract the repository ZIP.</p>
+                    <div class="code-card">
+                        <div class="code-card__header"><span>Terminal (Command Prompt or PowerShell)</span><button class="copy-button" type="button" data-copy-target="studio-clone">Copy</button></div>
+                        <pre><code id="studio-clone">git clone https://github.com/TheWizardNexus/DBOPFS-Studio.git</code></pre>
+                    </div>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>Browser</th><th>Open this address</th></tr></thead>
+                            <tbody>
+                                <tr><td>Google Chrome</td><td><code>chrome://extensions</code></td></tr>
+                                <tr><td>Microsoft Edge</td><td><code>edge://extensions</code></td></tr>
+                                <tr><td>Brave</td><td><code>brave://extensions</code></td></tr>
+                                <tr><td>Vivaldi</td><td><code>vivaldi://extensions</code></td></tr>
+                                <tr><td>Opera</td><td><code>opera://extensions</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <ol>
+                        <li>Open the matching address in the browser.</li>
+                        <li>Enable <strong>Developer mode</strong>.</li>
+                        <li>Choose <strong>Load unpacked</strong>.</li>
+                        <li>Select the repository's <code>extension/</code> folder—the folder that contains <code>manifest.json</code>.</li>
+                        <li>Pin <strong>DBOPFS Studio</strong> if you want the toolbar entry to remain visible.</li>
+                        <li>Reload site tabs that were already open when you installed the extension.</li>
+                    </ol>
+                    <div class="callout">
+                        <p><strong>Browser addresses are not Terminal commands.</strong> Open the matching internal address in the browser address bar.</p>
+                    </div>
+                    <p>The extension declares Chrome 109 as its minimum version. Chrome and Microsoft Edge are first-class targets; Brave, Vivaldi, Opera, and other current Chromium browsers are compatibility targets whose privacy controls and extension behavior may differ.</p>
+                    <p>The <a href="https://thewizardnexus.github.io/DBOPFS-Studio/install.html">official Studio installation guide</a> contains current browser-specific notes, update instructions, and compatibility guidance.</p>
+                </section>
+
+                <section id="toolbar">
+                    <p class="eyebrow">Current site</p>
+                    <h2>Connect from the browser toolbar.</h2>
+                    <ol>
+                        <li>Open the HTTPS site or localhost page whose DBOPFS data you want to inspect.</li>
+                        <li>Keep that site as the active browser tab.</li>
+                        <li>Select the <strong>DBOPFS Studio</strong> extension icon in the toolbar.</li>
+                        <li>Verify the origin shown in the popup, then choose <strong>Open Studio</strong>.</li>
+                        <li>Verify the connected origin displayed in Studio before editing or deleting data.</li>
+                    </ol>
+                    <p>Studio opens in a normal browser tab and remains bound to the site tab selected when you launched it. Keep that site tab open while you work. To connect another origin, open Studio from that site's tab.</p>
+                </section>
+
+                <section id="console">
+                    <p class="eyebrow">Inspected site</p>
+                    <h2>Connect from DevTools (the Console).</h2>
+                    <ol>
+                        <li>Open the HTTPS site or localhost page whose DBOPFS data you want to inspect.</li>
+                        <li>Open DevTools (the Console) on that page.</li>
+                        <li>Select the <strong>DBOPFS Studio</strong> panel. If it is not visible, check the DevTools panel overflow menu.</li>
+                        <li>Choose <strong>Open Studio window</strong>.</li>
+                        <li>Verify that Studio displays the inspected site's origin.</li>
+                    </ol>
+                    <div class="callout">
+                        <p><strong>The extension adds a dedicated Studio launcher panel to DevTools.</strong> The panel opens a separate Studio window connected to the page DevTools is inspecting; there is no launcher command to paste into the JavaScript Console tab.</p>
+                    </div>
+                    <p>Keep the inspected site tab open while you work. Studio cannot continue operating against a page after that target tab closes.</p>
+                </section>
+
+                <section id="origin">
+                    <p class="eyebrow">One live origin at a time</p>
+                    <h2>Know which site is connected.</h2>
+                    <p>Protocol, hostname, and port define an origin. For example, <code>https://app.example</code> and <code>https://admin.example</code> have separate OPFS storage, and different ports on localhost are separate origins. Studio works through one selected live tab and does not merge unrelated sites into one filesystem.</p>
+                    <p>The extension's dormant isolated bridge waits on permitted pages until Studio sends a request. On first use it loads the packaged DBOPFS agent in the extension's isolated content-script world, while browser storage calls remain scoped to the connected website. Inspected content stays in the browser unless you intentionally export, download, copy, or print it.</p>
+                    <div class="callout warning">
+                        <p><strong>Use HTTPS or localhost.</strong> OPFS requires a secure browser context. Browser-internal pages, extension stores, other protected URLs, and closed sites cannot be connected.</p>
+                    </div>
+                    <p>Read the Studio <a href="https://thewizardnexus.github.io/DBOPFS-Studio/architecture.html">architecture guide</a> for the complete request flow and the <a href="https://thewizardnexus.github.io/DBOPFS-Studio/privacy.html">privacy policy</a> for its local-processing boundary.</p>
+                </section>
+
+                <section id="troubleshooting">
+                    <p class="eyebrow">Quick checks</p>
+                    <h2>When Studio cannot connect.</h2>
+                    <div class="table-scroll">
+                        <table>
+                            <thead><tr><th>What you see</th><th>What to check</th></tr></thead>
+                            <tbody>
+                                <tr><td>The toolbar says the page is protected.</td><td>Use an ordinary HTTPS site or localhost page, not a browser settings page, extension page, or browser store.</td></tr>
+                                <tr><td>The Studio panel is missing from DevTools.</td><td>Confirm the extension is loaded and enabled, then close and reopen DevTools. Check the panel overflow menu.</td></tr>
+                                <tr><td>A site was already open when you installed the extension.</td><td>Reload that site tab so the extension's connection bridge is available, then launch Studio again.</td></tr>
+                                <tr><td>Studio reports a connection error.</td><td>Keep the target tab open and confirm the browser grants DBOPFS Studio access to that site.</td></tr>
+                                <tr><td>Studio opens on the wrong origin.</td><td>Return to the intended site and relaunch from its toolbar popup, or open DevTools on that exact page and use the Studio panel.</td></tr>
+                                <tr><td>No applications or records appear.</td><td>Confirm the full origin, browser profile, and storage partition. The site may not have created DBOPFS data yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>For additional checks, continue to the Studio project's <a href="https://thewizardnexus.github.io/DBOPFS-Studio/install.html#troubleshoot">connection troubleshooting guide</a>.</p>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div>
+                <div><h2>Learn</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="async.html">Async patterns</a></li><li><a href="api.html">API reference</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="playground/index.html">Playground</a></li><li><a href="studio.html">Studio Extension</a></li></ul></div>
+                <div><h2>Get DBOPFS</h2><ul><li><a href="getting-started.html#install">Installation instructions</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">GitHub Release</a></li><li><a href="https://www.npmjs.com/package/dbopfs/v/1.0.0">npm package</a></li><li><a href="status.html">Release status</a></li><li><a href="license.html">License &amp; commercial use</a></li></ul></div>
+                <div><h2>Ecosystem</h2><ul><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub repository</a></li><li><a href="https://thewizardnexus.github.io/ARCANE-OS/">Arcane OS</a></li><li><a href="https://thewizardnexus.github.io/TWiN-Compass/">TWiN Compass</a></li><li><a href="https://www.thewizardnexus.com/">The Wizard Nexus</a></li><li><a href="https://www.thewizardnexus.com/#block-a2f8cfd2fde8d5d75077">Contact TWiN</a></li></ul></div>
+            </div>
+            <div class="footer-meta"><span>© <span data-current-year></span> The Wizard Nexus</span><span>DBOPFS Studio Extension</span></div>
+        </div>
+    </footer>
+</body>
+</html>

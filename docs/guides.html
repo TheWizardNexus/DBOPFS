@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="Practical DBOPFS guides for record formats, batch work, raw files, table discovery, backup, restore, and Arcane integration.">
+    <meta name="description" content="Practical DBOPFS guides for formats, batch work, raw files, backup, restore, Arcane integration, DevTools, and DBOPFS Studio.">
     <meta name="theme-color" content="#050c17">
     <link rel="icon" href="data:,">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/guides.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/guides.html">
     <meta property="og:title" content="DBOPFS developer guides">
-    <meta property="og:description" content="Practical DBOPFS guides for formats, batch work, files, tables, backup, restore, and Arcane integration.">
+    <meta property="og:description" content="Practical DBOPFS guides for formats, batch work, files, backup, restore, DevTools, and DBOPFS Studio.">
     <meta property="og:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
     <meta property="og:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DBOPFS developer guides">
-    <meta name="twitter:description" content="Practical DBOPFS guides for formats, batch work, files, tables, backup, restore, and Arcane integration.">
+    <meta name="twitter:description" content="Practical DBOPFS guides for formats, batch work, files, backup, restore, DevTools, and DBOPFS Studio.">
     <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
     <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
     <title>Guides — DBOPFS</title>
@@ -29,7 +29,7 @@
             <a class="brand" href="index.html" aria-label="DBOPFS home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>DBOPFS</strong><small>The Wizard Nexus</small></span></a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
             <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
+                <a href="index.html" data-nav="home">Home</a><a href="getting-started.html" data-nav="start">Get started</a><a href="guides.html" data-nav="guides">Guides</a><a href="async.html" data-nav="async">Async</a><a href="api.html" data-nav="api">API</a><a href="architecture.html" data-nav="architecture">Architecture</a><a href="playground/index.html" data-nav="playground">Playground</a><a href="studio.html" data-nav="studio">Studio</a><a href="status.html" data-nav="status">Status</a><a href="license.html" data-nav="license">License</a>
             </nav>
         </div>
     </header>
@@ -57,7 +57,7 @@
                     <li><a href="#backup">Backup and restore</a></li>
                     <li><a href="#clearing">Clear safely</a></li>
                     <li><a href="#arcane">Arcane integration</a></li>
-                    <li><a href="#devtools">Chrome DevTools</a></li>
+                    <li><a href="#devtools">DevTools and Studio</a></li>
                 </ul>
             </nav>
 
@@ -372,11 +372,16 @@ await window.dbopfs.readyPromise;</code></pre>
                 </section>
 
                 <section id="devtools">
-                    <p class="eyebrow">Inspect the filesystem</p>
-                    <h2>Chrome DevTools</h2>
-                    <p>Run this read-only helper in the Console on the same page as your application. It lists OPFS entries without installing an extension.</p>
+                    <p class="eyebrow">Inspect the current site</p>
+                    <h2>DevTools (the Console) and DBOPFS Studio</h2>
+                    <p>For a database-aware workspace, install the <a href="studio.html">DBOPFS Studio Extension</a>. Open DevTools on the current site, select the dedicated <strong>DBOPFS Studio</strong> launcher panel, and choose <strong>Open Studio window</strong>. Studio connects to the page DevTools is inspecting so you can work with the DBOPFS application namespaces exposed by the current Studio UI.</p>
+                    <div class="callout">
+                        <p><strong>The Studio launcher is a DevTools panel, not a pasted command.</strong> The extension adds the panel alongside the browser's other developer tools and opens the Studio workspace in a separate window bound to the inspected page.</p>
+                    </div>
+                    <h3>Quick read-only Console helper</h3>
+                    <p>If you only need an unstructured filesystem listing, run this read-only helper in the JavaScript Console on the same page as your application. It lists OPFS entries without installing the extension.</p>
                     <div class="code-card">
-                        <div class="code-card__header"><span>DevTools Console</span><button class="copy-button" type="button" data-copy-target="guide-devtools">Copy</button></div>
+                        <div class="code-card__header"><span>JavaScript Console</span><button class="copy-button" type="button" data-copy-target="guide-devtools">Copy</button></div>
                         <pre><code id="guide-devtools">async function opfsTree(directory,prefix=''){
     const rows=[];
 
@@ -405,7 +410,7 @@ console.log((await opfsTree(root)).join('\n'));</code></pre>
         <div class="wrap">
             <div class="footer-grid">
                 <div><h2>DBOPFS</h2><p>A browser-native database abstraction created by The Wizard Nexus. Where WiZdom Meets Innovation.</p></div>
-                <div><h2>Learn</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="async.html">Async patterns</a></li><li><a href="api.html">API reference</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="playground/index.html">Playground</a></li></ul></div>
+                <div><h2>Learn</h2><ul><li><a href="getting-started.html">Get started</a></li><li><a href="guides.html">Guides</a></li><li><a href="async.html">Async patterns</a></li><li><a href="api.html">API reference</a></li><li><a href="architecture.html">Architecture</a></li><li><a href="playground/index.html">Playground</a></li><li><a href="studio.html">Studio Extension</a></li></ul></div>
                 <div><h2>Get DBOPFS</h2><ul><li><a href="getting-started.html#install">Installation instructions</a></li><li><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">GitHub Release</a></li><li><a href="https://www.npmjs.com/package/dbopfs/v/1.0.0">npm package</a></li><li><a href="status.html">Release status</a></li><li><a href="license.html">License &amp; commercial use</a></li></ul></div>
                 <div><h2>Ecosystem</h2><ul><li><a href="https://github.com/TheWizardNexus/DBOPFS">GitHub repository</a></li><li><a href="https://thewizardnexus.github.io/ARCANE-OS/">Arcane OS</a></li><li><a href="https://thewizardnexus.github.io/TWiN-Compass/">TWiN Compass</a></li><li><a href="https://www.thewizardnexus.com/">The Wizard Nexus</a></li><li><a href="https://www.thewizardnexus.com/#block-a2f8cfd2fde8d5d75077">Contact TWiN</a></li></ul></div>
             </div>

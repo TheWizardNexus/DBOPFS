@@ -13,7 +13,7 @@ DBOPFS is a browser-native database built directly on the [Origin Private File S
 
 This `1.0.0` package preserves the production ARCANE OS runtime byte-for-byte. Its surrounding package, release tests, coverage evidence, licensing, and documentation are new; the three implementation files are unchanged.
 
-[Read the documentation](https://thewizardnexus.github.io/DBOPFS/) · [Open the playground](https://thewizardnexus.github.io/DBOPFS/playground/) · [Review release evidence](https://thewizardnexus.github.io/DBOPFS/status.html)
+[Read the documentation](https://thewizardnexus.github.io/DBOPFS/) · [Inspect with the Studio Extension](https://thewizardnexus.github.io/DBOPFS/studio.html) · [Open the playground](https://thewizardnexus.github.io/DBOPFS/playground/) · [Review release evidence](https://thewizardnexus.github.io/DBOPFS/status.html)
 
 ## Install
 
@@ -76,6 +76,19 @@ await db.readyPromise;
 ```
 
 Use a `.json` key when you want `get()` to parse an object. Plain-text keys return strings; `.jsonl` and `.ndjson` keys return parsed row arrays.
+
+## Inspect with DBOPFS Studio
+
+[DBOPFS Studio](https://thewizardnexus.github.io/DBOPFS-Studio/) is a
+Chromium extension for exploring and managing an origin's DBOPFS applications,
+tables, and records. Open it from the browser toolbar to connect Studio to the
+current site, or open DevTools (the Console), select the dedicated **DBOPFS
+Studio** panel, and choose **Open Studio window** to connect it to the inspected
+page.
+
+The extension is currently installed from source as an unpacked build. Follow
+the [DBOPFS Studio Extension guide](https://thewizardnexus.github.io/DBOPFS/studio.html)
+for installation, both connection paths, origin boundaries, and troubleshooting.
 
 ## Core model
 

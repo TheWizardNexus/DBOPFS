@@ -42,6 +42,7 @@
                 <a href="api.html" data-nav="api">API</a>
                 <a href="architecture.html" data-nav="architecture">Architecture</a>
                 <a href="playground/index.html" data-nav="playground">Playground</a>
+                <a href="studio.html" data-nav="studio">Studio</a>
                 <a href="status.html" data-nav="status">Status</a>
                 <a href="license.html" data-nav="license">License</a>
             </nav>
@@ -113,6 +114,32 @@
                         <p>A validated application ID places data below <code>apps/&lt;application-id&gt;</code>, reducing accidental cross-app reads and clears. It organizes trusted same-origin apps; it is not a hostile-code security boundary.</p>
                         <p><a href="architecture.html#security">Understand application isolation and sharing</a></p>
                     </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-rule">
+            <div class="wrap">
+                <div class="section-heading">
+                    <p class="eyebrow">DBOPFS Studio Extension</p>
+                    <h2>Inspect the database on the current site.</h2>
+                    <p>DBOPFS Studio turns an origin's DBOPFS applications, tables, and records into a focused browser workspace. Connect from the extension toolbar or directly from DevTools (the Console) while inspecting a site.</p>
+                </div>
+                <div class="card-grid two">
+                    <article class="card">
+                        <span class="card-number">TOOLBAR / CURRENT SITE</span>
+                        <h3>Open Studio from the extension.</h3>
+                        <p>Make the site active, select the DBOPFS Studio toolbar icon, verify the displayed origin, and open a Studio tab connected to that site.</p>
+                    </article>
+                    <article class="card">
+                        <span class="card-number">DEVTOOLS / INSPECTED SITE</span>
+                        <h3>Launch Studio from DevTools.</h3>
+                        <p>Open DevTools on the site, select the dedicated <strong>DBOPFS Studio</strong> panel, and choose <strong>Open Studio window</strong>. The workspace connects to the page DevTools is inspecting.</p>
+                    </article>
+                </div>
+                <div class="hero-actions">
+                    <a class="button" href="studio.html">Read the Studio Extension guide</a>
+                    <a class="button ghost" href="https://thewizardnexus.github.io/DBOPFS-Studio/">Visit DBOPFS Studio</a>
                 </div>
             </div>
         </section>
@@ -244,6 +271,7 @@ tar -xzf dbopfs-1.0.0.tgz -C vendor/dbopfs --strip-components=1</code></pre>
                         <li><a href="api.html">API reference</a></li>
                         <li><a href="architecture.html">Architecture</a></li>
                         <li><a href="playground/index.html">Playground</a></li>
+                        <li><a href="studio.html">Studio Extension</a></li>
                     </ul>
                 </div>
                 <div>
