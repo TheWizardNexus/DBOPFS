@@ -1,4 +1,4 @@
-import VanillaTest from '/node_modules/vanilla-test/index.js';
+import VanillaTest from 'vanilla-test';
 
 export const SUITE_NAMES=Object.freeze([
     'Unit',
@@ -145,7 +145,7 @@ function suiteSummary(details,name){
     };
 }
 
-export function createTestRegistry({frameworkVersion='1.4.9'}={}){
+export function createTestRegistry({frameworkVersion='2.1.0'}={}){
     const framework=new VanillaTest();
     const details=[];
     let hasRun=false;
@@ -202,7 +202,14 @@ export function createTestRegistry({frameworkVersion='1.4.9'}={}){
             }
         }
 
-        const frameworkResults=framework.report(false);
+        const frameworkCompletion=new Promise(resolve=>{
+            const unsubscribe=framework.onComplete(event=>{
+                unsubscribe();
+                resolve(event.detail);
+            },{once:true});
+        });
+        const frameworkResults=framework.report();
+        const completedResults=await frameworkCompletion;
         const suiteResults=SUITE_NAMES.map(name=>suiteSummary(details,name));
         const summary={
             failed:details.filter(testCase=>testCase.status==='failed').length,
@@ -210,6 +217,21 @@ export function createTestRegistry({frameworkVersion='1.4.9'}={}){
             skipped:details.filter(testCase=>testCase.status==='skipped').length,
             total:details.length
         };
+
+        assert(completedResults===frameworkResults,
+            'Vanilla-test completion did not publish its report snapshot.');
+        assert(Object.isFrozen(frameworkResults),
+            'Vanilla-test did not return a frozen report snapshot.');
+        assert(Object.isFrozen(frameworkResults.passed),
+            'Vanilla-test did not freeze its passed-case ledger.');
+        assert(Object.isFrozen(frameworkResults.failed),
+            'Vanilla-test did not freeze its failed-case ledger.');
+        assertEqual(frameworkResults.total,summary.total,
+            'Vanilla-test reported the wrong case total.');
+        assertEqual(frameworkResults.failureCount,summary.failed,
+            'Vanilla-test reported the wrong failure count.');
+        assertEqual(frameworkResults.ok,summary.failed===0,
+            'Vanilla-test reported the wrong completion status.');
 
         return {
             cases:details,

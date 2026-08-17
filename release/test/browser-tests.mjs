@@ -12,7 +12,7 @@ import regressionSuite from './suites/regression.mjs';
 const PRIMARY_APPLICATION_ID='dbopfs-release-test-primary';
 const PEER_APPLICATION_ID='dbopfs-release-test-peer';
 const WORKER_APPLICATION_ID='dbopfs-release-test-worker';
-const FRAMEWORK_VERSION='1.4.9';
+const FRAMEWORK_VERSION='2.1.0';
 const startedAt=new Date();
 const startedMark=performance.now();
 const suites=[unitSuite,functionalSuite,integrationSuite,regressionSuite];

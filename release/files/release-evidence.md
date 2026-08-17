@@ -1,12 +1,12 @@
 # Release evidence
 
-Generated: 2026-08-17T16:21:24.695Z
+Generated: 2026-08-17T23:12:28.509Z
 
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Package | dbopfs | 1.0.0 |
 | Overall release gate | PASSED | All gates passed |
-| Browser tests | passed | 87 passed, 0 failed, 0 skipped; vanilla-test 1.4.9 |
+| Browser tests | passed | 87 passed, 0 failed, 0 skipped; vanilla-test 2.1.0 |
 | Precise coverage | 86.68% | 35920 / 41441 executed source bytes; no release threshold is asserted |
 | npm pack | passed | dbopfs-1.0.0.tgz |
 | Fresh install | passed | npm lifecycle scripts disabled: true |

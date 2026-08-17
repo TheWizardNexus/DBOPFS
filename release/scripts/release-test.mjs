@@ -27,6 +27,7 @@ const BROWSER_HARNESS_PATH=resolve(
     'release/scripts/run-browser-release-tests.mjs'
 );
 const TEMPORARY_PREFIX='dbopfs-packed-release-';
+const VANILLA_TEST_VERSION='2.1.0';
 const RUNTIME_PATHS=Object.freeze([
     'arcane/modules/AppDataScope.js',
     'arcane/modules/DBOPFS.js',
@@ -310,8 +311,10 @@ function validateHarnessResults(testResults,coverageSummary){
         throw new Error('The existing browser release harness did not pass.');
     }
 
-    if(testResults?.framework?.name!=='vanilla-test'){
-        throw new Error('The browser release harness did not use vanilla-test.');
+    if(testResults?.framework?.name!=='vanilla-test'
+        ||testResults?.framework?.version!==VANILLA_TEST_VERSION
+        ||testResults?.driver?.vanillaTestVersion!==VANILLA_TEST_VERSION){
+        throw new Error(`The browser release harness did not use vanilla-test ${VANILLA_TEST_VERSION}.`);
     }
 
     if(testResults?.sourceIntegrity?.passed!==true

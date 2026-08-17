@@ -164,7 +164,7 @@ The release test installs the packed tarball into a clean consumer fixture and v
 
 ## Tests and coverage
 
-Release tests use [`vanilla-test@1.4.9`](https://github.com/RIAEvangelist/vanilla-test) in Google Chrome against real OPFS on localhost. The current evidence contains 87 unique cases across Unit (37), Functional (34), Integration (12), and Regression (4) suites. Chrome precise coverage is captured for the three runtime modules. Release tests do not run in GitHub Actions; the repository's Pages-only workflow deploys the documentation. Badges are generated from the final release evidence committed under `release/`.
+Release tests use [`vanilla-test@2.1.0`](https://github.com/RIAEvangelist/vanilla-test) in Google Chrome against real OPFS on localhost. The test toolchain requires Node.js 22.12 or newer; this does not change the browser runtime requirements for DBOPFS itself. The current evidence contains 87 unique cases across Unit (37), Functional (34), Integration (12), and Regression (4) suites. Chrome precise coverage is captured for the three runtime modules. Release tests do not run in GitHub Actions; the repository's Pages-only workflow deploys the documentation. Badges are generated from the final release evidence committed under `release/`.
 
 <p>
   <a href="https://thewizardnexus.github.io/DBOPFS/status.html#screenshots"><img src="docs/assets/vanilla-test-results.png" alt="Vanilla-test browser results: 87 passed, 0 failed, 0 skipped across four suites" width="49%"></a>

@@ -5,10 +5,11 @@ npm-installable module. The public entry point remains
 `arcane/modules/DBOPFS.js`, and `strong-type` is bundled at the nested location
 used by the preserved runtime import.
 
-The local release gate runs the existing vanilla-test 1.4.9 suite in installed
-Google Chrome, records precise Chrome DevTools byte coverage without inventing
-a coverage threshold, packs the npm artifact with lifecycle scripts disabled,
-and installs that tarball into a fresh operating-system temporary directory.
+The local release gate runs the existing vanilla-test 2.1.0 suite in installed
+Google Chrome using Node.js 22.12 or newer, records precise Chrome DevTools
+byte coverage without inventing a coverage threshold, packs the npm artifact
+with lifecycle scripts disabled, and installs that tarball into a fresh
+operating-system temporary directory.
 It then verifies the three runtime files against the checked-in SHA-256 source
 manifest and imports the installed package in Chrome for a real OPFS set/get
 round trip.

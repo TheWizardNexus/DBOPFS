@@ -10,6 +10,7 @@ const TEST_RESULTS_PATH=resolve(PROJECT_ROOT,'release/files/test-results.json');
 const COVERAGE_RESULTS_PATH=resolve(PROJECT_ROOT,'release/files/coverage-summary.json');
 const TEST_SCREENSHOT_PATH=resolve(PROJECT_ROOT,'docs/assets/vanilla-test-results.png');
 const COVERAGE_SCREENSHOT_PATH=resolve(PROJECT_ROOT,'docs/assets/chrome-coverage-results.png');
+const VANILLA_TEST_VERSION='2.1.0';
 const SUITE_NAMES=Object.freeze(['Unit','Functional','Integration','Regression']);
 const MODULE_PATHS=Object.freeze([
     'arcane/modules/AppDataScope.js',
@@ -47,6 +48,10 @@ function validateTestResults(results){
     assert(results?.teardown?.status==='passed','The browser test teardown did not pass.');
     assert(!results.fatalError,'The browser test evidence contains a fatal error.');
     assert(results?.framework?.name==='vanilla-test','The test evidence did not use vanilla-test.');
+    assert(results.framework.version===VANILLA_TEST_VERSION,
+        `The test evidence did not use vanilla-test ${VANILLA_TEST_VERSION}.`);
+    assert(results?.driver?.vanillaTestVersion===VANILLA_TEST_VERSION,
+        `The browser driver did not load vanilla-test ${VANILLA_TEST_VERSION}.`);
     assert(Array.isArray(results.cases),'The test evidence has no case registry.');
     assert(Array.isArray(results.suites)&&results.suites.length===SUITE_NAMES.length,
         'The test evidence must contain exactly four suites.');

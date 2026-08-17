@@ -58,6 +58,6 @@
   ],
   "devDependencies": {
     "puppeteer-core": "25.6.0",
-    "vanilla-test": "1.4.9"
+    "vanilla-test": "2.1.0"
   }
 }

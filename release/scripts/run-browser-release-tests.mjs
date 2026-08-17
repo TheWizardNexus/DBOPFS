@@ -9,7 +9,7 @@ import {startStaticServer} from './static-server.mjs';
 const WORKSPACE_ROOT=resolve(fileURLToPath(new URL('../..',import.meta.url)));
 const DEFAULT_OUTPUT_DIRECTORY=resolve(WORKSPACE_ROOT,'release/files');
 const SOURCE_MANIFEST_PATH=resolve(WORKSPACE_ROOT,'release/test/source-manifest.json');
-const VANILLA_TEST_VERSION='1.4.9';
+const VANILLA_TEST_VERSION='2.1.0';
 const TEST_SUITE_NAMES=Object.freeze(['Unit','Functional','Integration','Regression']);
 const MODULE_URL_PATTERN=/^\/arcane\/modules\/[^/]+\.js$/;
 
@@ -206,10 +206,19 @@ function validateBrowserResults(results){
     if(frameworkPassed.length+frameworkFailed.length!==results.cases.length){
         throw new Error('The vanilla-test total does not match the browser case registry.');
     }
+    if(results.framework.results.total!==results.cases.length){
+        throw new Error('The vanilla-test result object reported the wrong total.');
+    }
     if(frameworkFailed.length!==results.cases.filter(testCase=>
         testCase.status==='failed'
     ).length){
         throw new Error('The vanilla-test failure total does not match the browser cases.');
+    }
+    if(results.framework.results.failureCount!==frameworkFailed.length){
+        throw new Error('The vanilla-test result object reported the wrong failure count.');
+    }
+    if(results.framework.results.ok!==(frameworkFailed.length===0)){
+        throw new Error('The vanilla-test result object reported the wrong completion status.');
     }
 
     const normalizeFrameworkDescriptor=descriptor=>String(descriptor)
