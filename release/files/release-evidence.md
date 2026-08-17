@@ -1,17 +1,26 @@
 # Release evidence
 
-Generated: 2026-08-11T21:02:45.893Z
+Generated: 2026-08-17T16:21:24.695Z
 
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Package | dbopfs | 1.0.0 |
 | Overall release gate | PASSED | All gates passed |
-| Browser tests | passed | 9 passed, 0 failed, 0 skipped; vanilla-test 1.4.9 |
-| Precise coverage | 81.50% | 33775 / 41441 executed source bytes; no release threshold is asserted |
+| Browser tests | passed | 87 passed, 0 failed, 0 skipped; vanilla-test 1.4.9 |
+| Precise coverage | 86.68% | 35920 / 41441 executed source bytes; no release threshold is asserted |
 | npm pack | passed | dbopfs-1.0.0.tgz |
 | Fresh install | passed | npm lifecycle scripts disabled: true |
 | Installed Chrome smoke | passed | imported /node_modules/dbopfs/arcane/modules/DBOPFS.js; set/get round trip |
 | Temporary fixture cleanup | passed | cleanup restricted to the mkdtemp path |
+
+## Browser test suites
+
+| Suite | Passed | Failed | Skipped | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Unit | 37 | 0 | 0 | 37 |
+| Functional | 34 | 0 | 0 | 34 |
+| Integration | 12 | 0 | 0 | 12 |
+| Regression | 4 | 0 | 0 | 4 |
 
 ## Installed runtime integrity
 

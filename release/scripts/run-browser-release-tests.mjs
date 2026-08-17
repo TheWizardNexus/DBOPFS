@@ -10,6 +10,7 @@ const WORKSPACE_ROOT=resolve(fileURLToPath(new URL('../..',import.meta.url)));
 const DEFAULT_OUTPUT_DIRECTORY=resolve(WORKSPACE_ROOT,'release/files');
 const SOURCE_MANIFEST_PATH=resolve(WORKSPACE_ROOT,'release/test/source-manifest.json');
 const VANILLA_TEST_VERSION='1.4.9';
+const TEST_SUITE_NAMES=Object.freeze(['Unit','Functional','Integration','Regression']);
 const MODULE_URL_PATTERN=/^\/arcane\/modules\/[^/]+\.js$/;
 
 function serializeError(error){
@@ -165,6 +166,100 @@ async function installedPackageVersion(packageName){
     const packagePath=resolve(WORKSPACE_ROOT,'node_modules',packageName,'package.json');
     const metadata=JSON.parse(await readFile(packagePath,'utf8'));
     return metadata.version;
+}
+
+function validateBrowserResults(results){
+    if(!results||!Array.isArray(results.cases)||!Array.isArray(results.suites)){
+        throw new Error('The browser page did not report structured test cases and suites.');
+    }
+    if(results.suites.length!==TEST_SUITE_NAMES.length){
+        throw new Error('The browser page did not report exactly four test suites.');
+    }
+
+    const ids=new Set();
+    const descriptions=new Set();
+    for(const testCase of results.cases){
+        if(!testCase?.id||ids.has(testCase.id)){
+            throw new Error(`The browser page reported an invalid or duplicate test ID: ${testCase?.id}.`);
+        }
+        if(!testCase.description||descriptions.has(testCase.description)){
+            throw new Error(
+                `The browser page reported an invalid or duplicate test description: `
+                +`${testCase.description}.`
+            );
+        }
+        if(!TEST_SUITE_NAMES.includes(testCase.suite)){
+            throw new Error(`The browser page reported an unknown suite: ${testCase.suite}.`);
+        }
+        if(!['failed','passed','skipped'].includes(testCase.status)){
+            throw new Error(`The browser page reported an unknown test status: ${testCase.status}.`);
+        }
+        ids.add(testCase.id);
+        descriptions.add(testCase.description);
+    }
+
+    const frameworkPassed=results.framework?.results?.passed;
+    const frameworkFailed=results.framework?.results?.failed;
+    if(!Array.isArray(frameworkPassed)||!Array.isArray(frameworkFailed)){
+        throw new Error('The browser page did not report vanilla-test case results.');
+    }
+    if(frameworkPassed.length+frameworkFailed.length!==results.cases.length){
+        throw new Error('The vanilla-test total does not match the browser case registry.');
+    }
+    if(frameworkFailed.length!==results.cases.filter(testCase=>
+        testCase.status==='failed'
+    ).length){
+        throw new Error('The vanilla-test failure total does not match the browser cases.');
+    }
+
+    const normalizeFrameworkDescriptor=descriptor=>String(descriptor)
+        .replace(/^\d+\) \.expects /,'');
+    const expectedPassed=results.cases
+        .filter(testCase=>testCase.status!=='failed')
+        .map(testCase=>`[${testCase.suite}] ${testCase.description}`);
+    const expectedFailed=results.cases
+        .filter(testCase=>testCase.status==='failed')
+        .map(testCase=>`[${testCase.suite}] ${testCase.description}`);
+    const actualPassed=frameworkPassed.map(normalizeFrameworkDescriptor);
+    const actualFailed=frameworkFailed.map(normalizeFrameworkDescriptor);
+    if(JSON.stringify(actualPassed)!==JSON.stringify(expectedPassed)
+        ||JSON.stringify(actualFailed)!==JSON.stringify(expectedFailed)){
+        throw new Error('The vanilla-test descriptors do not match the browser case ledger.');
+    }
+
+    results.suites.forEach((suite,index)=>{
+        const expectedName=TEST_SUITE_NAMES[index];
+        if(suite?.name!==expectedName){
+            throw new Error(
+                `The browser page reported suite ${suite?.name||'unknown'} at `
+                +`the ${expectedName} position.`
+            );
+        }
+        const cases=results.cases.filter(testCase=>testCase.suite===expectedName);
+        const expected={
+            failed:cases.filter(testCase=>testCase.status==='failed').length,
+            passed:cases.filter(testCase=>testCase.status==='passed').length,
+            skipped:cases.filter(testCase=>testCase.status==='skipped').length,
+            total:cases.length
+        };
+        for(const field of Object.keys(expected)){
+            if(suite[field]!==expected[field]){
+                throw new Error(`${expectedName} reported an inconsistent ${field} total.`);
+            }
+        }
+    });
+
+    const aggregate=results.suites.reduce((total,suite)=>({
+        failed:total.failed+suite.failed,
+        passed:total.passed+suite.passed,
+        skipped:total.skipped+suite.skipped,
+        total:total.total+suite.total
+    }),{failed:0,passed:0,skipped:0,total:0});
+    for(const field of Object.keys(aggregate)){
+        if(results.summary?.[field]!==aggregate[field]){
+            throw new Error(`The browser page reported an inconsistent ${field} summary.`);
+        }
+    }
 }
 
 function modulePathFromUrl(url){
@@ -580,6 +675,19 @@ async function run(){
     if(!runError&&browserResults?.framework?.version!==VANILLA_TEST_VERSION){
         runError=serializeError(new Error('The browser page reported the wrong vanilla-test version.'));
     }
+    if(!runError){
+        try{
+            validateBrowserResults(browserResults);
+        }catch(error){
+            runError=serializeError(error);
+        }
+    }
+    if(!runError&&browserResults?.fatalError){
+        runError=browserResults.fatalError;
+    }
+    if(!runError&&browserResults?.teardown?.status!=='passed'){
+        runError=serializeError(new Error('The browser page teardown did not pass.'));
+    }
     if(!runError&&diagnostics.pageErrors.length){
         runError=serializeError(new Error('Chrome reported an uncaught page or coverage error.'));
     }
@@ -609,9 +717,18 @@ async function run(){
             cases:[],
             complete:false,
             driver,
+            framework:{name:'vanilla-test',results:{failed:[],passed:[]},version:VANILLA_TEST_VERSION},
             schemaVersion:1,
             sourceIntegrity,
-            summary:{failed:1,passed:0,skipped:0,total:1}
+            suites:TEST_SUITE_NAMES.map(name=>({
+                failed:0,
+                name,
+                passed:0,
+                skipped:0,
+                total:0
+            })),
+            summary:{failed:0,passed:0,skipped:0,total:0},
+            teardown:{durationMs:0,error:runError,status:'not-run'}
         };
     const rawCoverage={
         entries:coverageEntries,
@@ -630,6 +747,14 @@ async function run(){
         +`(${browserResults?.summary?.passed||0} passed, `
         +`${browserFailures} failed, ${browserResults?.summary?.skipped||0} skipped)`
     );
+    for(const suiteName of TEST_SUITE_NAMES){
+        const suite=browserResults?.suites?.find(result=>result.name===suiteName)
+            ||{failed:0,passed:0,skipped:0,total:0};
+        console.log(
+            `  ${suiteName}: ${suite.passed} passed, ${suite.failed} failed, `
+            +`${suite.skipped} skipped, ${suite.total} total`
+        );
+    }
     console.log(
         `Precise module byte coverage: ${coverageSummary.total.byteCoveragePercent.toFixed(2)}%`
     );

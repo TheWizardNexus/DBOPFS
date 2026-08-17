@@ -6,114 +6,949 @@
   },
   "cases": [
     {
-      "description": "initializes the DBOPFS singleton on real localhost OPFS with the declared app id",
-      "durationMs": 45.4,
+      "description": "canonical application IDs accept lowercase hyphenated values",
+      "durationMs": 2.6,
       "error": null,
+      "id": "unit.scope.canonical.accepts",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Unit"
     },
     {
-      "description": "stores and retrieves JSON, text, JSONL, and NDJSON records",
-      "durationMs": 57.7,
+      "description": "canonical application IDs accept the one-character boundary",
+      "durationMs": 0.1,
       "error": null,
+      "id": "unit.scope.canonical.minimum-length",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Unit"
     },
     {
-      "description": "executes batch writes, batch reads, and table/database enumeration",
-      "durationMs": 12.5,
+      "description": "canonical application IDs accept the 64-character boundary",
+      "durationMs": 0.1,
       "error": null,
+      "id": "unit.scope.canonical.max-length",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Unit"
     },
     {
-      "description": "serializes append operations and concurrent writes to one file",
-      "durationMs": 69,
+      "description": "canonical application IDs reject non-string values",
+      "durationMs": 0.2,
       "error": null,
+      "id": "unit.scope.canonical.rejects-non-string",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Unit"
     },
     {
-      "description": "reports metadata, keys, discovery, filters, counts, deletion, clearing, and table removal",
+      "description": "canonical application IDs reject empty strings",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-empty",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "canonical application IDs reject uppercase letters",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-uppercase",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "canonical application IDs reject a leading digit",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-leading-digit",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "canonical application IDs reject empty hyphenated segments",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-empty-segment",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "canonical application IDs reject values longer than 64 characters",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-overlength",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "canonical application IDs reject path separators",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.canonical.rejects-separator",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "document declarations read the arcane application metadata",
+      "durationMs": 0.2,
+      "error": null,
+      "id": "unit.scope.declaration.meta",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "document declarations read the root application dataset",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.declaration.dataset",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "matching metadata and root declarations resolve one identity",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.declaration.matching",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "documents without an application declaration resolve to null",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.declaration.absent",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "conflicting document declarations fail closed",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.declaration.conflict",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "invalid document declarations are rejected",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.declaration.invalid",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "browser identity resolution accepts an explicit application ID",
+      "durationMs": 0.2,
+      "error": null,
+      "id": "unit.scope.browser.explicit",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "browser identity resolution falls back to the document declaration",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.browser.declared",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "matching configured and declared browser identities resolve once",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.browser.matching",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "browser identity resolution rejects configured and declared mismatches",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.browser.mismatch",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "browser identity resolution requires an application identity",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.browser.required",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application local-storage keys include the canonical ownership prefix",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.local-storage-key",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application local-storage keys preserve a falsey numeric key",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.local-storage-falsey-key",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "native identity resolution accepts the Arcane-bound application ID",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.native.bound",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "asynchronous identity resolution accepts a browser-only identity",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.native.browser-only",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "matching native and browser identities resolve one application ID",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.native.matching",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "native and browser identity mismatches fail closed",
+      "durationMs": 0.2,
+      "error": null,
+      "id": "unit.scope.native.mismatch",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "invalid native application descriptors are rejected",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.native.invalid-descriptor",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "asynchronous identity resolution rejects an unbound caller",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.native.required",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application directory opening traverses apps then the canonical ID",
+      "durationMs": 0.2,
+      "error": null,
+      "id": "unit.scope.directory.hierarchy",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application directory opening creates both hierarchy levels by default",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.directory.default-create",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application directory opening returns the scoped directory handle",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.directory.result-handle",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application directory opening returns the resolved application ID",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.directory.result-id",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "application directory opening returns its application-relative path",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "unit.scope.directory.result-path",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "read-only directory opening forwards create false at both levels",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.directory.read-only",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "directory opening rejects an unavailable storage manager",
+      "durationMs": 0.2,
+      "error": null,
+      "id": "unit.scope.directory.storage-unavailable",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "directory opening rejects an invalid OPFS root handle",
+      "durationMs": 0,
+      "error": null,
+      "id": "unit.scope.directory.root-unavailable",
+      "reason": null,
+      "status": "passed",
+      "suite": "Unit"
+    },
+    {
+      "description": "Chrome exposes the Origin Private File System API",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.environment.opfs",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "DBOPFS exposes its class as the default module export",
+      "durationMs": 3.1,
+      "error": null,
+      "id": "functional.module.default-export",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "DBOPFS installs its browser singleton on window",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.module.singleton",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "DBOPFS becomes ready after its ready promise resolves",
+      "durationMs": 4.9,
+      "error": null,
+      "id": "functional.module.ready",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "DBOPFS uses the declared application ID",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.module.application-id",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "DBOPFS reports its application-relative storage path",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.module.storage-path",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "the ready event exposes the initialized DBOPFS instance",
+      "durationMs": 0,
+      "error": null,
+      "id": "functional.ready-event.database",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "the ready event reports the declared application ID",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.ready-event.application-id",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "the ready event reports the application storage path",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.ready-event.storage-path",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "JSON records round-trip as structured values",
+      "durationMs": 5.3,
+      "error": null,
+      "id": "functional.records.json",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "text records round-trip without content changes",
+      "durationMs": 3.8,
+      "error": null,
+      "id": "functional.records.text",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "JSONL records parse into ordered row values",
+      "durationMs": 4.5,
+      "error": null,
+      "id": "functional.records.jsonl",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "NDJSON records parse into ordered row values",
+      "durationMs": 4.1,
+      "error": null,
+      "id": "functional.records.ndjson",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "readFile exposes the exact stored text bytes",
+      "durationMs": 1.5,
+      "error": null,
+      "id": "functional.records.raw-file",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "setMany returns one result for every requested record",
+      "durationMs": 6.4,
+      "error": null,
+      "id": "functional.batch.set-count",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "setMany fulfills every valid record write",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.batch.set-status",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "getMany fulfills every existing record read",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.batch.get-status",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "getMany preserves the requested record order",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "functional.batch.get-order",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "getAll returns every record in a selected table",
+      "durationMs": 0.6,
+      "error": null,
+      "id": "functional.enumeration.table-values",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "database-wide getAll includes the selected table values",
+      "durationMs": 1.3,
+      "error": null,
+      "id": "functional.enumeration.database-values",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "file metadata reports a positive modification timestamp",
+      "durationMs": 6,
+      "error": null,
+      "id": "functional.metadata.last-modified",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "file metadata reports the encoded byte length",
+      "durationMs": 0.6,
+      "error": null,
+      "id": "functional.metadata.size",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "file metadata exposes a string MIME type",
+      "durationMs": 0.5,
+      "error": null,
+      "id": "functional.metadata.type",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "getAllKeys enumerates every file in the table",
+      "durationMs": 0.5,
+      "error": null,
+      "id": "functional.enumeration.keys",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "table discovery includes physically stored custom tables",
+      "durationMs": 0.6,
+      "error": null,
+      "id": "functional.enumeration.tables",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "key filtering returns only names containing the substring",
+      "durationMs": 0.4,
+      "error": null,
+      "id": "functional.query.filter-keys",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "count reports the number of records in a table",
+      "durationMs": 0.6,
+      "error": null,
+      "id": "functional.query.count",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "hasKey returns true for an existing record",
+      "durationMs": 0.3,
+      "error": null,
+      "id": "functional.query.has-existing-key",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "hasKey returns false for a missing record",
+      "durationMs": 0.3,
+      "error": null,
+      "id": "functional.query.has-missing-key",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "delete removes one selected record",
+      "durationMs": 4.4,
+      "error": null,
+      "id": "functional.delete.single-record",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "deleteMany fulfills every requested record deletion",
+      "durationMs": 25.3,
+      "error": null,
+      "id": "functional.delete.multiple-status",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "deleteMany leaves the table empty after deleting all remaining records",
+      "durationMs": 5.9,
+      "error": null,
+      "id": "functional.delete.multiple-empty",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "clear removes every record while retaining the table",
+      "durationMs": 4.7,
+      "error": null,
+      "id": "functional.delete.clear-table",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "deleteTable removes the physical table directory",
+      "durationMs": 4.8,
+      "error": null,
+      "id": "functional.delete.table",
+      "reason": null,
+      "status": "passed",
+      "suite": "Functional"
+    },
+    {
+      "description": "the primary application reads its own identically named record",
+      "durationMs": 19.6,
+      "error": null,
+      "id": "integration.scope.primary-record",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "the peer application reads its own identically named record",
+      "durationMs": 7.3,
+      "error": null,
+      "id": "integration.scope.peer-record",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "clearing the primary application removes its isolated record",
       "durationMs": 21.5,
       "error": null,
+      "id": "integration.scope.primary-clear",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Integration"
     },
     {
-      "description": "isolates identical records and clear-all operations by application id",
-      "durationMs": 47.4,
+      "description": "clearing the primary application preserves the peer record",
+      "durationMs": 15.5,
       "error": null,
+      "id": "integration.scope.peer-survives-clear",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Integration"
     },
     {
-      "description": "executes the production DBOPFS worker against real OPFS",
-      "durationMs": 42.8,
+      "description": "the production worker writes bytes to its application OPFS scope",
+      "durationMs": 32.3,
       "error": null,
+      "id": "integration.worker.write",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Integration"
     },
     {
-      "description": "downloads and restores the compressed PNG backup format when Chrome supports it",
-      "durationMs": 46.3,
+      "description": "the production worker reads the exact bytes written to OPFS",
+      "durationMs": 3.4,
       "error": null,
+      "id": "integration.worker.read",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Integration"
     },
     {
-      "description": "removes all release-test OPFS application scopes",
-      "durationMs": 12.2,
+      "description": "compressed backup export produces a browser Blob",
+      "durationMs": 20.6,
       "error": null,
+      "id": "integration.backup.blob",
       "reason": null,
-      "status": "passed"
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "compressed backup export uses the PNG MIME type",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "integration.backup.mime",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "compressed backup export contains encoded payload bytes",
+      "durationMs": 0,
+      "error": null,
+      "id": "integration.backup.nonempty",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "compressed backup export prefixes its timestamped download name",
+      "durationMs": 0.1,
+      "error": null,
+      "id": "integration.backup.filename",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "clearing the backup source removes the stored record",
+      "durationMs": 1.1,
+      "error": null,
+      "id": "integration.backup.clear-source",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "PNG backup restore recreates the exported structured record",
+      "durationMs": 12.5,
+      "error": null,
+      "id": "integration.backup.restore",
+      "reason": null,
+      "status": "passed",
+      "suite": "Integration"
+    },
+    {
+      "description": "sequential append writes preserve the existing file prefix",
+      "durationMs": 7.9,
+      "error": null,
+      "id": "regression.write.append",
+      "reason": null,
+      "status": "passed",
+      "suite": "Regression"
+    },
+    {
+      "description": "concurrent append writes serialize in invocation order",
+      "durationMs": 17.4,
+      "error": null,
+      "id": "regression.write.concurrent-append",
+      "reason": null,
+      "status": "passed",
+      "suite": "Regression"
+    },
+    {
+      "description": "concurrent overwrite writes leave the last invoked value",
+      "durationMs": 8.9,
+      "error": null,
+      "id": "regression.write.concurrent-overwrite",
+      "reason": null,
+      "status": "passed",
+      "suite": "Regression"
+    },
+    {
+      "description": "the production worker rejects path-like application identities",
+      "durationMs": 0.7,
+      "error": null,
+      "id": "regression.worker.unsafe-scope",
+      "reason": null,
+      "status": "passed",
+      "suite": "Regression"
     }
   ],
   "complete": true,
-  "durationMs": 355.8,
+  "durationMs": 297.9,
   "environment": {
     "compressionStream": true,
+    "createImageBitmap": true,
     "decompressionStream": true,
     "opfs": true,
-    "origin": "http://127.0.0.1:65124",
+    "origin": "http://127.0.0.1:53877",
     "persisted": false,
     "secureContext": true,
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36"
   },
-  "finishedAt": "2026-08-11T21:02:43.576Z",
+  "fatalError": null,
+  "finishedAt": "2026-08-17T16:21:23.206Z",
   "framework": {
     "name": "vanilla-test",
     "results": {
       "passed": [
-        "1) .expects initializes the DBOPFS singleton on real localhost OPFS with the declared app id",
-        "2) .expects stores and retrieves JSON, text, JSONL, and NDJSON records",
-        "3) .expects executes batch writes, batch reads, and table/database enumeration",
-        "4) .expects serializes append operations and concurrent writes to one file",
-        "5) .expects reports metadata, keys, discovery, filters, counts, deletion, clearing, and table removal",
-        "6) .expects isolates identical records and clear-all operations by application id",
-        "7) .expects executes the production DBOPFS worker against real OPFS",
-        "8) .expects downloads and restores the compressed PNG backup format when Chrome supports it",
-        "9) .expects removes all release-test OPFS application scopes"
+        "1) .expects [Unit] canonical application IDs accept lowercase hyphenated values",
+        "2) .expects [Unit] canonical application IDs accept the one-character boundary",
+        "3) .expects [Unit] canonical application IDs accept the 64-character boundary",
+        "4) .expects [Unit] canonical application IDs reject non-string values",
+        "5) .expects [Unit] canonical application IDs reject empty strings",
+        "6) .expects [Unit] canonical application IDs reject uppercase letters",
+        "7) .expects [Unit] canonical application IDs reject a leading digit",
+        "8) .expects [Unit] canonical application IDs reject empty hyphenated segments",
+        "9) .expects [Unit] canonical application IDs reject values longer than 64 characters",
+        "10) .expects [Unit] canonical application IDs reject path separators",
+        "11) .expects [Unit] document declarations read the arcane application metadata",
+        "12) .expects [Unit] document declarations read the root application dataset",
+        "13) .expects [Unit] matching metadata and root declarations resolve one identity",
+        "14) .expects [Unit] documents without an application declaration resolve to null",
+        "15) .expects [Unit] conflicting document declarations fail closed",
+        "16) .expects [Unit] invalid document declarations are rejected",
+        "17) .expects [Unit] browser identity resolution accepts an explicit application ID",
+        "18) .expects [Unit] browser identity resolution falls back to the document declaration",
+        "19) .expects [Unit] matching configured and declared browser identities resolve once",
+        "20) .expects [Unit] browser identity resolution rejects configured and declared mismatches",
+        "21) .expects [Unit] browser identity resolution requires an application identity",
+        "22) .expects [Unit] application local-storage keys include the canonical ownership prefix",
+        "23) .expects [Unit] application local-storage keys preserve a falsey numeric key",
+        "24) .expects [Unit] native identity resolution accepts the Arcane-bound application ID",
+        "25) .expects [Unit] asynchronous identity resolution accepts a browser-only identity",
+        "26) .expects [Unit] matching native and browser identities resolve one application ID",
+        "27) .expects [Unit] native and browser identity mismatches fail closed",
+        "28) .expects [Unit] invalid native application descriptors are rejected",
+        "29) .expects [Unit] asynchronous identity resolution rejects an unbound caller",
+        "30) .expects [Unit] application directory opening traverses apps then the canonical ID",
+        "31) .expects [Unit] application directory opening creates both hierarchy levels by default",
+        "32) .expects [Unit] application directory opening returns the scoped directory handle",
+        "33) .expects [Unit] application directory opening returns the resolved application ID",
+        "34) .expects [Unit] application directory opening returns its application-relative path",
+        "35) .expects [Unit] read-only directory opening forwards create false at both levels",
+        "36) .expects [Unit] directory opening rejects an unavailable storage manager",
+        "37) .expects [Unit] directory opening rejects an invalid OPFS root handle",
+        "38) .expects [Functional] Chrome exposes the Origin Private File System API",
+        "39) .expects [Functional] DBOPFS exposes its class as the default module export",
+        "40) .expects [Functional] DBOPFS installs its browser singleton on window",
+        "41) .expects [Functional] DBOPFS becomes ready after its ready promise resolves",
+        "42) .expects [Functional] DBOPFS uses the declared application ID",
+        "43) .expects [Functional] DBOPFS reports its application-relative storage path",
+        "44) .expects [Functional] the ready event exposes the initialized DBOPFS instance",
+        "45) .expects [Functional] the ready event reports the declared application ID",
+        "46) .expects [Functional] the ready event reports the application storage path",
+        "47) .expects [Functional] JSON records round-trip as structured values",
+        "48) .expects [Functional] text records round-trip without content changes",
+        "49) .expects [Functional] JSONL records parse into ordered row values",
+        "50) .expects [Functional] NDJSON records parse into ordered row values",
+        "51) .expects [Functional] readFile exposes the exact stored text bytes",
+        "52) .expects [Functional] setMany returns one result for every requested record",
+        "53) .expects [Functional] setMany fulfills every valid record write",
+        "54) .expects [Functional] getMany fulfills every existing record read",
+        "55) .expects [Functional] getMany preserves the requested record order",
+        "56) .expects [Functional] getAll returns every record in a selected table",
+        "57) .expects [Functional] database-wide getAll includes the selected table values",
+        "58) .expects [Functional] file metadata reports a positive modification timestamp",
+        "59) .expects [Functional] file metadata reports the encoded byte length",
+        "60) .expects [Functional] file metadata exposes a string MIME type",
+        "61) .expects [Functional] getAllKeys enumerates every file in the table",
+        "62) .expects [Functional] table discovery includes physically stored custom tables",
+        "63) .expects [Functional] key filtering returns only names containing the substring",
+        "64) .expects [Functional] count reports the number of records in a table",
+        "65) .expects [Functional] hasKey returns true for an existing record",
+        "66) .expects [Functional] hasKey returns false for a missing record",
+        "67) .expects [Functional] delete removes one selected record",
+        "68) .expects [Functional] deleteMany fulfills every requested record deletion",
+        "69) .expects [Functional] deleteMany leaves the table empty after deleting all remaining records",
+        "70) .expects [Functional] clear removes every record while retaining the table",
+        "71) .expects [Functional] deleteTable removes the physical table directory",
+        "72) .expects [Integration] the primary application reads its own identically named record",
+        "73) .expects [Integration] the peer application reads its own identically named record",
+        "74) .expects [Integration] clearing the primary application removes its isolated record",
+        "75) .expects [Integration] clearing the primary application preserves the peer record",
+        "76) .expects [Integration] the production worker writes bytes to its application OPFS scope",
+        "77) .expects [Integration] the production worker reads the exact bytes written to OPFS",
+        "78) .expects [Integration] compressed backup export produces a browser Blob",
+        "79) .expects [Integration] compressed backup export uses the PNG MIME type",
+        "80) .expects [Integration] compressed backup export contains encoded payload bytes",
+        "81) .expects [Integration] compressed backup export prefixes its timestamped download name",
+        "82) .expects [Integration] clearing the backup source removes the stored record",
+        "83) .expects [Integration] PNG backup restore recreates the exported structured record",
+        "84) .expects [Regression] sequential append writes preserve the existing file prefix",
+        "85) .expects [Regression] concurrent append writes serialize in invocation order",
+        "86) .expects [Regression] concurrent overwrite writes leave the last invoked value",
+        "87) .expects [Regression] the production worker rejects path-like application identities"
       ],
       "failed": []
     },
     "version": "1.4.9"
   },
   "schemaVersion": 1,
-  "startedAt": "2026-08-11T21:02:43.220Z",
+  "startedAt": "2026-08-17T16:21:22.908Z",
+  "suites": [
+    {
+      "failed": 0,
+      "name": "Unit",
+      "passed": 37,
+      "skipped": 0,
+      "total": 37
+    },
+    {
+      "failed": 0,
+      "name": "Functional",
+      "passed": 34,
+      "skipped": 0,
+      "total": 34
+    },
+    {
+      "failed": 0,
+      "name": "Integration",
+      "passed": 12,
+      "skipped": 0,
+      "total": 12
+    },
+    {
+      "failed": 0,
+      "name": "Regression",
+      "passed": 4,
+      "skipped": 0,
+      "total": 4
+    }
+  ],
   "summary": {
     "failed": 0,
-    "passed": 9,
+    "passed": 87,
     "skipped": 0,
-    "total": 9
+    "total": 87
+  },
+  "teardown": {
+    "durationMs": 8.1,
+    "error": null,
+    "status": "passed"
   },
   "driver": {
-    "browserVersion": "Chrome/151.0.7922.109",
+    "browserVersion": "Chrome/151.0.7922.138",
     "chromeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
     "diagnostics": {
       "console": [
         {
-          "text": "\n\u001b[40m\u001b[37m1) .expects initializes the DBOPFS singleton on real localhost OPFS with the declared app id\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m1) .expects [Unit] canonical application IDs accept lowercase hyphenated values\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -121,7 +956,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m2) .expects stores and retrieves JSON, text, JSONL, and NDJSON records\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m2) .expects [Unit] canonical application IDs accept the one-character boundary\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -129,7 +964,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m3) .expects executes batch writes, batch reads, and table/database enumeration\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m3) .expects [Unit] canonical application IDs accept the 64-character boundary\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -137,7 +972,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m4) .expects serializes append operations and concurrent writes to one file\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m4) .expects [Unit] canonical application IDs reject non-string values\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -145,7 +980,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m5) .expects reports metadata, keys, discovery, filters, counts, deletion, clearing, and table removal\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m5) .expects [Unit] canonical application IDs reject empty strings\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -153,7 +988,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m6) .expects isolates identical records and clear-all operations by application id\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m6) .expects [Unit] canonical application IDs reject uppercase letters\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -161,7 +996,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m7) .expects executes the production DBOPFS worker against real OPFS\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m7) .expects [Unit] canonical application IDs reject a leading digit\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -169,7 +1004,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m8) .expects downloads and restores the compressed PNG backup format when Chrome supports it\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m8) .expects [Unit] canonical application IDs reject empty hyphenated segments\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -177,7 +1012,7 @@
           "type": "log"
         },
         {
-          "text": "\n\u001b[40m\u001b[37m9) .expects removes all release-test OPFS application scopes\u001b[39m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m9) .expects [Unit] canonical application IDs reject values longer than 64 characters\u001b[39m\u001b[49m",
           "type": "log"
         },
         {
@@ -185,19 +1020,643 @@
           "type": "log"
         },
         {
-          "text": "\u001b[40m\u001b[49m\n\u001b[40m\u001b[49m\n\u001b[40mResult : \u001b[92mPASSED\u001b[39m\u001b[49m\n\u001b[40m\u001b[49m\n\u001b[40mTest Total : 9\u001b[49m\n\u001b[40m\u001b[92mPassed :\u001b[39m 9\u001b[49m\n\u001b[40m\u001b[91mFailed :\u001b[39m 0\u001b[49m\n\u001b[40m\u001b[101m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[101m\u001b[30mFAILED TESTS :\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[101m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[102m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[102m\u001b[30mPASSED TESTS :\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[102m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m1) .expects initializes the DBOPFS singleton on real localhost OPFS with the declared app id\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m2) .expects stores and retrieves JSON, text, JSONL, and NDJSON records\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m3) .expects executes batch writes, batch reads, and table/database enumeration\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m4) .expects serializes append operations and concurrent writes to one file\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m5) .expects reports metadata, keys, discovery, filters, counts, deletion, clearing, and table removal\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m6) .expects isolates identical records and clear-all operations by application id\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m7) .expects executes the production DBOPFS worker against real OPFS\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m8) .expects downloads and restores the compressed PNG backup format when Chrome supports it\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m9) .expects removes all release-test OPFS application scopes\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[49m",
+          "text": "\n\u001b[40m\u001b[37m10) .expects [Unit] canonical application IDs reject path separators\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m11) .expects [Unit] document declarations read the arcane application metadata\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m12) .expects [Unit] document declarations read the root application dataset\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m13) .expects [Unit] matching metadata and root declarations resolve one identity\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m14) .expects [Unit] documents without an application declaration resolve to null\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m15) .expects [Unit] conflicting document declarations fail closed\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m16) .expects [Unit] invalid document declarations are rejected\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m17) .expects [Unit] browser identity resolution accepts an explicit application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m18) .expects [Unit] browser identity resolution falls back to the document declaration\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m19) .expects [Unit] matching configured and declared browser identities resolve once\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m20) .expects [Unit] browser identity resolution rejects configured and declared mismatches\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m21) .expects [Unit] browser identity resolution requires an application identity\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m22) .expects [Unit] application local-storage keys include the canonical ownership prefix\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m23) .expects [Unit] application local-storage keys preserve a falsey numeric key\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m24) .expects [Unit] native identity resolution accepts the Arcane-bound application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m25) .expects [Unit] asynchronous identity resolution accepts a browser-only identity\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m26) .expects [Unit] matching native and browser identities resolve one application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m27) .expects [Unit] native and browser identity mismatches fail closed\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m28) .expects [Unit] invalid native application descriptors are rejected\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m29) .expects [Unit] asynchronous identity resolution rejects an unbound caller\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m30) .expects [Unit] application directory opening traverses apps then the canonical ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m31) .expects [Unit] application directory opening creates both hierarchy levels by default\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m32) .expects [Unit] application directory opening returns the scoped directory handle\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m33) .expects [Unit] application directory opening returns the resolved application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m34) .expects [Unit] application directory opening returns its application-relative path\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m35) .expects [Unit] read-only directory opening forwards create false at both levels\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m36) .expects [Unit] directory opening rejects an unavailable storage manager\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m37) .expects [Unit] directory opening rejects an invalid OPFS root handle\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m38) .expects [Functional] Chrome exposes the Origin Private File System API\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m39) .expects [Functional] DBOPFS exposes its class as the default module export\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m40) .expects [Functional] DBOPFS installs its browser singleton on window\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m41) .expects [Functional] DBOPFS becomes ready after its ready promise resolves\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m42) .expects [Functional] DBOPFS uses the declared application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m43) .expects [Functional] DBOPFS reports its application-relative storage path\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m44) .expects [Functional] the ready event exposes the initialized DBOPFS instance\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m45) .expects [Functional] the ready event reports the declared application ID\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m46) .expects [Functional] the ready event reports the application storage path\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m47) .expects [Functional] JSON records round-trip as structured values\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m48) .expects [Functional] text records round-trip without content changes\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m49) .expects [Functional] JSONL records parse into ordered row values\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m50) .expects [Functional] NDJSON records parse into ordered row values\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m51) .expects [Functional] readFile exposes the exact stored text bytes\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m52) .expects [Functional] setMany returns one result for every requested record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m53) .expects [Functional] setMany fulfills every valid record write\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m54) .expects [Functional] getMany fulfills every existing record read\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m55) .expects [Functional] getMany preserves the requested record order\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m56) .expects [Functional] getAll returns every record in a selected table\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m57) .expects [Functional] database-wide getAll includes the selected table values\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m58) .expects [Functional] file metadata reports a positive modification timestamp\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m59) .expects [Functional] file metadata reports the encoded byte length\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m60) .expects [Functional] file metadata exposes a string MIME type\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m61) .expects [Functional] getAllKeys enumerates every file in the table\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m62) .expects [Functional] table discovery includes physically stored custom tables\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m63) .expects [Functional] key filtering returns only names containing the substring\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m64) .expects [Functional] count reports the number of records in a table\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m65) .expects [Functional] hasKey returns true for an existing record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m66) .expects [Functional] hasKey returns false for a missing record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m67) .expects [Functional] delete removes one selected record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m68) .expects [Functional] deleteMany fulfills every requested record deletion\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m69) .expects [Functional] deleteMany leaves the table empty after deleting all remaining records\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m70) .expects [Functional] clear removes every record while retaining the table\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m71) .expects [Functional] deleteTable removes the physical table directory\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m72) .expects [Integration] the primary application reads its own identically named record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m73) .expects [Integration] the peer application reads its own identically named record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m74) .expects [Integration] clearing the primary application removes its isolated record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m75) .expects [Integration] clearing the primary application preserves the peer record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m76) .expects [Integration] the production worker writes bytes to its application OPFS scope\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m77) .expects [Integration] the production worker reads the exact bytes written to OPFS\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m78) .expects [Integration] compressed backup export produces a browser Blob\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m79) .expects [Integration] compressed backup export uses the PNG MIME type\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m80) .expects [Integration] compressed backup export contains encoded payload bytes\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m81) .expects [Integration] compressed backup export prefixes its timestamped download name\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m82) .expects [Integration] clearing the backup source removes the stored record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m83) .expects [Integration] PNG backup restore recreates the exported structured record\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m84) .expects [Regression] sequential append writes preserve the existing file prefix\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m85) .expects [Regression] concurrent append writes serialize in invocation order\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m86) .expects [Regression] concurrent overwrite writes leave the last invoked value\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\n\u001b[40m\u001b[37m87) .expects [Regression] the production worker rejects path-like application identities\u001b[39m\u001b[49m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[92m   pass\u001b[39m\n\u001b[92m\u001b[39m",
+          "type": "log"
+        },
+        {
+          "text": "\u001b[40m\u001b[49m\n\u001b[40m\u001b[49m\n\u001b[40mResult : \u001b[92mPASSED\u001b[39m\u001b[49m\n\u001b[40m\u001b[49m\n\u001b[40mTest Total : 87\u001b[49m\n\u001b[40m\u001b[92mPassed :\u001b[39m 87\u001b[49m\n\u001b[40m\u001b[91mFailed :\u001b[39m 0\u001b[49m\n\u001b[40m\u001b[101m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[101m\u001b[30mFAILED TESTS :\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[101m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[102m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[102m\u001b[30mPASSED TESTS :\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[102m\u001b[30m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m1) .expects [Unit] canonical application IDs accept lowercase hyphenated values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m2) .expects [Unit] canonical application IDs accept the one-character boundary\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m3) .expects [Unit] canonical application IDs accept the 64-character boundary\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m4) .expects [Unit] canonical application IDs reject non-string values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m5) .expects [Unit] canonical application IDs reject empty strings\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m6) .expects [Unit] canonical application IDs reject uppercase letters\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m7) .expects [Unit] canonical application IDs reject a leading digit\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m8) .expects [Unit] canonical application IDs reject empty hyphenated segments\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m9) .expects [Unit] canonical application IDs reject values longer than 64 characters\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m10) .expects [Unit] canonical application IDs reject path separators\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m11) .expects [Unit] document declarations read the arcane application metadata\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m12) .expects [Unit] document declarations read the root application dataset\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m13) .expects [Unit] matching metadata and root declarations resolve one identity\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m14) .expects [Unit] documents without an application declaration resolve to null\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m15) .expects [Unit] conflicting document declarations fail closed\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m16) .expects [Unit] invalid document declarations are rejected\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m17) .expects [Unit] browser identity resolution accepts an explicit application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m18) .expects [Unit] browser identity resolution falls back to the document declaration\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m19) .expects [Unit] matching configured and declared browser identities resolve once\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m20) .expects [Unit] browser identity resolution rejects configured and declared mismatches\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m21) .expects [Unit] browser identity resolution requires an application identity\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m22) .expects [Unit] application local-storage keys include the canonical ownership prefix\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m23) .expects [Unit] application local-storage keys preserve a falsey numeric key\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m24) .expects [Unit] native identity resolution accepts the Arcane-bound application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m25) .expects [Unit] asynchronous identity resolution accepts a browser-only identity\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m26) .expects [Unit] matching native and browser identities resolve one application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m27) .expects [Unit] native and browser identity mismatches fail closed\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m28) .expects [Unit] invalid native application descriptors are rejected\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m29) .expects [Unit] asynchronous identity resolution rejects an unbound caller\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m30) .expects [Unit] application directory opening traverses apps then the canonical ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m31) .expects [Unit] application directory opening creates both hierarchy levels by default\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m32) .expects [Unit] application directory opening returns the scoped directory handle\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m33) .expects [Unit] application directory opening returns the resolved application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m34) .expects [Unit] application directory opening returns its application-relative path\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m35) .expects [Unit] read-only directory opening forwards create false at both levels\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m36) .expects [Unit] directory opening rejects an unavailable storage manager\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m37) .expects [Unit] directory opening rejects an invalid OPFS root handle\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m38) .expects [Functional] Chrome exposes the Origin Private File System API\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m39) .expects [Functional] DBOPFS exposes its class as the default module export\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m40) .expects [Functional] DBOPFS installs its browser singleton on window\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m41) .expects [Functional] DBOPFS becomes ready after its ready promise resolves\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m42) .expects [Functional] DBOPFS uses the declared application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m43) .expects [Functional] DBOPFS reports its application-relative storage path\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m44) .expects [Functional] the ready event exposes the initialized DBOPFS instance\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m45) .expects [Functional] the ready event reports the declared application ID\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m46) .expects [Functional] the ready event reports the application storage path\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m47) .expects [Functional] JSON records round-trip as structured values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m48) .expects [Functional] text records round-trip without content changes\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m49) .expects [Functional] JSONL records parse into ordered row values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m50) .expects [Functional] NDJSON records parse into ordered row values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m51) .expects [Functional] readFile exposes the exact stored text bytes\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m52) .expects [Functional] setMany returns one result for every requested record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m53) .expects [Functional] setMany fulfills every valid record write\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m54) .expects [Functional] getMany fulfills every existing record read\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m55) .expects [Functional] getMany preserves the requested record order\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m56) .expects [Functional] getAll returns every record in a selected table\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m57) .expects [Functional] database-wide getAll includes the selected table values\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m58) .expects [Functional] file metadata reports a positive modification timestamp\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m59) .expects [Functional] file metadata reports the encoded byte length\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m60) .expects [Functional] file metadata exposes a string MIME type\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m61) .expects [Functional] getAllKeys enumerates every file in the table\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m62) .expects [Functional] table discovery includes physically stored custom tables\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m63) .expects [Functional] key filtering returns only names containing the substring\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m64) .expects [Functional] count reports the number of records in a table\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m65) .expects [Functional] hasKey returns true for an existing record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m66) .expects [Functional] hasKey returns false for a missing record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m67) .expects [Functional] delete removes one selected record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m68) .expects [Functional] deleteMany fulfills every requested record deletion\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m69) .expects [Functional] deleteMany leaves the table empty after deleting all remaining records\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m70) .expects [Functional] clear removes every record while retaining the table\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m71) .expects [Functional] deleteTable removes the physical table directory\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m72) .expects [Integration] the primary application reads its own identically named record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m73) .expects [Integration] the peer application reads its own identically named record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m74) .expects [Integration] clearing the primary application removes its isolated record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m75) .expects [Integration] clearing the primary application preserves the peer record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m76) .expects [Integration] the production worker writes bytes to its application OPFS scope\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m77) .expects [Integration] the production worker reads the exact bytes written to OPFS\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m78) .expects [Integration] compressed backup export produces a browser Blob\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m79) .expects [Integration] compressed backup export uses the PNG MIME type\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m80) .expects [Integration] compressed backup export contains encoded payload bytes\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m81) .expects [Integration] compressed backup export prefixes its timestamped download name\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m82) .expects [Integration] clearing the backup source removes the stored record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m83) .expects [Integration] PNG backup restore recreates the exported structured record\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m84) .expects [Regression] sequential append writes preserve the existing file prefix\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m85) .expects [Regression] concurrent append writes serialize in invocation order\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m86) .expects [Regression] concurrent overwrite writes leave the last invoked value\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[40m\u001b[92m87) .expects [Regression] the production worker rejects path-like application identities\u001b[39m\u001b[49m\u001b[40m\u001b[49m\n\u001b[40m\u001b[40m\u001b[92m\u001b[39m\u001b[49m\u001b[40m\u001b[49m",
           "type": "log"
         }
       ],
       "pageErrors": [],
       "requestFailures": []
     },
-    "durationMs": 911,
+    "durationMs": 720,
     "error": null,
-    "finishedAt": "2026-08-11T21:02:43.720Z",
+    "finishedAt": "2026-08-17T16:21:23.328Z",
     "missingCoverageModules": [],
     "puppeteerCoreVersion": "25.6.0",
-    "startedAt": "2026-08-11T21:02:42.809Z",
+    "startedAt": "2026-08-17T16:21:22.608Z",
     "status": "passed",
     "vanillaTestVersion": "1.4.9"
   },

@@ -2,6 +2,393 @@
   "entries": [
     {
       "context": "page",
+      "modulePath": "arcane/modules/AppDataScope.js",
+      "ranges": [
+        {
+          "start": 0,
+          "end": 5122
+        },
+        {
+          "start": 5158,
+          "end": 6437
+        },
+        {
+          "start": 6446,
+          "end": 7642
+        }
+      ],
+      "rawScriptCoverage": {
+        "scriptId": "32",
+        "url": "http://127.0.0.1:53877/arcane/modules/AppDataScope.js",
+        "functions": [
+          {
+            "functionName": "",
+            "ranges": [
+              {
+                "startOffset": 0,
+                "endOffset": 7642,
+                "count": 1
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "scopeError",
+            "ranges": [
+              {
+                "startOffset": 181,
+                "endOffset": 292,
+                "count": 19
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "canonicalApplicationId",
+            "ranges": [
+              {
+                "startOffset": 509,
+                "endOffset": 899,
+                "count": 40
+              },
+              {
+                "startOffset": 610,
+                "endOffset": 626,
+                "count": 39
+              },
+              {
+                "startOffset": 635,
+                "endOffset": 675,
+                "count": 38
+              },
+              {
+                "startOffset": 684,
+                "endOffset": 721,
+                "count": 37
+              },
+              {
+                "startOffset": 722,
+                "endOffset": 878,
+                "count": 8
+              },
+              {
+                "startOffset": 878,
+                "endOffset": 898,
+                "count": 32
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "declaredApplicationId",
+            "ranges": [
+              {
+                "startOffset": 1198,
+                "endOffset": 1974,
+                "count": 28
+              },
+              {
+                "startOffset": 1309,
+                "endOffset": 1356,
+                "count": 13
+              },
+              {
+                "startOffset": 1365,
+                "endOffset": 1392,
+                "count": 10
+              },
+              {
+                "startOffset": 1428,
+                "endOffset": 1467,
+                "count": 13
+              },
+              {
+                "startOffset": 1775,
+                "endOffset": 1937,
+                "count": 1
+              },
+              {
+                "startOffset": 1937,
+                "endOffset": 1965,
+                "count": 26
+              },
+              {
+                "startOffset": 1965,
+                "endOffset": 1971,
+                "count": 17
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "",
+            "ranges": [
+              {
+                "startOffset": 1530,
+                "endOffset": 1580,
+                "count": 56
+              },
+              {
+                "startOffset": 1568,
+                "endOffset": 1580,
+                "count": 13
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "",
+            "ranges": [
+              {
+                "startOffset": 1595,
+                "endOffset": 1735,
+                "count": 13
+              },
+              {
+                "startOffset": 1674,
+                "endOffset": 1699,
+                "count": 11
+              },
+              {
+                "startOffset": 1699,
+                "endOffset": 1725,
+                "count": 2
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "resolveBrowserApplicationId",
+            "ranges": [
+              {
+                "startOffset": 2363,
+                "endOffset": 3120,
+                "count": 22
+              },
+              {
+                "startOffset": 2511,
+                "endOffset": 2558,
+                "count": 14
+              },
+              {
+                "startOffset": 2567,
+                "endOffset": 2572,
+                "count": 8
+              },
+              {
+                "startOffset": 2581,
+                "endOffset": 2619,
+                "count": 14
+              },
+              {
+                "startOffset": 2695,
+                "endOffset": 2705,
+                "count": 14
+              },
+              {
+                "startOffset": 2705,
+                "endOffset": 2726,
+                "count": 2
+              },
+              {
+                "startOffset": 2727,
+                "endOffset": 2896,
+                "count": 1
+              },
+              {
+                "startOffset": 2896,
+                "endOffset": 2913,
+                "count": 21
+              },
+              {
+                "startOffset": 2913,
+                "endOffset": 2923,
+                "count": 8
+              },
+              {
+                "startOffset": 2924,
+                "endOffset": 2966,
+                "count": 17
+              },
+              {
+                "startOffset": 2949,
+                "endOffset": 2959,
+                "count": 4
+              },
+              {
+                "startOffset": 2966,
+                "endOffset": 3119,
+                "count": 4
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "resolveApplicationLocalStorageKey",
+            "ranges": [
+              {
+                "startOffset": 3424,
+                "endOffset": 3637,
+                "count": 2
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "nativeApplicationId",
+            "ranges": [
+              {
+                "startOffset": 3639,
+                "endOffset": 4130,
+                "count": 15
+              },
+              {
+                "startOffset": 3721,
+                "endOffset": 3735,
+                "count": 4
+              },
+              {
+                "startOffset": 3749,
+                "endOffset": 3777,
+                "count": 11
+              },
+              {
+                "startOffset": 3777,
+                "endOffset": 3847,
+                "count": 4
+              },
+              {
+                "startOffset": 3847,
+                "endOffset": 3877,
+                "count": 3
+              },
+              {
+                "startOffset": 3878,
+                "endOffset": 4031,
+                "count": 1
+              },
+              {
+                "startOffset": 4031,
+                "endOffset": 4129,
+                "count": 3
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "resolveApplicationId",
+            "ranges": [
+              {
+                "startOffset": 4755,
+                "endOffset": 5713,
+                "count": 15
+              },
+              {
+                "startOffset": 5057,
+                "endOffset": 5164,
+                "count": 3
+              },
+              {
+                "startOffset": 5122,
+                "endOffset": 5158,
+                "count": 0
+              },
+              {
+                "startOffset": 5224,
+                "endOffset": 5247,
+                "count": 14
+              },
+              {
+                "startOffset": 5247,
+                "endOffset": 5264,
+                "count": 3
+              },
+              {
+                "startOffset": 5264,
+                "endOffset": 5298,
+                "count": 2
+              },
+              {
+                "startOffset": 5299,
+                "endOffset": 5466,
+                "count": 1
+              },
+              {
+                "startOffset": 5466,
+                "endOffset": 5489,
+                "count": 13
+              },
+              {
+                "startOffset": 5489,
+                "endOffset": 5506,
+                "count": 11
+              },
+              {
+                "startOffset": 5507,
+                "endOffset": 5562,
+                "count": 12
+              },
+              {
+                "startOffset": 5538,
+                "endOffset": 5555,
+                "count": 10
+              },
+              {
+                "startOffset": 5562,
+                "endOffset": 5712,
+                "count": 1
+              }
+            ],
+            "isBlockCoverage": true
+          },
+          {
+            "functionName": "openApplicationDataDirectory",
+            "ranges": [
+              {
+                "startOffset": 6359,
+                "endOffset": 7516,
+                "count": 10
+              },
+              {
+                "startOffset": 6437,
+                "endOffset": 6446,
+                "count": 0
+              },
+              {
+                "startOffset": 6580,
+                "endOffset": 6622,
+                "count": 9
+              },
+              {
+                "startOffset": 6623,
+                "endOffset": 6792,
+                "count": 1
+              },
+              {
+                "startOffset": 6792,
+                "endOffset": 7009,
+                "count": 9
+              },
+              {
+                "startOffset": 7010,
+                "endOffset": 7171,
+                "count": 1
+              },
+              {
+                "startOffset": 7171,
+                "endOffset": 7515,
+                "count": 8
+              }
+            ],
+            "isBlockCoverage": true
+          }
+        ]
+      },
+      "text": "const APPLICATION_ID_PATTERN=/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;\nconst APPLICATION_ID_MAX_LENGTH=64;\nconst APP_DATA_DIRECTORY='apps';\nconst APP_LOCAL_STORAGE_PREFIX='arcane.apps.';\n\nfunction scopeError(code,message){\n    const error=new Error(message);\n    error.code=code;\n    return error;\n}\n\n/**\n * Validates the canonical application identifier used by Arcane packages,\n * the native host, and application-owned data folders.\n *\n * @param {*} value\n * @param {string} label\n * @returns {string}\n */\nexport function canonicalApplicationId(value,label='applicationId'){\n    if(typeof value!=='string'\n        ||value.length<1\n        ||value.length>APPLICATION_ID_MAX_LENGTH\n        ||!APPLICATION_ID_PATTERN.test(value)){\n        throw scopeError(\n            'APP_DATA_SCOPE_INVALID',\n            `${label} must be a canonical Arcane application identifier.`\n        );\n    }\n\n    return value;\n}\n\n/**\n * Reads the immutable application declaration from a document. Application\n * pages declare this before storage modules run so standalone browser builds\n * do not depend on their mount path for identity.\n *\n * @param {Document|Object|null} documentObject\n * @returns {string|null}\n */\nexport function declaredApplicationId(documentObject=globalThis.document){\n    const metaValue=documentObject\n        ?.querySelector?.('meta[name=\"arcane-app-id\"]')\n        ?.getAttribute?.('content');\n    const rootValue=documentObject?.documentElement?.dataset?.arcaneAppId;\n    const declarations=[metaValue,rootValue]\n        .filter(value=>value!==null&&value!==undefined&&value!=='')\n        .map((value,index)=>canonicalApplicationId(\n            value,\n            index===0?'arcane-app-id metadata':'document application id'\n        ));\n\n    if(new Set(declarations).size>1){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The document contains conflicting Arcane application identities.'\n        );\n    }\n\n    return declarations[0]||null;\n}\n\n/**\n * Resolves the synchronous browser declaration used by storage mechanisms\n * such as localStorage. Native-capable asynchronous callers must use\n * resolveApplicationId so the host-bound identity remains authoritative.\n *\n * @param {Object} options\n * @param {string|null} options.applicationId\n * @param {Document|Object|null} options.documentObject\n * @returns {string}\n */\nexport function resolveBrowserApplicationId({\n    applicationId=null,\n    documentObject=globalThis.document\n}={}){\n    const explicit=applicationId===null||applicationId===undefined||applicationId===''\n        ?null\n        :canonicalApplicationId(applicationId);\n    const declared=declaredApplicationId(documentObject);\n\n    if(explicit&&declared&&explicit!==declared){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The configured and declared Arcane application identities do not match.'\n        );\n    }\n\n    if(explicit||declared){\n        return explicit||declared;\n    }\n\n    throw scopeError(\n        'APP_DATA_SCOPE_REQUIRED',\n        'Arcane application data cannot open without a declared application identity.'\n    );\n}\n\n/**\n * Resolves a logical local-storage key beneath the current browser app scope.\n * Callers retain their domain namespace while the shared mechanism supplies\n * the canonical `arcane.apps.<id>:` ownership prefix.\n *\n * @param {*} logicalKey\n * @param {Object} options\n * @returns {string}\n */\nexport function resolveApplicationLocalStorageKey(logicalKey='',options={}){\n    const applicationId=resolveBrowserApplicationId(options);\n    return `${APP_LOCAL_STORAGE_PREFIX}${applicationId}:${String(logicalKey)}`;\n}\n\nasync function nativeApplicationId(arcane=globalThis.Arcane){\n    if(typeof arcane?.app?.current!=='function'){\n        return null;\n    }\n\n    const descriptor=await arcane.app.current();\n\n    if(!descriptor||typeof descriptor!=='object'){\n        throw scopeError(\n            'APP_DATA_SCOPE_INVALID',\n            'Arcane returned an invalid bound application descriptor.'\n        );\n    }\n\n    return canonicalApplicationId(\n        descriptor.id,\n        'bound application id'\n    );\n}\n\n/**\n * Resolves one application identity for persistent data. The native host is\n * authoritative when present. Browser-only applications must declare their\n * package id in `meta[name=\"arcane-app-id\"]` (or the equivalent root data\n * attribute). A mismatch fails closed before a data directory is opened.\n *\n * @param {Object} options\n * @param {string|null} options.applicationId Explicit identity for adapters\n *   and synthetic tests. Application pages should use document metadata.\n * @param {Document|Object|null} options.documentObject\n * @param {Object|null} options.arcane\n * @returns {Promise<string>}\n */\nexport async function resolveApplicationId({\n    applicationId=null,\n    documentObject=globalThis.document,\n    arcane=globalThis.Arcane\n}={}){\n    let browserIdentity=null;\n    try{\n        browserIdentity=resolveBrowserApplicationId({\n            applicationId,\n            documentObject\n        });\n    }catch(error){\n        if(error?.code!=='APP_DATA_SCOPE_REQUIRED'){\n            throw error;\n        }\n    }\n    const nativeIdentity=await nativeApplicationId(arcane);\n\n    if(nativeIdentity&&browserIdentity&&nativeIdentity!==browserIdentity){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The document identity does not match the application bound by Arcane.'\n        );\n    }\n\n    if(nativeIdentity||browserIdentity){\n        return nativeIdentity||browserIdentity;\n    }\n\n    throw scopeError(\n        'APP_DATA_SCOPE_REQUIRED',\n        'Arcane application data cannot open without a bound application identity.'\n    );\n}\n\n/**\n * Opens `<OPFS root>/apps/<application-id>` and returns only that app-owned\n * directory. This is an organizational boundary for browser-only same-origin\n * code; the native host additionally supplies a separate WebView profile and\n * authoritative application identity.\n *\n * @param {Object} options\n * @param {StorageManager|Object} options.storage\n * @param {string|null} options.applicationId\n * @param {Document|Object|null} options.documentObject\n * @param {Object|null} options.arcane\n * @param {boolean} options.create\n * @returns {Promise<{applicationId:string,directory:FileSystemDirectoryHandle|Object,path:string}>}\n */\nexport async function openApplicationDataDirectory({\n    storage=globalThis.navigator?.storage,\n    applicationId=null,\n    documentObject=globalThis.document,\n    arcane=globalThis.Arcane,\n    create=true\n}={}){\n    if(!storage||typeof storage.getDirectory!=='function'){\n        throw scopeError(\n            'APP_DATA_STORAGE_UNAVAILABLE',\n            'Origin Private File System storage is unavailable in this browser.'\n        );\n    }\n\n    const id=await resolveApplicationId({\n        applicationId,\n        documentObject,\n        arcane\n    });\n    const root=await storage.getDirectory();\n\n    if(!root||typeof root.getDirectoryHandle!=='function'){\n        throw scopeError(\n            'APP_DATA_STORAGE_UNAVAILABLE',\n            'Arcane could not open the Origin Private File System root.'\n        );\n    }\n\n    const applications=await root.getDirectoryHandle(\n        APP_DATA_DIRECTORY,\n        {create:Boolean(create)}\n    );\n    const directory=await applications.getDirectoryHandle(\n        id,\n        {create:Boolean(create)}\n    );\n\n    return {\n        applicationId:id,\n        directory,\n        path:`${APP_DATA_DIRECTORY}/${id}`\n    };\n}\n\nexport {\n    APPLICATION_ID_MAX_LENGTH,\n    APPLICATION_ID_PATTERN,\n    APP_DATA_DIRECTORY,\n    APP_LOCAL_STORAGE_PREFIX\n};\n",
+      "url": "http://127.0.0.1:53877/arcane/modules/AppDataScope.js"
+    },
+    {
+      "context": "page",
       "modulePath": "arcane/modules/DBOPFS.js",
       "ranges": [
         {
@@ -154,8 +541,8 @@
         }
       ],
       "rawScriptCoverage": {
-        "scriptId": "11",
-        "url": "http://127.0.0.1:65124/arcane/modules/DBOPFS.js",
+        "scriptId": "33",
+        "url": "http://127.0.0.1:53877/arcane/modules/DBOPFS.js",
         "functions": [
           {
             "functionName": "",
@@ -245,7 +632,7 @@
               {
                 "startOffset": 6043,
                 "endOffset": 6123,
-                "count": 25
+                "count": 37
               }
             ],
             "isBlockCoverage": true
@@ -358,7 +745,7 @@
               {
                 "startOffset": 8883,
                 "endOffset": 9421,
-                "count": 109
+                "count": 137
               },
               {
                 "startOffset": 8942,
@@ -368,7 +755,7 @@
               {
                 "startOffset": 9034,
                 "endOffset": 9368,
-                "count": 12
+                "count": 19
               },
               {
                 "startOffset": 9202,
@@ -384,7 +771,7 @@
               {
                 "startOffset": 9125,
                 "endOffset": 9156,
-                "count": 162
+                "count": 279
               }
             ],
             "isBlockCoverage": true
@@ -395,12 +782,12 @@
               {
                 "startOffset": 9599,
                 "endOffset": 11131,
-                "count": 25
+                "count": 37
               },
               {
                 "startOffset": 9772,
                 "endOffset": 9791,
-                "count": 20
+                "count": 32
               }
             ],
             "isBlockCoverage": true
@@ -422,17 +809,17 @@
               {
                 "startOffset": 9865,
                 "endOffset": 10745,
-                "count": 25
+                "count": 37
               },
               {
                 "startOffset": 9942,
                 "endOffset": 10008,
-                "count": 7
+                "count": 13
               },
               {
                 "startOffset": 10092,
                 "endOffset": 10171,
-                "count": 8
+                "count": 15
               },
               {
                 "startOffset": 10509,
@@ -448,12 +835,12 @@
               {
                 "startOffset": 10824,
                 "endOffset": 10981,
-                "count": 25
+                "count": 37
               },
               {
                 "startOffset": 10907,
                 "endOffset": 10971,
-                "count": 20
+                "count": 32
               }
             ],
             "isBlockCoverage": true
@@ -464,7 +851,7 @@
               {
                 "startOffset": 11355,
                 "endOffset": 12232,
-                "count": 25
+                "count": 37
               },
               {
                 "startOffset": 11641,
@@ -485,12 +872,12 @@
               {
                 "startOffset": 12511,
                 "endOffset": 12879,
-                "count": 40
+                "count": 52
               },
               {
                 "startOffset": 12681,
                 "endOffset": 12776,
-                "count": 37
+                "count": 49
               },
               {
                 "startOffset": 12776,
@@ -506,7 +893,7 @@
               {
                 "startOffset": 13132,
                 "endOffset": 13675,
-                "count": 1
+                "count": 3
               },
               {
                 "startOffset": 13357,
@@ -532,7 +919,7 @@
               {
                 "startOffset": 13869,
                 "endOffset": 14539,
-                "count": 16
+                "count": 17
               }
             ],
             "isBlockCoverage": true
@@ -543,7 +930,7 @@
               {
                 "startOffset": 13997,
                 "endOffset": 14112,
-                "count": 7
+                "count": 11
               }
             ],
             "isBlockCoverage": true
@@ -554,7 +941,7 @@
               {
                 "startOffset": 14235,
                 "endOffset": 14498,
-                "count": 7
+                "count": 11
               },
               {
                 "startOffset": 14380,
@@ -570,7 +957,7 @@
               {
                 "startOffset": 14723,
                 "endOffset": 16366,
-                "count": 55
+                "count": 67
               },
               {
                 "startOffset": 14788,
@@ -580,12 +967,12 @@
               {
                 "startOffset": 14827,
                 "endOffset": 16309,
-                "count": 39
+                "count": 51
               },
               {
                 "startOffset": 14912,
                 "endOffset": 15010,
-                "count": 36
+                "count": 48
               },
               {
                 "startOffset": 15010,
@@ -595,12 +982,12 @@
               {
                 "startOffset": 15076,
                 "endOffset": 15331,
-                "count": 36
+                "count": 48
               },
               {
                 "startOffset": 15331,
                 "endOffset": 15532,
-                "count": 13
+                "count": 20
               },
               {
                 "startOffset": 15491,
@@ -630,7 +1017,7 @@
               {
                 "startOffset": 16129,
                 "endOffset": 16143,
-                "count": 36
+                "count": 48
               },
               {
                 "startOffset": 16143,
@@ -645,7 +1032,7 @@
               {
                 "startOffset": 16309,
                 "endOffset": 16365,
-                "count": 52
+                "count": 64
               }
             ],
             "isBlockCoverage": true
@@ -742,7 +1129,7 @@
               {
                 "startOffset": 18570,
                 "endOffset": 18984,
-                "count": 5
+                "count": 7
               },
               {
                 "startOffset": 18837,
@@ -758,7 +1145,7 @@
               {
                 "startOffset": 19162,
                 "endOffset": 19448,
-                "count": 1
+                "count": 2
               }
             ],
             "isBlockCoverage": true
@@ -769,7 +1156,7 @@
               {
                 "startOffset": 19259,
                 "endOffset": 19366,
-                "count": 2
+                "count": 4
               }
             ],
             "isBlockCoverage": true
@@ -806,7 +1193,7 @@
               {
                 "startOffset": 20142,
                 "endOffset": 20215,
-                "count": 40
+                "count": 45
               }
             ],
             "isBlockCoverage": true
@@ -817,6 +1204,11 @@
               {
                 "startOffset": 20484,
                 "endOffset": 20678,
+                "count": 3
+              },
+              {
+                "startOffset": 20615,
+                "endOffset": 20672,
                 "count": 2
               }
             ],
@@ -854,7 +1246,7 @@
               {
                 "startOffset": 21554,
                 "endOffset": 21911,
-                "count": 59
+                "count": 61
               },
               {
                 "startOffset": 21597,
@@ -875,7 +1267,7 @@
               {
                 "startOffset": 21724,
                 "endOffset": 21760,
-                "count": 466
+                "count": 506
               }
             ],
             "isBlockCoverage": true
@@ -979,17 +1371,17 @@
               {
                 "startOffset": 26773,
                 "endOffset": 26777,
-                "count": 10
+                "count": 12
               },
               {
                 "startOffset": 26824,
                 "endOffset": 26828,
-                "count": 10
+                "count": 12
               },
               {
                 "startOffset": 26875,
                 "endOffset": 26879,
-                "count": 10
+                "count": 13
               },
               {
                 "startOffset": 27087,
@@ -1010,12 +1402,12 @@
               {
                 "startOffset": 24232,
                 "endOffset": 25205,
-                "count": 14
+                "count": 13
               },
               {
                 "startOffset": 24381,
                 "endOffset": 24468,
-                "count": 13
+                "count": 12
               },
               {
                 "startOffset": 24707,
@@ -1072,7 +1464,7 @@
               {
                 "startOffset": 29700,
                 "endOffset": 29759,
-                "count": 14
+                "count": 13
               }
             ],
             "isBlockCoverage": true
@@ -1080,343 +1472,7 @@
         ]
       },
       "text": "import Is from \"../../node_modules/strong-type/index.js\";\nimport {openApplicationDataDirectory} from './AppDataScope.js';\nconst is=new Is(false);\n\nconst DEFAULT_TABLE_DIRECTORIES=Object.freeze({\n    users:'users',\n    scores:'scores',\n    chats:'chats',\n    notes:'notes',\n    documents:'documents',\n    songs:'songs',\n    images:'images',\n    journal_entries:'journal_entries',\n    streams_of_consciousness:'streams_of_consciousness',\n    reports:'reports',\n    errors:'errors',\n    memories:'memory'\n});\n\nif(navigator.storage?.persist){\n    await navigator.storage.persist().catch(()=>false);\n}\n\n/**\n * @typedef {Object<string,any>} DBOPFSTableCache\n * Represents cached values of a table in memory.\n * Key = filename\n * Value = parsed file content\n */\n\n/**\n * @typedef {Object<string,DBOPFSTableCache>} DBOPFSTables\n * Represents the in-memory cache of all tables.\n */\n\n/**\n * @typedef {Object<string,FileSystemDirectoryHandle>} DBOPFSTableHandles\n * Handles to directories inside OPFS.\n */\n\n/**\n * @typedef {Object<string,Promise>} DBOPFSWriteLocks\n * Promise based write locks to serialize writes to the same file.\n */\n\n/**\n * @typedef {Object} DBOPFSTableUpdate\n * @property {string} tableName\n * @property {string} fileName\n * @property {*} value\n */\n\n\n/**\n * DBOPFS\n *\n * A lightweight database abstraction on top of the\n * **Origin Private File System (OPFS)**.\n *\n * Tables are directories and records are files.\n *\n * This module automatically attaches a singleton to:\n *\n *     window.dbopfs\n *\n * Example:\n *\n *     await dbopfs.set('users','alex',{email:'alex@example.com'})\n *     const user=await dbopfs.get('users','alex')\n */\nclass DBOPFS {\n\n    /** @type {FileSystemDirectoryHandle|Object} */\n    #db={}\n\n    /** @type {DBOPFSTableHandles} */\n    #tableHandles={}\n\n    /** @type {DBOPFSTables} */\n    #tables={}\n\n    /** @type {DBOPFSWriteLocks} */\n    #writeLocks={}\n\n    /** @type {ServiceWorker|Object} */\n    #serviceWorker={}\n\n    /** @type {Worker|Object} */\n    #writeWorker={}\n\n    /** @type {string} */\n    #applicationId=''\n\n    /** @type {string} */\n    #storagePath=''\n\n    /**\n     * Handles messages received from the service worker.\n     * Placeholder for future synchronization logic.\n     * @private\n     */\n    #handleServiceWorkerMessage(){};\n\n    /**\n     * Writes file data through a dedicated OPFS worker.\n     * Used when FileSystemFileHandle.createWritable is unavailable.\n     *\n     * @private\n     * @param {string} directoryName\n     * @param {string} fileName\n     * @param {*} fileData\n     * @param {boolean} append\n     * @returns {Promise<boolean>}\n    */\n    async #writeFileWithWorker(directoryName='',fileName='',fileData='',append=false){\n        const fileDataBuffer=await new Blob([fileData]).arrayBuffer();\n\n        await this.#requestFileWorker(\n            {\n                operation:'write',\n                applicationId:this.#applicationId,\n                directoryName,\n                fileName,\n                fileData:fileDataBuffer,\n                append\n            },\n            [fileDataBuffer]\n        )\n\n        return true\n    }\n\n    /**\n     * Reads file data through a dedicated OPFS worker.\n     * Used when FileSystemFileHandle.getFile is unavailable.\n     *\n     * @private\n     * @param {string} directoryName\n     * @param {string} fileName\n     * @returns {Promise<File>}\n     */\n    async #readFileWithWorker(directoryName='',fileName=''){\n        const response=await this.#requestFileWorker(\n            {\n                operation:'read',\n                applicationId:this.#applicationId,\n                directoryName,\n                fileName\n            }\n        )\n\n        return new File(\n            [response.fileData],\n            fileName\n        )\n    }\n\n    /**\n     * Sends a file operation to the shared OPFS worker.\n     *\n     * @private\n     * @param {Object} data\n     * @param {Transferable[]} transfer\n     * @returns {Promise<Object>}\n     */\n    async #requestFileWorker(data={},transfer=[]){\n\n        if(typeof this.#writeWorker?.postMessage!=='function'){\n            this.#writeWorker=new Worker(\n                new URL('./DBOPFSWorker.js',import.meta.url)\n            );\n        }\n\n        const channel=new MessageChannel();\n        const worker=this.#writeWorker;\n        const db=this;\n\n        return new Promise(\n            function fileWorkerPromise(resolve,reject){\n                function cleanup(){\n                    channel.port1.onmessage=null;\n                    channel.port1.close();\n                    worker.removeEventListener('error',workerErrorHandler);\n                }\n\n                function workerErrorHandler(event){\n                    cleanup();\n                    worker.terminate();\n\n                    if(db.#writeWorker===worker){\n                        db.#writeWorker={};\n                    }\n\n                    reject(event.error||new Error(event.message||'OPFS worker failed'));\n                }\n\n                channel.port1.onmessage=function fileWorkerMessage(event){\n                    cleanup();\n\n                    if(event.data?.error){\n                        const error=new Error(event.data.error.message);\n                        error.name=event.data.error.name;\n                        reject(error);\n                        return;\n                    }\n\n                    resolve(event.data);\n                };\n\n                channel.port1.start();\n                worker.addEventListener('error',workerErrorHandler);\n\n                try{\n                    worker.postMessage(\n                        data,\n                        transfer.concat(channel.port2)\n                    );\n                }catch(error){\n                    cleanup();\n                    channel.port2.close();\n                    reject(error);\n                }\n            }\n        );\n    }\n\n    /**\n     * Generates a unique key for a file lock.\n     * @private\n     * @param {string} tableName\n     * @param {string} fileName\n     * @returns {string}\n     */\n    #getLockKey(tableName,fileName){\n        return `${tableName}:${fileName}`\n    }\n\n    /** @type {boolean} */\n    ready=false;\n\n    /** @type {Promise<void>} */\n    readyPromise=Promise.resolve();\n\n    constructor(options={}){\n        if(window.dbopfs){\n            return window.dbopfs;\n        }\n\n        this.readyPromise=this.#init(options);\n    }\n\n    /**\n     * Initializes OPFS database and default tables.\n     * Dispatches `dbopfs-ready` event when complete.\n     *\n     * @returns {Promise<void>}\n     */\n    async #init(options={}){\n        const scope=await openApplicationDataDirectory({\n            storage:options.storage||navigator.storage,\n            applicationId:options.applicationId||null,\n            documentObject:options.documentObject||globalThis.document,\n            arcane:options.arcane||globalThis.Arcane,\n            create:true\n        });\n        this.#applicationId=scope.applicationId;\n        this.#storagePath=scope.path;\n        this.#db=scope.directory;\n        await this.#createDefaultTables();\n\n        this.ready=true;\n\n        window.dispatchEvent(\n            new CustomEvent(\n                'dbopfs-ready',\n                {\n                    detail:{\n                        dbopfs:this,\n                        applicationId:this.#applicationId,\n                        storagePath:this.#storagePath\n                    }\n                }\n            )\n        );\n    }\n\n    async #createDefaultTables(){\n        for(const [alias,directoryName]of Object.entries(DEFAULT_TABLE_DIRECTORIES)){\n            this.#tableHandles[alias]=await this.#db.getDirectoryHandle(\n                directoryName,\n                {create:true}\n            );\n        }\n    }\n\n    /**\n     * Canonical application identity owning this database.\n     *\n     * @returns {string}\n     */\n    get applicationId(){\n        return this.#applicationId;\n    }\n\n    /**\n     * Application-relative OPFS directory used by this database.\n     *\n     * @returns {string}\n     */\n    get storagePath(){\n        return this.#storagePath;\n    }\n\n    /**\n     * Returns in-memory table cache.\n     *\n     * @returns {DBOPFSTables}\n     */\n    get tables(){\n        return this.#tables\n    }\n\n    /**\n     * Convenience setter to write to tables.\n     *\n     * Example:\n     *\n     *     dbopfs.tables={\n     *         tableName:'users',\n     *         fileName:'alex',\n     *         value:{email:'alex@example.com'}\n     *     }\n     *\n     * @param {DBOPFSTableUpdate} update\n     */\n    set tables(update={tableName:'',fileName:'',value:''}){\n        this.set(update.tableName,update.fileName,update.value)\n    }\n\n    /**\n     * Gets the directory handle for a table.\n     * Creates the table if it does not exist.\n     *\n     * @param {string} tableName\n     * @returns {Promise<FileSystemDirectoryHandle>}\n     */\n    async getTableHandle(tableName=''){\n        if(!this.ready){\n            await this.readyPromise;\n        }\n\n        if(!this.#tableHandles[tableName]){\n            const existingHandle=Object.values(this.#tableHandles).find(\n                handle=>handle.name===tableName\n            )\n\n            if(existingHandle){\n                return existingHandle\n            }\n\n            this.#tableHandles[tableName]=await this.#db.getDirectoryHandle(tableName,{create:true});\n        }\n\n        return this.#tableHandles[tableName];\n    }\n\n    /**\n     * Writes a value to OPFS.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @param {*} value\n     * @returns {Promise<*>}\n     */\n    async set(tableName='',fileName='',value={}, append=false){\n        const lockKey=this.#getLockKey(tableName,fileName)\n\n        const previousWrite=this.#writeLocks[lockKey]||Promise.resolve()\n        const currentWrite=previousWrite.catch(()=>{}).then(\n            async function setWriteLocked(){\n                if(!this.#tables[tableName]){\n                    this.#tables[tableName]={}\n                }\n\n                let dataToWrite=value\n\n                if(typeof value!=='string'){\n                    dataToWrite=JSON.stringify(dataToWrite)\n                }\n\n                try{\n                    await this.writeFile(\n                        tableName,\n                        fileName,\n                        dataToWrite,\n                        append\n                    );\n\n                    this.#tables[tableName][fileName]=await this.get(tableName,fileName,true);\n                }catch(error){\n                    console.error(`Error writing file '${fileName}' to table '${tableName}':`,error)\n                    throw error\n                }\n\n                return this.#tables[tableName][fileName]\n            }.bind(this)\n        )\n\n        this.#writeLocks[lockKey]=currentWrite\n\n        function clearWriteLock(){\n            if(this.#writeLocks[lockKey]===currentWrite){\n                delete this.#writeLocks[lockKey]\n            }\n        }\n\n        currentWrite.then(\n            clearWriteLock.bind(this),\n            clearWriteLock.bind(this)\n        )\n\n        return currentWrite\n    }\n\n    /**\n     * Writes raw file data to OPFS.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @param {*} fileData\n     * @param {boolean} append\n     * @returns {Promise<boolean>}\n     */\n    async writeFile(tableName='',fileName='',fileData='',append=false){\n        const table=await this.getTableHandle(tableName)\n        const handle=await table.getFileHandle(\n            fileName,\n            {create:true}\n        );\n\n        if(typeof handle.createWritable!=='function'){\n            return this.#writeFileWithWorker(\n                table.name,\n                fileName,\n                fileData,\n                append\n            );\n        }\n\n        const writable=await handle.createWritable(\n            {keepExistingData:append}\n        );\n\n        if(append){\n            const file=await handle.getFile();\n            await writable.seek(file.size);\n        }\n\n        const blob = new Blob(\n            [\n                fileData\n            ]\n        );\n\n        await writable.write(blob);\n        await writable.close();\n\n        return true\n    }\n\n    /**\n     * Reads a raw file from OPFS.\n     * Falls back to a synchronous access handle in a worker on browsers\n     * without FileSystemFileHandle.getFile.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @returns {Promise<File>}\n     */\n    async readFile(tableName='',fileName=''){\n        const table=await this.getTableHandle(tableName)\n        const handle=await table.getFileHandle(fileName,{create:false})\n\n        if(typeof handle.getFile==='function'){\n            return handle.getFile()\n        }\n\n        return this.#readFileWithWorker(\n            table.name,\n            fileName\n        )\n    }\n\n    /**\n     * Returns metadata exposed by the browser File API.\n     * Creation time is not available through the OPFS file handle.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @returns {Promise<Object>}\n     */\n    async getFileMetadata(tableName='',fileName=''){\n        const table=await this.getTableHandle(tableName)\n        const handle=await table.getFileHandle(fileName,{create:false})\n\n        if(typeof handle.getFile!=='function'){\n            return {\n                lastModified:null,\n                size:null,\n                type:''\n            }\n        }\n\n        const file=await handle.getFile()\n\n        return {\n            lastModified:file.lastModified||null,\n            size:file.size,\n            type:file.type||''\n        }\n    }\n\n    /**\n     * Writes multiple files into a table.\n     *\n     * @param {string} tableName\n     * @param {Object<string,*>} items\n     * @returns {Promise<PromiseSettledResult[]>}\n     */\n    async setMany(tableName,items){\n        const entries=Object.entries(items)\n\n        const setPromises=entries.map(\n            function setManyPromises([fileName,value]){\n                return this.set(tableName,fileName,value)\n            }.bind(this)\n        );\n\n        const results=await Promise.allSettled(setPromises);\n\n        results.forEach(\n            function setManyResultsItterator(result,index){\n                const fileName=entries[index][0]\n\n                if(result.status!=='fulfilled'){\n                    console.error(`Failed to set file '${fileName}':`,result.reason)\n                }\n            }\n        );\n\n        return results\n    }\n\n    /**\n     * Reads a file from OPFS.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @param {boolean} force\n     * @returns {Promise<*>}\n     */\n    async get(tableName='',fileName='',force=false){\n        if(force||!this.#tables[tableName]?.[fileName]){\n            try{\n                const file=await this.readFile(tableName,fileName)\n                const textContent=await file.text()\n\n                if(!this.#tables[tableName]){\n                    this.#tables[tableName]={}\n                }\n\n                this.#tables[tableName][fileName]=textContent;\n\n                const extention=fileName.slice(\n                    fileName.lastIndexOf('.')+1)\n                    .toLowerCase();\n\n                switch(extention){\n                    case 'json':\n                        try{\n                            this.#tables[tableName][fileName]=JSON.parse(textContent.trim())\n                        }catch(e){}\n                        break;\n                    case 'jsonl':\n                    case 'ndjson':\n                        const rows=textContent.split('\\n');\n                        const parsedRows=[];\n\n                        for(let i=0;i<rows.length;i++){\n                            try{\n                                parsedRows.push(\n                                    JSON.parse(rows[i].trim())\n                                );\n                            }catch(e){}\n                        }\n\n                        this.#tables[tableName][fileName]=parsedRows;\n                        break;\n                }\n            }catch(error){\n                if(error.name==='NotFoundError'){\n                    return null\n                }\n\n                throw error\n            }\n        }\n\n        return this.#tables[tableName][fileName];\n    }\n\n    /**\n     * Reads multiple files.\n     *\n     * @param {string} tableName\n     * @param {string[]} items\n     * @returns {Promise<PromiseSettledResult[]>}\n     */\n    async getMany(tableName,items){\n        const getPromises=items.map(\n            function getManyPromises(fileName){\n                return this.get(tableName,fileName)\n            }.bind(this)\n        )\n\n        return Promise.allSettled(getPromises);\n    }\n\n    /**\n     * Reads all files from a table or the entire DB.\n     *\n     * @param {string} tableName\n     * @returns {Promise<Object>}\n     */\n    async getAll(tableName=''){\n        const items={}\n\n        if(tableName){\n            const table=await this.getTableHandle(tableName)\n\n            const readPromises=[]\n\n            for await(const [name]of table.entries()){\n                readPromises.push(\n                    this.get(tableName,name).then(\n                        function assignValue(value){\n                            items[name]=value\n                        }\n                    )\n                )\n            }\n\n            await Promise.all(readPromises)\n\n            return items\n        }\n\n        await this.getTableNames(true)\n\n        const tableNames=Object.keys(this.#tableHandles)\n\n        const tablePromises=tableNames.map(\n            async function loadTable(tableName){\n                const table=await this.getTableHandle(tableName);\n                const tableItems={};\n\n                const readPromises=[];\n\n                for await(const [name]of table.entries()){\n                    readPromises.push(\n                        this.get(tableName,name).then(\n                            function assignValue(value){\n                                tableItems[name]=value;\n                            }\n                        )\n                    );\n                }\n\n                await Promise.all(readPromises);\n\n                items[tableName]=tableItems;\n            }.bind(this)\n        )\n\n        await Promise.all(tablePromises)\n\n        return items\n    }\n\n    /**\n     * Deletes a file.\n     *\n     * @param {string} tableName\n     * @param {string} fileName\n     * @returns {Promise<boolean>}\n     */\n    async delete(tableName='',fileName=''){\n        if(this.#tables[tableName]){\n            delete this.#tables[tableName][fileName]\n        }\n\n        const table=await this.getTableHandle(tableName)\n\n        try{\n            await table.removeEntry(fileName)\n        }catch(error){\n            if(error.name!=='NotFoundError'){\n                console.error(error)\n            }\n        }\n\n        return true\n    }\n\n    /**\n     * Deletes multiple files.\n     *\n     * @param {string} tableName\n     * @param {string[]} fileNames\n     * @returns {Promise<PromiseSettledResult[]>}\n     */\n    async deleteMany(tableName,fileNames){\n        const deletionPromises=fileNames.map(\n            function deleteManyPromises(fileName){\n                return this.delete(tableName,fileName)\n            }.bind(this)\n        );\n\n        return Promise.allSettled(deletionPromises);\n    }\n\n    /**\n     * Deletes a full table.\n     *\n     * @param {string} tableName\n     * @returns {Promise<boolean>}\n     */\n    async deleteTable(tableName){\n        try{\n            await this.#db.removeEntry(tableName,{recursive:true})\n\n            delete this.#tables[tableName]\n            delete this.#tableHandles[tableName]\n        }catch(error){\n            console.error(error)\n        }\n\n        return true\n    }\n\n    /**\n     * Clears only the current application's OPFS database.\n     *\n     * @returns {Promise<DBOPFS>}\n     */\n    async clearAllStorage(){\n        if(!this.ready){\n            await this.readyPromise;\n        }\n\n        for await(const [name]of this.#db.entries()){\n            await this.#db.removeEntry(name,{recursive:true})\n        }\n\n        this.#tables={}\n        this.#tableHandles={}\n        this.#writeLocks={}\n        await this.#createDefaultTables()\n\n        return this\n    }\n\n    /**\n     * Clears a table.\n     *\n     * @param {string} tableName\n     * @returns {Promise<void>}\n     */\n    async clear(tableName){\n        const table=await this.getTableHandle(tableName)\n\n        for await(const [name]of table.entries()){\n            await this.delete(tableName,name)\n        }\n    }\n\n    /**\n     * Returns all keys in a table.\n     *\n     * @param {string} tableName\n     * @returns {Promise<string[]>}\n     */\n    async getAllKeys(tableName){\n        const keys=[]\n        const table=await this.getTableHandle(tableName)\n\n        for await(const [name]of table.entries()){\n            keys.push(name)\n        }\n\n        return keys\n    }\n\n    /**\n     * Returns registered table names, or discovers physical OPFS directories.\n     * Discovered directories are registered so later reads and exports include\n     * data created outside the current page load.\n     *\n     * @param {boolean} discover\n     * @returns {Promise<string[]>}\n     */\n    async getTableNames(discover=false){\n        if(!discover){\n            return Object.keys(this.#tableHandles)\n        }\n\n        const tableNames=[]\n\n        for await(const [name,handle]of this.#db.entries()){\n            if(handle.kind!=='directory'){\n                continue\n            }\n\n            const registered=Object.values(this.#tableHandles).some(\n                tableHandle=>tableHandle.name===name\n            )\n\n            if(!registered){\n                this.#tableHandles[name]=handle\n            }\n\n            tableNames.push(name)\n        }\n\n        return tableNames\n    }\n\n    /**\n     * Filters files by key substring.\n     *\n     * @param {string} tableName\n     * @param {string} subString\n     * @returns {Promise<Object>}\n     */\n    async filterKeyIncludes(tableName,subString=''){\n        const items={}\n        const table=await this.getTableHandle(tableName)\n\n        for await(const [name]of table.entries()){\n            if(name.includes(subString)){\n                items[name]=await this.get(tableName,name)\n            }\n        }\n\n        return items\n    }\n\n    /**\n     * Checks if a key exists.\n     *\n     * @param {string} tableName\n     * @param {string} key\n     * @returns {Promise<boolean>}\n     */\n    async hasKey(tableName,key){\n        try{\n            const table=await this.getTableHandle(tableName)\n            await table.getFileHandle(key)\n            return true\n        }catch(err){\n            return false\n        }\n    }\n\n    /**\n     * Counts items in a table.\n     *\n     * @param {string} tableName\n     * @returns {Promise<number>}\n     */\n    async count(tableName){\n        let count=0\n        const table=await this.getTableHandle(tableName)\n\n        for await(const _ of table.entries()){\n            count++\n        }\n\n        return count\n    }\n\n    /**\n     * Downloads the entire database as a compressed PNG backup.\n     *\n     * The database is streamed as JSON, compressed using gzip via\n     * CompressionStream, and encoded into RGBA pixels inside a PNG.\n     *\n     * Each pixel stores 4 bytes of payload data.\n     * The first 4 bytes store the gzip byte length header.\n     *\n     * Output example:\n     *\n     *     DBOPFS-backup-2026-03-10-13-45-12.png\n     *\n     * @param {string} name\n     * Base name used for the generated backup filename.\n     *\n     * @returns {Promise<void>}\n     */\n    async downloadCompressedPNG(name='DBOPFS-backup'){\n        if(!('CompressionStream' in window)){\n            throw new Error('CompressionStream not supported.')\n        }\n\n        const encoder=new TextEncoder()\n        await this.getTableNames(true)\n\n        const tableNames=Object.keys(this.#tableHandles)\n\n        const jsonStream=new ReadableStream({\n            start:async controller=>{\n                controller.enqueue(encoder.encode('{'))\n\n                for(let t=0;t<tableNames.length;t++){\n                    const tableName=tableNames[t]\n                    const table=await this.getTableHandle(tableName)\n\n                    if(t>0){\n                        controller.enqueue(encoder.encode(','))\n                    }\n\n                    controller.enqueue(\n                        encoder.encode(`${JSON.stringify(tableName)}:{`)\n                    )\n\n                    let first=true\n\n                    for await(const [fileName]of table.entries()){\n                        const value=await this.get(tableName,fileName)\n\n                        if(!first){\n                            controller.enqueue(encoder.encode(','))\n                        }\n\n                        first=false\n\n                        const json=`${JSON.stringify(fileName)}:${JSON.stringify(value)}`\n\n                        controller.enqueue(encoder.encode(json))\n                    }\n\n                    controller.enqueue(encoder.encode('}'))\n                }\n\n                controller.enqueue(encoder.encode('}'))\n                controller.close()\n            }\n        })\n\n        const gzipStream=jsonStream.pipeThrough(\n            new CompressionStream('deflate')\n        )\n\n        const reader=gzipStream.getReader()\n\n        const chunks=[]\n        let totalLength=0\n\n        while(true){\n            const {done,value}=await reader.read()\n\n            if(done){\n                break\n            }\n\n            chunks.push(value)\n            totalLength+=value.length\n        }\n\n        const gzipBytes=new Uint8Array(totalLength)\n\n        let offset=0\n        for(const chunk of chunks){\n            gzipBytes.set(chunk,offset)\n            offset+=chunk.length\n        }\n\n        const payload=new Uint8Array(totalLength+4)\n\n        const view=new DataView(payload.buffer)\n        view.setUint32(0,totalLength,true)\n\n        payload.set(gzipBytes,4)\n\n        const size=Math.ceil(Math.sqrt(payload.length/3))\n\n        const totalPixels=size*size\n\n        if(totalPixels*3 < payload.length){\n            throw new Error('PNG canvas too small for payload.')\n        }\n\n        const canvas=document.createElement('canvas')\n        canvas.width=size\n        canvas.height=size\n\n        const ctx=canvas.getContext('2d')\n\n        if(!ctx){\n            throw new Error('Canvas 2D context unavailable.')\n        }\n\n        const imgData=ctx.createImageData(size,size)\n        imgData.data.fill(0);\n        \n        let p=0;\n\n        for(let i=0;i<imgData.data.length;i+=4){\n\n            imgData.data[i]   = payload[p]   ?? 0;\n            imgData.data[i+1] = payload[p+1] ?? 0;\n            imgData.data[i+2] = payload[p+2] ?? 0;\n            imgData.data[i+3] = 255;\n\n            p+=3;\n        }\n\n        ctx.putImageData(imgData,0,0)\n\n        const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'))\n\n        if(!blob){\n            throw new Error('PNG export failed.')\n        }\n\n        const stamp=new Date()\n            .toISOString()\n            .slice(0,19)\n            .replace(/[:T]/g,'-')\n\n        const url=URL.createObjectURL(blob)\n\n        const a=document.createElement('a')\n        a.href=url\n        a.download=`${name}-${stamp}.png`\n\n        document.body.appendChild(a)\n        a.click()\n        a.remove()\n\n        URL.revokeObjectURL(url)\n    }\n\n    /**\n     * Restores a database backup from a PNG image created by\n     * `downloadCompressedPNG`.\n     *\n     * The PNG is decoded into RGBA pixel data,the compressed payload\n     * is extracted using the stored byte length header, then\n     * decompressed using DecompressionStream.\n     *\n     * The resulting JSON database structure is parsed and written\n     * back into OPFS using `setMany`.\n     *\n     * Restore process:\n     *\n     *     PNG → RGBA bytes → deflate payload → JSON → DBOPFS tables\n     *\n     * Any existing records with matching keys will be overwritten.\n     *\n     * @param {File|Blob} file\n     * PNG backup file generated by DBOPFS.\n     *\n     * @returns {Promise<void>}\n     * Resolves once the database restore process is complete.\n     */\n    async restoreFromPNG(file){\n        const img=await createImageBitmap(\n            file,\n            {premultiplyAlpha:'none'}\n        )\n\n        const canvas=document.createElement('canvas')\n        canvas.width=img.width\n        canvas.height=img.height\n\n        const ctx=canvas.getContext('2d')\n\n        if(!ctx){\n            throw new Error('Canvas 2D context unavailable.')\n        }\n\n        ctx.drawImage(img,0,0)\n\n        const data=ctx.getImageData(0,0,img.width,img.height).data\n\n        if(data.length < 4){\n            throw new Error('Invalid PNG backup.')\n        }\n\n        const payload=new Uint8Array((data.length/4)*3);\n\n        let p=0;\n\n        for(let i=0;i<data.length;i+=4){\n            payload[p++] = data[i];\n            payload[p++] = data[i+1];\n            payload[p++] = data[i+2];\n        }\n\n        const view=new DataView(payload.buffer)\n\n        const length=view.getUint32(0,true);\n\n        if(length <= 0 || length > payload.length-4){\n            throw new Error('Invalid PNG backup payload length.')\n        }\n\n        const gzipBytes=payload.slice(4,4+length)\n\n        const stream=new Blob([gzipBytes])\n            .stream()\n            .pipeThrough(new DecompressionStream('deflate'))\n\n        const json=await new Response(stream).text()\n\n        const db=JSON.parse(json)\n\n        const tables=Object.keys(db)\n\n        for(const table of tables){\n            await this.setMany(table,db[table])\n        }\n    }\n}\n\nif(typeof window.dbopfs?.get!==\"function\"){\n    window.dbopfs=new DBOPFS();\n}\n\nexport default DBOPFS;\n",
-      "url": "http://127.0.0.1:65124/arcane/modules/DBOPFS.js"
-    },
-    {
-      "context": "page",
-      "modulePath": "arcane/modules/AppDataScope.js",
-      "ranges": [
-        {
-          "start": 0,
-          "end": 181
-        },
-        {
-          "start": 292,
-          "end": 722
-        },
-        {
-          "start": 878,
-          "end": 1699
-        },
-        {
-          "start": 1725,
-          "end": 1775
-        },
-        {
-          "start": 1937,
-          "end": 2705
-        },
-        {
-          "start": 2726,
-          "end": 2727
-        },
-        {
-          "start": 2896,
-          "end": 2966
-        },
-        {
-          "start": 3119,
-          "end": 3424
-        },
-        {
-          "start": 3637,
-          "end": 3721
-        },
-        {
-          "start": 3735,
-          "end": 3777
-        },
-        {
-          "start": 3877,
-          "end": 3878
-        },
-        {
-          "start": 4129,
-          "end": 5057
-        },
-        {
-          "start": 5164,
-          "end": 5247
-        },
-        {
-          "start": 5298,
-          "end": 5299
-        },
-        {
-          "start": 5466,
-          "end": 5562
-        },
-        {
-          "start": 5712,
-          "end": 6437
-        },
-        {
-          "start": 6446,
-          "end": 6623
-        },
-        {
-          "start": 6792,
-          "end": 7010
-        },
-        {
-          "start": 7171,
-          "end": 7642
-        }
-      ],
-      "rawScriptCoverage": {
-        "scriptId": "16",
-        "url": "http://127.0.0.1:65124/arcane/modules/AppDataScope.js",
-        "functions": [
-          {
-            "functionName": "",
-            "ranges": [
-              {
-                "startOffset": 0,
-                "endOffset": 7642,
-                "count": 1
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "scopeError",
-            "ranges": [
-              {
-                "startOffset": 181,
-                "endOffset": 292,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": false
-          },
-          {
-            "functionName": "canonicalApplicationId",
-            "ranges": [
-              {
-                "startOffset": 509,
-                "endOffset": 899,
-                "count": 2
-              },
-              {
-                "startOffset": 722,
-                "endOffset": 878,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "declaredApplicationId",
-            "ranges": [
-              {
-                "startOffset": 1198,
-                "endOffset": 1974,
-                "count": 2
-              },
-              {
-                "startOffset": 1365,
-                "endOffset": 1392,
-                "count": 1
-              },
-              {
-                "startOffset": 1775,
-                "endOffset": 1937,
-                "count": 0
-              },
-              {
-                "startOffset": 1965,
-                "endOffset": 1971,
-                "count": 1
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "",
-            "ranges": [
-              {
-                "startOffset": 1530,
-                "endOffset": 1580,
-                "count": 4
-              },
-              {
-                "startOffset": 1568,
-                "endOffset": 1580,
-                "count": 1
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "",
-            "ranges": [
-              {
-                "startOffset": 1595,
-                "endOffset": 1735,
-                "count": 1
-              },
-              {
-                "startOffset": 1699,
-                "endOffset": 1725,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "resolveBrowserApplicationId",
-            "ranges": [
-              {
-                "startOffset": 2363,
-                "endOffset": 3120,
-                "count": 2
-              },
-              {
-                "startOffset": 2511,
-                "endOffset": 2558,
-                "count": 1
-              },
-              {
-                "startOffset": 2567,
-                "endOffset": 2572,
-                "count": 1
-              },
-              {
-                "startOffset": 2581,
-                "endOffset": 2619,
-                "count": 1
-              },
-              {
-                "startOffset": 2695,
-                "endOffset": 2705,
-                "count": 1
-              },
-              {
-                "startOffset": 2705,
-                "endOffset": 2726,
-                "count": 0
-              },
-              {
-                "startOffset": 2727,
-                "endOffset": 2896,
-                "count": 0
-              },
-              {
-                "startOffset": 2913,
-                "endOffset": 2923,
-                "count": 1
-              },
-              {
-                "startOffset": 2949,
-                "endOffset": 2959,
-                "count": 1
-              },
-              {
-                "startOffset": 2966,
-                "endOffset": 3119,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "resolveApplicationLocalStorageKey",
-            "ranges": [
-              {
-                "startOffset": 3424,
-                "endOffset": 3637,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": false
-          },
-          {
-            "functionName": "nativeApplicationId",
-            "ranges": [
-              {
-                "startOffset": 3639,
-                "endOffset": 4130,
-                "count": 2
-              },
-              {
-                "startOffset": 3721,
-                "endOffset": 3735,
-                "count": 0
-              },
-              {
-                "startOffset": 3777,
-                "endOffset": 3877,
-                "count": 0
-              },
-              {
-                "startOffset": 3878,
-                "endOffset": 4129,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "resolveApplicationId",
-            "ranges": [
-              {
-                "startOffset": 4755,
-                "endOffset": 5713,
-                "count": 2
-              },
-              {
-                "startOffset": 5057,
-                "endOffset": 5164,
-                "count": 0
-              },
-              {
-                "startOffset": 5247,
-                "endOffset": 5298,
-                "count": 0
-              },
-              {
-                "startOffset": 5299,
-                "endOffset": 5466,
-                "count": 0
-              },
-              {
-                "startOffset": 5562,
-                "endOffset": 5712,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          },
-          {
-            "functionName": "openApplicationDataDirectory",
-            "ranges": [
-              {
-                "startOffset": 6359,
-                "endOffset": 7516,
-                "count": 2
-              },
-              {
-                "startOffset": 6437,
-                "endOffset": 6446,
-                "count": 0
-              },
-              {
-                "startOffset": 6623,
-                "endOffset": 6792,
-                "count": 0
-              },
-              {
-                "startOffset": 7010,
-                "endOffset": 7171,
-                "count": 0
-              }
-            ],
-            "isBlockCoverage": true
-          }
-        ]
-      },
-      "text": "const APPLICATION_ID_PATTERN=/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/;\nconst APPLICATION_ID_MAX_LENGTH=64;\nconst APP_DATA_DIRECTORY='apps';\nconst APP_LOCAL_STORAGE_PREFIX='arcane.apps.';\n\nfunction scopeError(code,message){\n    const error=new Error(message);\n    error.code=code;\n    return error;\n}\n\n/**\n * Validates the canonical application identifier used by Arcane packages,\n * the native host, and application-owned data folders.\n *\n * @param {*} value\n * @param {string} label\n * @returns {string}\n */\nexport function canonicalApplicationId(value,label='applicationId'){\n    if(typeof value!=='string'\n        ||value.length<1\n        ||value.length>APPLICATION_ID_MAX_LENGTH\n        ||!APPLICATION_ID_PATTERN.test(value)){\n        throw scopeError(\n            'APP_DATA_SCOPE_INVALID',\n            `${label} must be a canonical Arcane application identifier.`\n        );\n    }\n\n    return value;\n}\n\n/**\n * Reads the immutable application declaration from a document. Application\n * pages declare this before storage modules run so standalone browser builds\n * do not depend on their mount path for identity.\n *\n * @param {Document|Object|null} documentObject\n * @returns {string|null}\n */\nexport function declaredApplicationId(documentObject=globalThis.document){\n    const metaValue=documentObject\n        ?.querySelector?.('meta[name=\"arcane-app-id\"]')\n        ?.getAttribute?.('content');\n    const rootValue=documentObject?.documentElement?.dataset?.arcaneAppId;\n    const declarations=[metaValue,rootValue]\n        .filter(value=>value!==null&&value!==undefined&&value!=='')\n        .map((value,index)=>canonicalApplicationId(\n            value,\n            index===0?'arcane-app-id metadata':'document application id'\n        ));\n\n    if(new Set(declarations).size>1){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The document contains conflicting Arcane application identities.'\n        );\n    }\n\n    return declarations[0]||null;\n}\n\n/**\n * Resolves the synchronous browser declaration used by storage mechanisms\n * such as localStorage. Native-capable asynchronous callers must use\n * resolveApplicationId so the host-bound identity remains authoritative.\n *\n * @param {Object} options\n * @param {string|null} options.applicationId\n * @param {Document|Object|null} options.documentObject\n * @returns {string}\n */\nexport function resolveBrowserApplicationId({\n    applicationId=null,\n    documentObject=globalThis.document\n}={}){\n    const explicit=applicationId===null||applicationId===undefined||applicationId===''\n        ?null\n        :canonicalApplicationId(applicationId);\n    const declared=declaredApplicationId(documentObject);\n\n    if(explicit&&declared&&explicit!==declared){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The configured and declared Arcane application identities do not match.'\n        );\n    }\n\n    if(explicit||declared){\n        return explicit||declared;\n    }\n\n    throw scopeError(\n        'APP_DATA_SCOPE_REQUIRED',\n        'Arcane application data cannot open without a declared application identity.'\n    );\n}\n\n/**\n * Resolves a logical local-storage key beneath the current browser app scope.\n * Callers retain their domain namespace while the shared mechanism supplies\n * the canonical `arcane.apps.<id>:` ownership prefix.\n *\n * @param {*} logicalKey\n * @param {Object} options\n * @returns {string}\n */\nexport function resolveApplicationLocalStorageKey(logicalKey='',options={}){\n    const applicationId=resolveBrowserApplicationId(options);\n    return `${APP_LOCAL_STORAGE_PREFIX}${applicationId}:${String(logicalKey)}`;\n}\n\nasync function nativeApplicationId(arcane=globalThis.Arcane){\n    if(typeof arcane?.app?.current!=='function'){\n        return null;\n    }\n\n    const descriptor=await arcane.app.current();\n\n    if(!descriptor||typeof descriptor!=='object'){\n        throw scopeError(\n            'APP_DATA_SCOPE_INVALID',\n            'Arcane returned an invalid bound application descriptor.'\n        );\n    }\n\n    return canonicalApplicationId(\n        descriptor.id,\n        'bound application id'\n    );\n}\n\n/**\n * Resolves one application identity for persistent data. The native host is\n * authoritative when present. Browser-only applications must declare their\n * package id in `meta[name=\"arcane-app-id\"]` (or the equivalent root data\n * attribute). A mismatch fails closed before a data directory is opened.\n *\n * @param {Object} options\n * @param {string|null} options.applicationId Explicit identity for adapters\n *   and synthetic tests. Application pages should use document metadata.\n * @param {Document|Object|null} options.documentObject\n * @param {Object|null} options.arcane\n * @returns {Promise<string>}\n */\nexport async function resolveApplicationId({\n    applicationId=null,\n    documentObject=globalThis.document,\n    arcane=globalThis.Arcane\n}={}){\n    let browserIdentity=null;\n    try{\n        browserIdentity=resolveBrowserApplicationId({\n            applicationId,\n            documentObject\n        });\n    }catch(error){\n        if(error?.code!=='APP_DATA_SCOPE_REQUIRED'){\n            throw error;\n        }\n    }\n    const nativeIdentity=await nativeApplicationId(arcane);\n\n    if(nativeIdentity&&browserIdentity&&nativeIdentity!==browserIdentity){\n        throw scopeError(\n            'APP_DATA_SCOPE_MISMATCH',\n            'The document identity does not match the application bound by Arcane.'\n        );\n    }\n\n    if(nativeIdentity||browserIdentity){\n        return nativeIdentity||browserIdentity;\n    }\n\n    throw scopeError(\n        'APP_DATA_SCOPE_REQUIRED',\n        'Arcane application data cannot open without a bound application identity.'\n    );\n}\n\n/**\n * Opens `<OPFS root>/apps/<application-id>` and returns only that app-owned\n * directory. This is an organizational boundary for browser-only same-origin\n * code; the native host additionally supplies a separate WebView profile and\n * authoritative application identity.\n *\n * @param {Object} options\n * @param {StorageManager|Object} options.storage\n * @param {string|null} options.applicationId\n * @param {Document|Object|null} options.documentObject\n * @param {Object|null} options.arcane\n * @param {boolean} options.create\n * @returns {Promise<{applicationId:string,directory:FileSystemDirectoryHandle|Object,path:string}>}\n */\nexport async function openApplicationDataDirectory({\n    storage=globalThis.navigator?.storage,\n    applicationId=null,\n    documentObject=globalThis.document,\n    arcane=globalThis.Arcane,\n    create=true\n}={}){\n    if(!storage||typeof storage.getDirectory!=='function'){\n        throw scopeError(\n            'APP_DATA_STORAGE_UNAVAILABLE',\n            'Origin Private File System storage is unavailable in this browser.'\n        );\n    }\n\n    const id=await resolveApplicationId({\n        applicationId,\n        documentObject,\n        arcane\n    });\n    const root=await storage.getDirectory();\n\n    if(!root||typeof root.getDirectoryHandle!=='function'){\n        throw scopeError(\n            'APP_DATA_STORAGE_UNAVAILABLE',\n            'Arcane could not open the Origin Private File System root.'\n        );\n    }\n\n    const applications=await root.getDirectoryHandle(\n        APP_DATA_DIRECTORY,\n        {create:Boolean(create)}\n    );\n    const directory=await applications.getDirectoryHandle(\n        id,\n        {create:Boolean(create)}\n    );\n\n    return {\n        applicationId:id,\n        directory,\n        path:`${APP_DATA_DIRECTORY}/${id}`\n    };\n}\n\nexport {\n    APPLICATION_ID_MAX_LENGTH,\n    APPLICATION_ID_PATTERN,\n    APP_DATA_DIRECTORY,\n    APP_LOCAL_STORAGE_PREFIX\n};\n",
-      "url": "http://127.0.0.1:65124/arcane/modules/AppDataScope.js"
+      "url": "http://127.0.0.1:53877/arcane/modules/DBOPFS.js"
     },
     {
       "context": "worker",
@@ -1461,7 +1517,7 @@
       ],
       "rawScriptCoverage": {
         "scriptId": "3",
-        "url": "http://127.0.0.1:65124/arcane/modules/DBOPFSWorker.js",
+        "url": "http://127.0.0.1:53877/arcane/modules/DBOPFSWorker.js",
         "functions": [
           {
             "functionName": "accessFile",
@@ -1562,17 +1618,17 @@
         ]
       },
       "text": "self.addEventListener(\n    'message',\n    async function accessFile(event){\n        const port=event.ports[0];\n        const operation=event.data.operation||'write';\n        let response={success:true};\n        let accessHandle;\n\n        try{\n            try{\n                const root=await navigator.storage.getDirectory();\n                const applicationId=String(event.data.applicationId||'');\n\n                if(applicationId.length>64\n                    ||!/^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$/.test(applicationId)){\n                    throw new DOMException(\n                        'Arcane rejected an invalid application data scope.',\n                        'SecurityError'\n                    );\n                }\n\n                const applications=await root.getDirectoryHandle(\n                    'apps',\n                    {create:operation==='write'}\n                );\n                const application=await applications.getDirectoryHandle(\n                    applicationId,\n                    {create:operation==='write'}\n                );\n                const directory=await application.getDirectoryHandle(\n                    event.data.directoryName,\n                    {create:operation==='write'}\n                );\n                const file=await directory.getFileHandle(\n                    event.data.fileName,\n                    {create:operation==='write'}\n                );\n\n                if(typeof file.createSyncAccessHandle!=='function'){\n                    throw new DOMException(\n                        'OPFS file access is not supported in this browser.',\n                        'NotSupportedError'\n                    );\n                }\n\n                accessHandle=await file.createSyncAccessHandle();\n\n                if(operation==='read'){\n                    const fileData=new Uint8Array(accessHandle.getSize());\n                    let bytesRead=0;\n\n                    while(bytesRead<fileData.byteLength){\n                        const read=accessHandle.read(\n                            fileData.subarray(bytesRead),\n                            {at:bytesRead}\n                        );\n\n                        if(read<1){\n                            throw new Error('OPFS read did not make progress.');\n                        }\n\n                        bytesRead+=read;\n                    }\n\n                    response={\n                        success:true,\n                        fileData:fileData.buffer\n                    };\n                }else{\n                    const fileData=new Uint8Array(event.data.fileData);\n                    const writePosition=event.data.append ? accessHandle.getSize() : 0;\n\n                    if(!event.data.append){\n                        accessHandle.truncate(0);\n                    }\n\n                    let bytesWritten=0;\n\n                    while(bytesWritten<fileData.byteLength){\n                        const written=accessHandle.write(\n                            fileData.subarray(bytesWritten),\n                            {at:writePosition+bytesWritten}\n                        );\n\n                        if(written<1){\n                            throw new Error('OPFS write did not make progress.');\n                        }\n\n                        bytesWritten+=written;\n                    }\n\n                    accessHandle.flush();\n                }\n            }finally{\n                if(accessHandle){\n                    accessHandle.close();\n                }\n            }\n        }catch(error){\n            response={\n                error:{\n                    name:error.name||'Error',\n                    message:error.message||String(error)\n                }\n            };\n        }\n\n        if(response.fileData){\n            port.postMessage(response,[response.fileData]);\n        }else{\n            port.postMessage(response);\n        }\n\n        port.close();\n    }\n);\n",
-      "url": "http://127.0.0.1:65124/arcane/modules/DBOPFSWorker.js"
+      "url": "http://127.0.0.1:53877/arcane/modules/DBOPFSWorker.js"
     }
   ],
-  "generatedAt": "2026-08-11T21:02:43.720Z",
+  "generatedAt": "2026-08-17T16:21:23.328Z",
   "schemaVersion": 1,
   "source": "Chrome DevTools precise V8 JavaScript coverage via Puppeteer-core",
   "summary": {
     "files": [
       {
-        "byteCoveragePercent": 71.34,
-        "coveredBytes": 5452,
+        "byteCoveragePercent": 99.41,
+        "coveredBytes": 7597,
         "modulePath": "arcane/modules/AppDataScope.js",
         "totalBytes": 7642
       },
@@ -1591,8 +1647,8 @@
     ],
     "metric": "executed source bytes from precise V8 block coverage",
     "total": {
-      "byteCoveragePercent": 81.5,
-      "coveredBytes": 33775,
+      "byteCoveragePercent": 86.68,
+      "coveredBytes": 35920,
       "totalBytes": 41441
     }
   }

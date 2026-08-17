@@ -773,12 +773,26 @@ function testBadge(testResults){
         return {color:'red',label:'tests',message:'unavailable',schemaVersion:1};
     }
 
-    const message=summary.failed
-        ?`${summary.failed} failed`
-        :`${summary.passed} passed${summary.skipped?`, ${summary.skipped} skipped`:''}`;
+    if(summary.failed){
+        return {
+            color:'red',
+            label:'tests',
+            message:`${summary.failed} failed`,
+            schemaVersion:1
+        };
+    }
+
+    if(testResults?.complete!==true
+        ||testResults?.driver?.status!=='passed'
+        ||testResults?.fatalError
+        ||testResults?.teardown?.status!=='passed'){
+        return {color:'red',label:'tests',message:'harness failed',schemaVersion:1};
+    }
+
+    const message=`${summary.passed} passed${summary.skipped?`, ${summary.skipped} skipped`:''}`;
 
     return {
-        color:summary.failed?'red':'brightgreen',
+        color:'brightgreen',
         label:'tests',
         message,
         schemaVersion:1
@@ -832,11 +846,31 @@ function releaseEvidenceMarkdown({
         `| Installed Chrome smoke | ${packedInstall?.browserSmoke?.passed?'passed':'not completed'} | imported ${markdownCell(packedInstall?.browserSmoke?.modulePointer)}; set/get round trip |`,
         `| Temporary fixture cleanup | ${packedInstall?.cleanup?.removed?'passed':'not completed'} | cleanup restricted to the mkdtemp path |`,
         '',
+        '## Browser test suites',
+        '',
+        '| Suite | Passed | Failed | Skipped | Total |',
+        '| --- | ---: | ---: | ---: | ---: |'
+    ];
+
+    const testSuites=testResults?.suites||[];
+    if(testSuites.length){
+        for(const suite of testSuites){
+            lines.push(
+                `| ${markdownCell(suite.name)} | ${suite.passed??0} | ${suite.failed??0} | `
+                +`${suite.skipped??0} | ${suite.total??0} |`
+            );
+        }
+    }else{
+        lines.push('| not completed | 0 | 0 | 0 | 0 |');
+    }
+
+    lines.push(
+        '',
         '## Installed runtime integrity',
         '',
         '| Runtime file | Expected SHA-256 | Installed SHA-256 | Match |',
         '| --- | --- | --- | --- |'
-    ];
+    );
 
     const integrityFiles=packedInstall?.runtimeIntegrity?.files||[];
     if(integrityFiles.length){

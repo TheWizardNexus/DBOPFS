@@ -1,8 +1,8 @@
 {
   "files": [
     {
-      "byteCoveragePercent": 71.34,
-      "coveredBytes": 5452,
+      "byteCoveragePercent": 99.41,
+      "coveredBytes": 7597,
       "modulePath": "arcane/modules/AppDataScope.js",
       "totalBytes": 7642
     },
@@ -21,8 +21,8 @@
   ],
   "metric": "executed source bytes from precise V8 block coverage",
   "total": {
-    "byteCoveragePercent": 81.5,
-    "coveredBytes": 33775,
+    "byteCoveragePercent": 86.68,
+    "coveredBytes": 35920,
     "totalBytes": 41441
   }
 }

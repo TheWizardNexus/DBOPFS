@@ -21,6 +21,29 @@
         h1{color:rgb(188,146,255)}
         [data-status="passed"] h1{color:rgb(111,224,165)}
         [data-status="failed"] h1{color:rgb(255,127,142)}
+        #summary{
+            font-size:1.125rem;
+            color:rgb(211,194,242);
+        }
+        #suite-results{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+            gap:.75rem;
+            padding:0;
+            list-style:none;
+        }
+        #suite-results li{
+            display:grid;
+            gap:.35rem;
+            padding:1rem;
+            border:1px solid rgb(91,72,126);
+            border-radius:.5rem;
+            background:rgb(20,16,33);
+        }
+        #suite-results strong{color:rgb(188,146,255)}
+        #suite-results span{font-size:.875rem;color:rgb(201,193,219)}
+        #suite-results li[data-status="passed"] strong{color:rgb(111,224,165)}
+        #suite-results li[data-status="failed"] strong{color:rgb(255,127,142)}
         pre{
             overflow:auto;
             padding:1rem;
@@ -39,6 +62,8 @@
     <main>
         <h1>DBOPFS browser release tests</h1>
         <p>Real-origin OPFS verification running in this Chrome profile.</p>
+        <p id="summary" aria-live="polite">Loading four vanilla-test suites…</p>
+        <ul id="suite-results" aria-label="Test suite results"></ul>
         <pre id="results" aria-live="polite">Loading vanilla-test and DBOPFS…</pre>
     </main>
 </body>
