@@ -49,7 +49,7 @@ function installNavigation(){
         }
     });
 
-    const desktop=window.matchMedia('(min-width:52.01rem)');
+    const desktop=window.matchMedia('(min-width:58.01rem)');
     desktop.addEventListener?.('change',event=>{
         if(event.matches){
             close();

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <title>DBOPFS</title><rect width="256" height="256" rx="40" fill="#080e18"/>
+  <g stroke="#ddb85e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M207 208A112 112 0 1 0 196 218"/>
+    <path d="M72 119V57Q72 48 81 48H155L202 95V204Q202 213 194 220"/>
+    <path d="M155 48V84Q155 95 166 95H202Z" fill="#73b7b1"/>
+    <ellipse cx="133" cy="128" rx="65" ry="14"/>
+    <ellipse cx="133" cy="165" rx="65" ry="14"/>
+    <ellipse cx="133" cy="202" rx="65" ry="14"/>
+  </g>
+</svg>

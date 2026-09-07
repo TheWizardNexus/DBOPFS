@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="DBOPFS is a browser-native database abstraction over the Origin Private File System, created by The Wizard Nexus.">
     <meta name="theme-color" content="#050c17">
-    <link rel="icon" href="data:,">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=three-rings">
     <link rel="canonical" href="https://thewizardnexus.github.io/DBOPFS/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thewizardnexus.github.io/DBOPFS/">
@@ -19,8 +19,8 @@
     <meta name="twitter:image" content="https://thewizardnexus.github.io/DBOPFS/assets/og.png">
     <meta name="twitter:image:alt" content="DBOPFS browser-native database documentation by The Wizard Nexus">
     <title>DBOPFS — A browser-native database written in files</title>
-    <link rel="stylesheet" href="assets/site.css?v=install-footer-1">
-    <script type="module" src="assets/site.js?v=137c33c"></script>
+    <link rel="stylesheet" href="assets/site.css?v=spacing-review">
+    <script type="module" src="assets/site.js?v=spacing-review"></script>
 </head>
 <body data-page="home">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -35,16 +35,16 @@
             </a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"><span class="nav-toggle__icon" aria-hidden="true"></span><span>Menu</span></button>
             <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
-                <a href="index.html" data-nav="home">Home</a>
                 <a href="getting-started.html" data-nav="start">Get started</a>
                 <a href="guides.html" data-nav="guides">Guides</a>
                 <a href="async.html" data-nav="async">Async</a>
-                <a href="api.html" data-nav="api">API</a>
                 <a href="architecture.html" data-nav="architecture">Architecture</a>
+                <a href="api.html" data-nav="api">API</a>
                 <a href="playground/index.html" data-nav="playground">Playground</a>
                 <a href="studio.html" data-nav="studio">Studio</a>
                 <a href="status.html" data-nav="status">Status</a>
                 <a href="license.html" data-nav="license">License</a>
+                <a class="nav-parent" href="https://www.thewizardnexus.com/">TWiN Home <span aria-hidden="true">&#8599;</span></a>
             </nav>
         </div>
     </header>
@@ -77,16 +77,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="database-sigil" aria-hidden="true">
-                    <span class="database-sigil__ray"></span>
-                    <span class="database-sigil__ray vertical"></span>
-                    <div class="database-sigil__core">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
+                <div class="database-sigil" aria-hidden="true"><img src="assets/logo.svg?v=three-rings" alt="" width="256" height="256"></div>
             </div>
         </section>
 
@@ -150,24 +141,26 @@
                     <p class="eyebrow">Install and initialize</p>
                     <h2>Your first durable record.</h2>
                     <p>Install 1.0.0 from npm, or download the same verified tarball from the GitHub release for plain self-hosted browser JavaScript.</p>
-                    <p><a class="button" href="https://www.npmjs.com/package/dbopfs/v/1.0.0">Open npm package</a> <a class="button secondary" href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">Download GitHub release</a></p>
+                    <p class="hero-actions"><a class="button" href="https://www.npmjs.com/package/dbopfs/v/1.0.0">Open npm package</a> <a class="button secondary" href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">Download GitHub release</a></p>
                 </div>
-                <div class="card-grid">
-                    <div class="code-card">
-                        <div class="code-card__header">
-                            <span>npm</span>
-                            <button class="copy-button" type="button" data-copy-target="home-install">Copy</button>
+                <div class="card-grid two install-options">
+                    <div class="install-sources">
+                        <div class="code-card">
+                            <div class="code-card__header">
+                                <span>npm</span>
+                                <button class="copy-button" type="button" data-copy-target="home-install">Copy</button>
+                            </div>
+                            <pre><code id="home-install" data-package-name>npm install dbopfs@1.0.0</code></pre>
                         </div>
-                        <pre><code id="home-install" data-package-name>npm install dbopfs@1.0.0</code></pre>
-                    </div>
-                    <div class="code-card">
-                        <div class="code-card__header">
-                            <span>GitHub Release (shell)</span>
-                            <button class="copy-button" type="button" data-copy-target="home-install-release">Copy</button>
-                        </div>
-                        <pre><code id="home-install-release">curl -fL https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz -o dbopfs-1.0.0.tgz
+                        <div class="code-card">
+                            <div class="code-card__header">
+                                <span>GitHub Release (shell)</span>
+                                <button class="copy-button" type="button" data-copy-target="home-install-release">Copy</button>
+                            </div>
+                            <pre><code id="home-install-release">curl -fL https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz -o dbopfs-1.0.0.tgz
 mkdir -p vendor/dbopfs
 tar -xzf dbopfs-1.0.0.tgz -C vendor/dbopfs --strip-components=1</code></pre>
+                        </div>
                     </div>
                     <div class="code-card">
                         <div class="code-card__header">
