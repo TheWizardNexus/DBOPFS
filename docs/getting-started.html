@@ -96,8 +96,8 @@
                     <p class="eyebrow">Step one</p>
                     <h2>Choose npm or the GitHub release.</h2>
                     <p>Both sources contain the same verified <code>dbopfs@1.0.0</code> package layout.</p>
-                    <div class="card-grid two install-options">
-                        <article class="card">
+                    <div class="card-grid two install-options source-options">
+                        <article class="card brand-card">
                             <h3>Install from npm</h3>
                             <p>Use the registry when npm already manages your application's dependencies.</p>
                             <div class="code-card">
@@ -106,10 +106,17 @@
                             </div>
                             <p><a href="https://www.npmjs.com/package/dbopfs/v/1.0.0">Open dbopfs@1.0.0 on npm</a></p>
                         </article>
-                        <article class="card">
+                        <article class="card brand-card">
                             <h3>Download from GitHub</h3>
                             <p>Use the release tarball when you want plain self-hosted browser files without adding npm to the application.</p>
                             <p><a class="button secondary" href="https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz">Download dbopfs-1.0.0.tgz</a></p>
+
+                            <p><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">Release notes, checksums, and evidence</a></p>
+                        </article>
+                    </div>
+                    <details class="install-commands">
+                        <summary>GitHub Extraction Commands</summary>
+                        <div class="card-grid two">
                             <div class="code-card">
                                 <div class="code-card__header"><span>macOS, Linux, Git Bash, or WSL</span><button class="copy-button" type="button" data-copy-target="start-install-release-shell">Copy</button></div>
                                 <pre><code id="start-install-release-shell">curl -fL https://github.com/TheWizardNexus/DBOPFS/releases/download/v1.0.0/dbopfs-1.0.0.tgz -o dbopfs-1.0.0.tgz
@@ -122,10 +129,9 @@ tar -xzf dbopfs-1.0.0.tgz -C vendor/dbopfs --strip-components=1</code></pre>
 New-Item -ItemType Directory -Force 'vendor/dbopfs' | Out-Null
 tar -xzf 'dbopfs-1.0.0.tgz' -C 'vendor/dbopfs' --strip-components=1</code></pre>
                             </div>
+                        </div>
                             <p>Run either command set from the web-project root. It removes the archive's outer <code>package/</code> directory while preserving the complete DBOPFS package beneath <code>vendor/dbopfs/</code>.</p>
-                            <p><a href="https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0">Release notes, checksums, and evidence</a></p>
-                        </article>
-                    </div>
+                    </details>
                     <div class="callout">
                         <p><strong>Verified release.</strong> The npm package and GitHub asset are the same tarball. Test, coverage, checksum, and clean-install evidence are linked from the <a href="status.html">status page</a>.</p>
                     </div>
