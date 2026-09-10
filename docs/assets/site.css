@@ -610,6 +610,37 @@ h4{
     padding-block:var(--space-7);
 }
 
+body[data-page="home"] .section{
+    padding-block:var(--space-6);
+}
+
+body[data-page="home"] .section-heading{
+    margin-bottom:var(--space-5);
+}
+
+.card.brand-card{
+    background:linear-gradient(120deg,#142831,var(--surface) 75%);
+    border-color:#52605a;
+    border-top:2px solid var(--gold);
+    border-radius:var(--radius-medium);
+    box-shadow:none;
+}
+
+.brand-card h3{
+    color:var(--gold);
+    font-size:clamp(1.25rem,2vw,1.6rem);
+    margin-bottom:var(--space-2);
+}
+
+.brand-card a:not(.button){
+    color:#91c8cf;
+    font-weight:700;
+}
+
+.section.compact .brand-card{
+    align-self:start;
+}
+
 .section-rule{
     border-top:1px solid var(--border-soft);
 }
