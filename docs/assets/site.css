@@ -448,6 +448,7 @@ h1{
 .page-hero h1{
     font-size:clamp(2.8rem,7vw,5.5rem);
     margin-block-end:var(--space-3);
+    text-wrap:wrap;
 }
 
 .page-hero .eyebrow{
@@ -476,6 +477,10 @@ h4{
     font-size:clamp(1.05rem,2vw,1.35rem);
     margin:0;
     max-width:44rem;
+}
+
+.page-hero .page-lede{
+    max-width:none;
 }
 
 .hero-actions{
