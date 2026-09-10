@@ -638,7 +638,7 @@ body[data-page="home"] .section-heading{
 }
 
 .section.compact .brand-card{
-    align-self:start;
+    align-self:center;
 }
 
 .section-rule{
