@@ -94,7 +94,7 @@ function installCopyButtons(){
                 await copyText(target.textContent);
                 button.textContent='Copied';
             }catch(error){
-                button.textContent='Copy failed';
+                button.textContent='Copy Failed';
             }
 
             window.setTimeout(()=>{
@@ -143,7 +143,7 @@ function installTopicSelection(){
     const all=document.createElement('button');
     all.type='button';
     all.className='toc-all';
-    all.textContent='See all';
+    all.textContent='See All';
     all.setAttribute('aria-controls',sections.map(section=>section.id).join(' '));
     toolbar.append(all);
     for(const link of links){
