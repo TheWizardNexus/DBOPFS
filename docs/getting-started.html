@@ -75,15 +75,15 @@
                     <p class="eyebrow">Before installation</p>
                     <h2>Requirements</h2>
                     <p>DBOPFS is a browser-only ES module. It expects the web platform, not Node.js, a server runtime, or server-side rendering.</p>
-                    <div class="table-scroll">
+                    <div class="table-scroll requirements-table">
                         <table>
-                            <thead><tr><th>Requirement</th><th>Why it matters</th></tr></thead>
+                            <thead><tr><th scope="col">Requirement</th><th scope="col">Why it matters</th></tr></thead>
                             <tbody>
-                                <tr><td>HTTPS or localhost</td><td>OPFS is exposed only in a secure browser context.</td></tr>
-                                <tr><td><code>navigator.storage.getDirectory</code></td><td>Opens the origin-private filesystem root.</td></tr>
-                                <tr><td>ES modules</td><td>The runtime uses imports, top-level await, private fields, and <code>import.meta.url</code>.</td></tr>
-                                <tr><td>Window and Worker APIs</td><td>The singleton lives on <code>window</code>; a co-located worker supplies the synchronous-access fallback.</td></tr>
-                                <tr><td>Compression and image APIs</td><td>Required only for PNG backup and restore, not ordinary CRUD.</td></tr>
+                                <tr><th scope="row">HTTPS or localhost</th><td>OPFS is exposed only in a secure browser context.</td></tr>
+                                <tr><th scope="row"><code>navigator.storage.getDirectory</code></th><td>Opens the origin-private filesystem root.</td></tr>
+                                <tr><th scope="row">ES modules</th><td>The runtime uses imports, top-level await, private fields, and <code>import.meta.url</code>.</td></tr>
+                                <tr><th scope="row">Window and Worker APIs</th><td>The singleton lives on <code>window</code>; a co-located worker supplies the synchronous-access fallback.</td></tr>
+                                <tr><th scope="row">Compression and image APIs</th><td>Required only for PNG backup and restore, not ordinary CRUD.</td></tr>
                             </tbody>
                         </table>
                     </div>

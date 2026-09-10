@@ -1018,6 +1018,42 @@ pre code{
     overflow-x:auto;
 }
 
+.requirements-table{
+    border:1px solid var(--gold);
+    box-shadow:0 0 0 4px rgba(221,184,94,.09);
+    background:#14232f;
+}
+
+.requirements-table thead th{
+    background:#283e49;
+    color:var(--gold);
+    border-bottom:2px solid var(--gold);
+}
+
+.requirements-table th[scope="row"]{
+    background:rgba(115,183,177,.09);
+    border-left:3px solid var(--gold);
+    color:var(--ivory);
+    font-size:1rem;
+    font-weight:700;
+    letter-spacing:normal;
+    text-transform:none;
+    width:40%;
+}
+
+.requirements-table td{
+    color:#dae4ed;
+}
+
+.requirements-table tbody tr:nth-child(even){
+    background:rgba(115,183,177,.06);
+}
+
+.requirements-table tbody tr:last-child th{
+    border-left-color:#73b7b1;
+    border-bottom:0;
+}
+
 table{
     border-collapse:collapse;
     min-width:42rem;
