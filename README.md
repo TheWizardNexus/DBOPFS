@@ -4,9 +4,12 @@
 
 # DBOPFS
 
+[![npm version](https://img.shields.io/npm/v/dbopfs.svg)](https://www.npmjs.com/package/dbopfs)
+[![npm monthly downloads](https://img.shields.io/npm/dm/dbopfs.svg)](https://www.npmjs.com/package/dbopfs)
+[![GitHub Pages deployment](https://github.com/TheWizardNexus/DBOPFS/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/TheWizardNexus/DBOPFS/actions/workflows/pages.yml)
 [![release tests](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FTheWizardNexus%2FDBOPFS%2Fmain%2Frelease%2Fbadges%2Ftests.json)](https://thewizardnexus.github.io/DBOPFS/status.html)
 [![code coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FTheWizardNexus%2FDBOPFS%2Fmain%2Frelease%2Fbadges%2Fcoverage.json)](https://thewizardnexus.github.io/DBOPFS/status.html)
-[![version 1.0.0](https://img.shields.io/badge/version-1.0.0-ab94ff)](https://github.com/TheWizardNexus/DBOPFS/releases/tag/v1.0.0)
+[![GitHub release](https://img.shields.io/github/v/release/TheWizardNexus/DBOPFS?sort=semver)](https://github.com/TheWizardNexus/DBOPFS/releases)
 [![PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20Noncommercial%201.0.0-d7a84d)](LICENSE)
 
 DBOPFS is a browser-native database built directly on the [Origin Private File System](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API/Origin_private_file_system). Tables are directories, records are files, and application data stays in the browser unless the application exports it.
